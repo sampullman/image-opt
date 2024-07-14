@@ -1,0 +1,23 @@
+[package]
+name = "image-opt"
+version = "0.1.0"
+edition = "2021"
+authors = ["Sam Pullman <sam@samatech.tw>"]
+description = "WASM PNG optimizer"
+license = "MIT"
+repository = "https://github.com/samatechtw/image-opt"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+oxipng = { version = "9.0.0", default-features = false, features = ["freestanding"] }
+wasm-bindgen = "0.2.91"
+wasm-bindgen-rayon = { version = "1.2.1", optional = true }
+
+[profile.release]
+lto = true
+opt-level = "s"
+
+[features]
+parallel = ["oxipng/parallel", "wasm-bindgen-rayon"]

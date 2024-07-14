@@ -1,0 +1,26 @@
+{
+  "name": "@samatech/image-opt",
+  "version": "1.0.0",
+  "description": "Library for WASM image optimizer",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@samatech/vue-store": "^0.6.0",
+    "vue": "^3.4.31"
+  },
+  "devDependencies": {
+    "@laynezh/vite-plugin-lib-assets": "^0.5.23",
+    "@rollup/plugin-terser": "0.4.4",
+    "@samatech/postcss-basics": "^0.7.4",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "postcss": "^8.4.39",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
+  }
+}
