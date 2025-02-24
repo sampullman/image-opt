@@ -1,6 +1,5 @@
 import { WorkerCommand, WorkerResultType } from './worker-enum'
 import { IOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
-import { AssetContentType } from '../util'
 import { IMozjpegOptions, initMozjpeg, optimizeMozjpeg } from './mozjpeg'
 import { IJpegliOptions, initJpegli, optimizeJpegli } from './jpegli'
 import { Optimizer } from './optimize-options'

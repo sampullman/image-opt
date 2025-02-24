@@ -18,6 +18,7 @@
       :disabled="!validatedFile?.file"
       @click="confirmOptimize"
     />
+    <EncodeOptions />
   </div>
 </template>
 
@@ -34,6 +35,7 @@ import { optimizeInitWrap, optimizeImage, getDefaultOptions } from '../optimize'
 import UploadFile from './UploadFile.vue'
 import OButton from './OButton.vue'
 import { Optimizer, WasmInitOptions } from '../optimize/optimize-options'
+import EncodeOptions from './EncodeOptions.vue'
 
 const error = ref()
 const assetBase64 = ref('')
@@ -127,7 +129,9 @@ const confirmOptimize = async () => {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
+@import '@samatech/vue-components/dist/style.css';
+
 .optimizer {
   display: flex;
   flex-direction: column;
