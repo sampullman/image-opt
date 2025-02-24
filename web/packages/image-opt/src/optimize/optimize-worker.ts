@@ -1,7 +1,9 @@
-import { WorkerCommand, WorkerFileData, WorkerResultType } from './worker-enum'
+import { WorkerCommand, WorkerResultType } from './worker-enum'
 import { IOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
 import { AssetContentType } from '../util'
 import { IMozjpegOptions, initMozjpeg, optimizeMozjpeg } from './mozjpeg'
+import { IJpegliOptions, initJpegli, optimizeJpegli } from './jpegli'
+import { Optimizer } from './optimize-options'
 
 self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
   const { file, init, options } = (e.data ?? {}) as WorkerCommand
@@ -9,8 +11,8 @@ self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
     return
   }
   const { buffer, data } = file
-  switch (init.assetType) {
-    case AssetContentType.Png:
+  switch (init.optimizer) {
+    case Optimizer.Oxipng:
       try {
         if (!buffer) {
           self.postMessage({ type: WorkerResultType.Error, output: 'Invalid PNG data' })
@@ -24,7 +26,7 @@ self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
         self.postMessage({ type: WorkerResultType.Error, output: e })
       }
       break
-    case AssetContentType.Jpeg:
+    case Optimizer.Mozjpeg:
       try {
         if (!data) {
           self.postMessage({ type: WorkerResultType.Error, output: 'Invalid JPG data' })
@@ -33,6 +35,20 @@ self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
         await initMozjpeg(init.mozjpegWasm)
         const opts = options as IMozjpegOptions
         const result = optimizeMozjpeg(data, opts)
+        self.postMessage({ type: WorkerResultType.Complete, output: result })
+      } catch (e) {
+        self.postMessage({ type: WorkerResultType.Error, output: e })
+      }
+      break
+    case Optimizer.Jpegli:
+      try {
+        if (!data) {
+          self.postMessage({ type: WorkerResultType.Error, output: 'Invalid PNG data' })
+          return
+        }
+        await initJpegli(init.jpegliWasm)
+        const opts = options as IJpegliOptions | undefined
+        const result = optimizeJpegli(data, opts)
         self.postMessage({ type: WorkerResultType.Complete, output: result })
       } catch (e) {
         self.postMessage({ type: WorkerResultType.Error, output: e })

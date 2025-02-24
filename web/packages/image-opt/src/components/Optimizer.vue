@@ -33,25 +33,28 @@ import {
 import { optimizeInitWrap, optimizeImage, getDefaultOptions } from '../optimize'
 import UploadFile from './UploadFile.vue'
 import OButton from './OButton.vue'
-import { WasmInitOptions } from '../optimize/optimize-options'
+import { Optimizer, WasmInitOptions } from '../optimize/optimize-options'
 
 const error = ref()
 const assetBase64 = ref('')
 const loading = ref(false)
 const validatedFile = ref<ValidatedFile | undefined>()
 const imageOptions = ref<Record<string, unknown>>({})
+const optimizer = ref<Optimizer>(Optimizer.Jpegli)
 
 const props = defineProps<{
   mozjpegWasm: string
   oxipngWasm: string
+  jpegliWasm: string
   workerUrl: string
 }>()
-const { mozjpegWasm, oxipngWasm, workerUrl } = toRefs(props)
+const { jpegliWasm, mozjpegWasm, oxipngWasm, workerUrl } = toRefs(props)
 
 const wasmInit = (): WasmInitOptions => {
   return {
     mozjpegWasm: mozjpegWasm.value,
     oxipngWasm: oxipngWasm.value,
+    jpegliWasm: jpegliWasm.value,
   }
 }
 
@@ -84,7 +87,11 @@ const updateAsset = async (file: File | null | undefined) => {
       )
       handleImageSelect(validFile)
       loading.value = true
-      await optimizeInitWrap({ ...wasmInit(), assetType: validFile.type })
+      await optimizeInitWrap({
+        ...wasmInit(),
+        assetType: validFile.type,
+        optimizer: optimizer.value,
+      })
       imageOptions.value = getDefaultOptions(validFile)
       loading.value = false
     } catch (e) {
@@ -104,6 +111,7 @@ const confirmOptimize = async () => {
         file,
         workerUrl.value,
         wasmInit(),
+        optimizer.value,
         imageOptions.value,
       )
       if (result) {

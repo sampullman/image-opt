@@ -7,6 +7,7 @@
         <Optimizer
           :mozjpegWasm="mozjpegWasm"
           :oxipngWasm="oxipngWasm"
+          :jpegliWasm="jpegliWasm"
           :workerUrl="OptimizeWorker.toString()"
         />
       </div>
@@ -18,6 +19,8 @@
 <script setup lang="ts">
 import { Optimizer, OptimizeWorker } from '@samatech/image-opt'
 
+// import OptimizeWorker from '/node_modules/@samatech/image-opt/src/optimize/optimize-worker.ts?url'
+
 const mozjpegWasm = new URL(
   '../../../../mozjpeg/enc/mozjpeg_enc.wasm',
   import.meta.url,
@@ -26,6 +29,7 @@ const oxipngWasm = new URL(
   '../../../../oxipng/pkg/image_opt_bg.wasm',
   import.meta.url,
 ).toString()
+const jpegliWasm = new URL('../../../../jpegli/jpegli.wasm', import.meta.url).toString()
 </script>
 
 <style lang="postcss">

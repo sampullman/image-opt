@@ -1,10 +1,11 @@
 import { ValidatedFile } from '../util'
-import { WasmInitOptions } from './optimize-options'
+import { Optimizer, WasmInitOptions } from './optimize-options'
 import { optimizeImageWrap } from './optimize-wrap'
 import { WorkerResult, WorkerResultType, WorkerCommand } from './worker-enum'
 
 // Avoids CORS issue, see https://github.com/vitejs/vite/issues/13680
 const workerHack = (url: string) => {
+  console.log('WORKER', url)
   const js = `import ${JSON.stringify(new URL(url))}`
   const blob = new Blob([js], { type: 'application/javascript' })
 
@@ -21,10 +22,10 @@ export const optimizeImage = async (
   file: ValidatedFile,
   workerUrl: string | undefined,
   wasmInit: WasmInitOptions,
+  optimizer: Optimizer,
   options: Record<string, unknown>,
 ): Promise<Uint8Array | undefined> => {
   const buffer = await file.file.arrayBuffer()
-
   if (workerUrl && window.Worker) {
     return new Promise((resolve, reject) => {
       const worker = workerHack(workerUrl)
@@ -42,6 +43,7 @@ export const optimizeImage = async (
         init: {
           ...wasmInit,
           assetType: file.type,
+          optimizer,
         },
         file: {
           buffer,

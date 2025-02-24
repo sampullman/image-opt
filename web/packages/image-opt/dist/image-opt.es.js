@@ -1,197 +1,197 @@
-(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".o-image[data-v-f697f219]{display:flex;justify-content:center;align-items:center;width:100%;height:100%;padding:4px;position:relative}.o-asset[data-v-f697f219]{width:100%;height:100%;background-size:cover;background-position:center;-o-object-fit:contain;object-fit:contain;-o-object-position:center;object-position:center}.o-default[data-v-f697f219]{width:32px;height:32px}.o-spinner{display:inline-flex;align-items:center}.o-spinner .dot{width:var(--2454e84c);height:var(--2454e84c);border-radius:50%;background-color:var(--05e43051);animation:scale .6s ease alternate infinite}.o-spinner .dot:not(:first-child){margin-left:calc(var(--2454e84c) / 4)}.o-spinner .dot:nth-of-type(2){animation-delay:.2s}.o-spinner .dot:nth-of-type(3){animation-delay:.4s}@keyframes scale{0%{transform:scale(0)}to{transform:scale(1)}}.o-upload-wrap{display:flex;justify-content:center;align-items:center;border:1px solid #bdbfc2}.o-upload-form{position:relative;height:100%;width:100%}.o-upload-background{display:flex;justify-content:center;align-items:center;position:absolute;top:0;width:100%;height:100%;background-color:transparent;background-size:contain;background-position:center;padding:0}.o-upload{cursor:pointer;opacity:0;position:absolute;left:0;top:0;width:100%;height:100%}.o-upload-button{display:flex;flex-direction:row;color:#000;text-align:left;pointer-events:none;font-size:16px;line-height:22px;font-weight:300}.o-upload-left{display:flex;justify-content:center;align-items:center;width:50%;border-right:1px solid #bdbfc2;position:relative}.o-upload-image{position:absolute}.o-upload-right{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 40px;width:50%}.o-upload-title{font-weight:600}.o-upload-subtitle{align-items:center;font-size:10px;line-height:16px;font-weight:300;display:inline;margin-top:8px}.o-upload-subtitle span{margin:0 3px;color:#3a86ff}:scope.has-file{border:#3a86ff}:scope.dragging{border-color:#3a86ff}:scope.dragging .file-upload-left{border-color:#3a86ff}.o-upload-spinner{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.o-upload-button,.o-upload-spinner{z-index:10;position:absolute;width:100%;height:100%}.o-upload-button .loader,.o-upload-spinner .loader{margin:0}.o-upload-button img,.o-upload-spinner img{width:32px;margin-bottom:6px}.o-button{font-weight:500;font-size:15px;letter-spacing:1.5px;margin-top:12px;display:inline-flex;align-items:center;justify-content:center;border:none;outline:none;cursor:pointer;text-align:center;border-radius:6px;transition:background-color .15s ease;min-width:100px;position:relative;height:38px;padding:0 32px;background-color:#3a86ff;color:#fff}.o-button:hover:not(:disabled){background-color:#3a86ffe6}.o-button:focus:not(:disabled){box-shadow:none;background-color:#3a86ffcc}.o-button.disabled{background-color:#9e9ea1;color:#fff;cursor:not-allowed;-webkit-user-select:none;-moz-user-select:none;user-select:none}.o-button .o-hidden{visibility:hidden}.o-button .o-animate{width:100%;height:100%;position:absolute}.o-button .o-spinner{position:absolute;display:flex;justify-content:center;align-items:center;left:0;top:0;right:0;bottom:0}.optimizer[data-v-a851d018]{display:flex;flex-direction:column;justify-content:center;align-items:center}.opt-wrap[data-v-a851d018]{width:480px;max-width:95%}")),document.head.appendChild(e)}}catch(t){console.error("vite-plugin-css-injected-by-js",t)}})();
-const { defineComponent: mn, toRefs: Hn, computed: Ye, openBlock: L, createElementBlock: z, normalizeStyle: ye, pushScopeId: Ze, popScopeId: $e, createElementVNode: S, useCssVars: Xe, ref: en, normalizeClass: Dn, renderSlot: Ke, createBlock: Qe, createCommentVNode: gn, toDisplayString: Pn, createVNode: Rn, unref: pe } = window.Vue;
-const de = (r) => (Ze("data-v-f697f219"), r = r(), $e(), r), nr = { class: "o-image" }, er = ["src"], rr = { key: 2, xmlns: "http://www.w3.org/2000/svg", width: "32", height: "32", viewBox: "0 0 32 32", class: "o-image-default" }, tr = [de(() => S("path", { fill: "currentColor", d: "M19 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1Z" }, null, -1)), de(() => S("path", { fill: "currentColor", d: "M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 22H6v-6l5-5l5.59 5.59a2 2 0 0 0 2.82 0L21 19l5 5Zm0-4.83l-3.59-3.59a2 2 0 0 0-2.82 0L18 19.17l-5.59-5.59a2 2 0 0 0-2.82 0L6 17.17V6h20Z" }, null, -1))], we = (r, v) => {
+(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".o-image[data-v-f697f219]{display:flex;justify-content:center;align-items:center;width:100%;height:100%;padding:4px;position:relative}.o-asset[data-v-f697f219]{width:100%;height:100%;background-size:cover;background-position:center;-o-object-fit:contain;object-fit:contain;-o-object-position:center;object-position:center}.o-default[data-v-f697f219]{width:32px;height:32px}.o-spinner{display:inline-flex;align-items:center}.o-spinner .dot{width:var(--2454e84c);height:var(--2454e84c);border-radius:50%;background-color:var(--05e43051);animation:scale .6s ease alternate infinite}.o-spinner .dot:not(:first-child){margin-left:calc(var(--2454e84c) / 4)}.o-spinner .dot:nth-of-type(2){animation-delay:.2s}.o-spinner .dot:nth-of-type(3){animation-delay:.4s}@keyframes scale{0%{transform:scale(0)}to{transform:scale(1)}}.o-upload-wrap{display:flex;justify-content:center;align-items:center;border:1px solid #bdbfc2}.o-upload-form{position:relative;height:100%;width:100%}.o-upload-background{display:flex;justify-content:center;align-items:center;position:absolute;top:0;width:100%;height:100%;background-color:transparent;background-size:contain;background-position:center;padding:0}.o-upload{cursor:pointer;opacity:0;position:absolute;left:0;top:0;width:100%;height:100%}.o-upload-button{display:flex;flex-direction:row;color:#000;text-align:left;pointer-events:none;font-size:16px;line-height:22px;font-weight:300}.o-upload-left{display:flex;justify-content:center;align-items:center;width:50%;border-right:1px solid #bdbfc2;position:relative}.o-upload-image{position:absolute}.o-upload-right{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 40px;width:50%}.o-upload-title{font-weight:600}.o-upload-subtitle{align-items:center;font-size:10px;line-height:16px;font-weight:300;display:inline;margin-top:8px}.o-upload-subtitle span{margin:0 3px;color:#3a86ff}:scope.has-file{border:#3a86ff}:scope.dragging{border-color:#3a86ff}:scope.dragging .file-upload-left{border-color:#3a86ff}.o-upload-spinner{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.o-upload-button,.o-upload-spinner{z-index:10;position:absolute;width:100%;height:100%}.o-upload-button .loader,.o-upload-spinner .loader{margin:0}.o-upload-button img,.o-upload-spinner img{width:32px;margin-bottom:6px}.o-button{font-weight:500;font-size:15px;letter-spacing:1.5px;margin-top:12px;display:inline-flex;align-items:center;justify-content:center;border:none;outline:none;cursor:pointer;text-align:center;border-radius:6px;transition:background-color .15s ease;min-width:100px;position:relative;height:38px;padding:0 32px;background-color:#3a86ff;color:#fff}.o-button:hover:not(:disabled){background-color:#3a86ffe6}.o-button:focus:not(:disabled){box-shadow:none;background-color:#3a86ffcc}.o-button.disabled{background-color:#9e9ea1;color:#fff;cursor:not-allowed;-webkit-user-select:none;-moz-user-select:none;user-select:none}.o-button .o-hidden{visibility:hidden}.o-button .o-animate{width:100%;height:100%;position:absolute}.o-button .o-spinner{position:absolute;display:flex;justify-content:center;align-items:center;left:0;top:0;right:0;bottom:0}.optimizer[data-v-24e73325]{display:flex;flex-direction:column;justify-content:center;align-items:center}.opt-wrap[data-v-24e73325]{width:480px;max-width:95%}")),document.head.appendChild(e)}}catch(t){console.error("vite-plugin-css-injected-by-js",t)}})();
+const { defineComponent: we, toRefs: Ye, computed: rr, openBlock: M, createElementBlock: D, normalizeStyle: Wn, pushScopeId: tr, popScopeId: ar, createElementVNode: j, useCssVars: or, ref: re, normalizeClass: qe, renderSlot: ir, createBlock: ur, createCommentVNode: ye, toDisplayString: Se, createVNode: ze, unref: bn } = window.Vue;
+const _n = (r) => (tr("data-v-f697f219"), r = r(), ar(), r), sr = { class: "o-image" }, lr = ["src"], cr = { key: 2, xmlns: "http://www.w3.org/2000/svg", width: "32", height: "32", viewBox: "0 0 32 32", class: "o-image-default" }, fr = [_n(() => j("path", { fill: "currentColor", d: "M19 14a3 3 0 1 0-3-3a3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1Z" }, null, -1)), _n(() => j("path", { fill: "currentColor", d: "M26 4H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 22H6v-6l5-5l5.59 5.59a2 2 0 0 0 2.82 0L21 19l5 5Zm0-4.83l-3.59-3.59a2 2 0 0 0-2.82 0L18 19.17l-5.59-5.59a2 2 0 0 0-2.82 0L6 17.17V6h20Z" }, null, -1))], Pn = (r, f) => {
   const h = r.__vccOpts || r;
-  for (const [d, f] of v) h[d] = f;
+  for (const [m, g] of f) h[m] = g;
   return h;
-}, ar = we(mn({ __name: "Image", props: { asset: { default: null }, asImg: { type: Boolean }, contentHash: { default: void 0 } }, setup(r) {
-  const v = r, { asset: h, contentHash: d } = Hn(v), f = Ye(() => {
-    const w = d.value;
-    return (h.value ?? "") + (w ? `?${w}` : "");
+}, pr = Pn(we({ __name: "Image", props: { asset: { default: null }, asImg: { type: Boolean }, contentHash: { default: void 0 } }, setup(r) {
+  const f = r, { asset: h, contentHash: m } = Ye(f), g = rr(() => {
+    const y = m.value;
+    return (h.value ?? "") + (y ? `?${y}` : "");
   });
-  return (w, g) => (L(), z("div", nr, [w.asImg && f.value ? (L(), z("img", { key: 0, src: f.value, class: "o-asset" }, null, 8, er)) : f.value ? (L(), z("div", { key: 1, style: ye({ backgroundImage: `url(${f.value})` }), class: "o-asset" }, null, 4)) : (L(), z("svg", rr, tr))]));
+  return (y, d) => (M(), D("div", sr, [y.asImg && g.value ? (M(), D("img", { key: 0, src: g.value, class: "o-asset" }, null, 8, lr)) : g.value ? (M(), D("div", { key: 1, style: Wn({ backgroundImage: `url(${g.value})` }), class: "o-asset" }, null, 4)) : (M(), D("svg", cr, fr))]));
 } }), [["__scopeId", "data-v-f697f219"]]);
-var Z = ((r) => (r.Png = "image/png", r.Jpeg = "image/jpeg", r))(Z || {});
-const ve = Object.values(Z);
-async function or(r) {
-  const v = URL.createObjectURL(r);
+var oe = ((r) => (r.Png = "image/png", r.Jpeg = "image/jpeg", r))(oe || {});
+const An = Object.values(oe);
+async function dr(r) {
+  const f = URL.createObjectURL(r);
   try {
     return await async function(h) {
-      const d = new Image();
-      d.decoding = "async", d.src = h;
-      const f = new Promise((w, g) => {
-        d.onload = () => w(), d.onerror = () => g(Error("Image loading error"));
+      const m = new Image();
+      m.decoding = "async", m.src = h;
+      const g = new Promise((y, d) => {
+        m.onload = () => y(), m.onerror = () => d(Error("Image loading error"));
       });
-      return d.decode && await d.decode().catch(() => null), await f, d;
-    }(v);
+      return m.decode && await m.decode().catch(() => null), await g, m;
+    }(f);
   } finally {
-    URL.revokeObjectURL(v);
+    URL.revokeObjectURL(f);
   }
 }
-async function ir(r) {
-  const v = "createImageBitmap" in self ? createImageBitmap(r) : or(r);
+async function gr(r) {
+  const f = "createImageBitmap" in self ? createImageBitmap(r) : dr(r);
   return function(h) {
-    const d = h.width, f = h.height, w = h.width, g = h.height, A = document.createElement("canvas");
-    A.width = d, A.height = f;
-    const R = A.getContext("2d");
-    if (!R) throw new Error("Could not create canvas context");
-    return R.drawImage(h, 0, 0, w, g, 0, 0, d, f), R.getImageData(0, 0, d, f);
-  }(await v);
+    const m = h.width, g = h.height, y = h.width, d = h.height, _ = document.createElement("canvas");
+    _.width = m, _.height = g;
+    const E = _.getContext("2d");
+    if (!E) throw new Error("Could not create canvas context");
+    return E.drawImage(h, 0, 0, y, d, 0, 0, m, g), E.getImageData(0, 0, m, g);
+  }(await f);
 }
-const be = (r) => {
+const Ze = (r) => {
   if (r) return new URL(r);
 };
-var zn, ur = (zn = import.meta.url, function(r, v) {
-  var h, d;
-  (r = (r = r || {}) !== void 0 ? r : {}).ready = new Promise(function(n, e) {
-    h = n, d = e;
+var Ne, mr = (Ne = import.meta.url, function(r, f) {
+  var h, m;
+  (r = (r = r || {}) !== void 0 ? r : {}).ready = new Promise(function(e, n) {
+    h = e, m = n;
   });
-  var f, w = {};
-  for (f in r) r.hasOwnProperty(f) && (w[f] = r[f]);
-  var g, A = "./this.program", R = function(n, e) {
-    throw e;
-  }, q = !0, p = "";
-  p = self.location.href, zn && (p = zn), p = p.indexOf("blob:") !== 0 ? p.substr(0, p.lastIndexOf("/") + 1) : "", g = function(n) {
-    var e = new XMLHttpRequest();
-    return e.open("GET", n, !1), e.responseType = "arraybuffer", e.send(null), new Uint8Array(e.response);
+  var g, y = {};
+  for (g in r) r.hasOwnProperty(g) && (y[g] = r[g]);
+  var d, _ = "./this.program", E = function(e, n) {
+    throw n;
+  }, O = !0, v = "";
+  v = self.location.href, Ne && (v = Ne), v = v.indexOf("blob:") !== 0 ? v.substr(0, v.lastIndexOf("/") + 1) : "", d = function(e) {
+    var n = new XMLHttpRequest();
+    return n.open("GET", e, !1), n.responseType = "arraybuffer", n.send(null), new Uint8Array(n.response);
   };
-  var I, D = r.print || console.log.bind(console), O = r.printErr || console.warn.bind(console);
-  for (f in w) w.hasOwnProperty(f) && (r[f] = w[f]);
-  w = null, r.arguments && r.arguments, r.thisProgram && (A = r.thisProgram), r.quit && (R = r.quit), r.wasmBinary && (I = r.wasmBinary);
-  var x, F = r.noExitRuntime || !0;
-  typeof WebAssembly != "object" && bn("no native wasm support detected");
-  var k = !1, C = new TextDecoder("utf8");
-  function W(n, e) {
-    if (!n) return "";
-    for (var t = n + e, a = n; !(a >= t) && E[a]; ) ++a;
-    return C.decode(E.subarray(n, a));
+  var C, z = r.print || console.log.bind(console), U = r.printErr || console.warn.bind(console);
+  for (g in y) y.hasOwnProperty(g) && (r[g] = y[g]);
+  y = null, r.arguments && r.arguments, r.thisProgram && (_ = r.thisProgram), r.quit && (E = r.quit), r.wasmBinary && (C = r.wasmBinary);
+  var q, G = r.noExitRuntime || !0;
+  typeof WebAssembly != "object" && Ce("no native wasm support detected");
+  var F = !1, S = new TextDecoder("utf8");
+  function W(e, n) {
+    if (!e) return "";
+    for (var t = e + n, a = e; !(a >= t) && x[a]; ) ++a;
+    return S.decode(x.subarray(e, a));
   }
-  var Y, G, E, rn, tn, U, j, sn, ln, Q, hn = new TextDecoder("utf-16le");
-  function yn(n, e) {
-    for (var t = n, a = t >> 1, o = a + e / 2; !(a >= o) && tn[a]; ) ++a;
-    return t = a << 1, hn.decode(E.subarray(n, t));
+  var R, P, x, K, H, L, J, ce, se, te, be = new TextDecoder("utf-16le");
+  function _e(e, n) {
+    for (var t = e, a = t >> 1, o = a + n / 2; !(a >= o) && H[a]; ) ++a;
+    return t = a << 1, be.decode(x.subarray(e, t));
   }
-  function wn(n, e, t) {
+  function Ae(e, n, t) {
     if (t === void 0 && (t = 2147483647), t < 2) return 0;
-    for (var a = e, o = (t -= 2) < 2 * n.length ? t / 2 : n.length, i = 0; i < o; ++i) {
-      var l = n.charCodeAt(i);
-      rn[e >> 1] = l, e += 2;
+    for (var a = n, o = (t -= 2) < 2 * e.length ? t / 2 : e.length, u = 0; u < o; ++u) {
+      var c = e.charCodeAt(u);
+      K[n >> 1] = c, n += 2;
     }
-    return rn[e >> 1] = 0, e - a;
+    return K[n >> 1] = 0, n - a;
   }
-  function Re(n) {
-    return 2 * n.length;
+  function Te(e) {
+    return 2 * e.length;
   }
-  function Ie(n, e) {
-    for (var t = 0, a = ""; !(t >= e / 4); ) {
-      var o = U[n + 4 * t >> 2];
+  function Ee(e, n) {
+    for (var t = 0, a = ""; !(t >= n / 4); ) {
+      var o = L[e + 4 * t >> 2];
       if (o == 0) break;
       if (++t, o >= 65536) {
-        var i = o - 65536;
-        a += String.fromCharCode(55296 | i >> 10, 56320 | 1023 & i);
+        var u = o - 65536;
+        a += String.fromCharCode(55296 | u >> 10, 56320 | 1023 & u);
       } else a += String.fromCharCode(o);
     }
     return a;
   }
-  function Ue(n, e, t) {
+  function Mn(e, n, t) {
     if (t === void 0 && (t = 2147483647), t < 4) return 0;
-    for (var a = e, o = a + t - 4, i = 0; i < n.length; ++i) {
-      var l = n.charCodeAt(i);
-      if (l >= 55296 && l <= 57343 && (l = 65536 + ((1023 & l) << 10) | 1023 & n.charCodeAt(++i)), U[e >> 2] = l, (e += 4) + 4 > o) break;
+    for (var a = n, o = a + t - 4, u = 0; u < e.length; ++u) {
+      var c = e.charCodeAt(u);
+      if (c >= 55296 && c <= 57343 && (c = 65536 + ((1023 & c) << 10) | 1023 & e.charCodeAt(++u)), L[n >> 2] = c, (n += 4) + 4 > o) break;
     }
-    return U[e >> 2] = 0, e - a;
+    return L[n >> 2] = 0, n - a;
   }
-  function xe(n) {
-    for (var e = 0, t = 0; t < n.length; ++t) {
-      var a = n.charCodeAt(t);
-      a >= 55296 && a <= 57343 && ++t, e += 4;
+  function Bn(e) {
+    for (var n = 0, t = 0; t < e.length; ++t) {
+      var a = e.charCodeAt(t);
+      a >= 55296 && a <= 57343 && ++t, n += 4;
     }
-    return e;
+    return n;
   }
-  function Vn(n) {
-    Y = n, r.HEAP8 = G = new Int8Array(n), r.HEAP16 = rn = new Int16Array(n), r.HEAP32 = U = new Int32Array(n), r.HEAPU8 = E = new Uint8Array(n), r.HEAPU16 = tn = new Uint16Array(n), r.HEAPU32 = j = new Uint32Array(n), r.HEAPF32 = sn = new Float32Array(n), r.HEAPF64 = ln = new Float64Array(n);
+  function $e(e) {
+    R = e, r.HEAP8 = P = new Int8Array(e), r.HEAP16 = K = new Int16Array(e), r.HEAP32 = L = new Int32Array(e), r.HEAPU8 = x = new Uint8Array(e), r.HEAPU16 = H = new Uint16Array(e), r.HEAPU32 = J = new Uint32Array(e), r.HEAPF32 = ce = new Float32Array(e), r.HEAPF64 = se = new Float64Array(e);
   }
   r.INITIAL_MEMORY;
-  var nn, In, Nn = [], qn = [], Gn = [], an = 0, cn = null;
-  function bn(n) {
-    r.onAbort && r.onAbort(n), O(n += ""), k = !0, n = "abort(" + n + "). Build with -s ASSERTIONS=1 for more info.";
-    var e = new WebAssembly.RuntimeError(n);
-    throw d(e), e;
+  var ae, Le, Qe = [], Ke = [], Xe = [], ie = 0, fe = null;
+  function Ce(e) {
+    r.onAbort && r.onAbort(e), U(e += ""), F = !0, e = "abort(" + e + "). Build with -s ASSERTIONS=1 for more info.";
+    var n = new WebAssembly.RuntimeError(e);
+    throw m(n), n;
   }
-  function Jn(n) {
+  function en(e) {
     try {
-      if (n == nn && I) return new Uint8Array(I);
-      if (g) return g(n);
+      if (e == ae && C) return new Uint8Array(C);
+      if (d) return d(e);
       throw "both async and sync fetching of the wasm failed";
-    } catch (e) {
-      bn(e);
+    } catch (n) {
+      Ce(n);
     }
   }
-  function Un(n) {
-    for (; n.length > 0; ) {
-      var e = n.shift();
-      if (typeof e != "function") {
-        var t = e.func;
-        typeof t == "number" ? e.arg === void 0 ? Q.get(t)() : Q.get(t)(e.arg) : t(e.arg === void 0 ? null : e.arg);
-      } else e(r);
+  function Oe(e) {
+    for (; e.length > 0; ) {
+      var n = e.shift();
+      if (typeof n != "function") {
+        var t = n.func;
+        typeof t == "number" ? n.arg === void 0 ? te.get(t)() : te.get(t)(n.arg) : t(n.arg === void 0 ? null : n.arg);
+      } else n(r);
     }
   }
-  r.preloadedImages = {}, r.preloadedAudios = {}, r.locateFile && (nn.startsWith("data:application/octet-stream;base64,") || (In = nn, nn = r.locateFile ? r.locateFile(In, p) : p + In));
-  var Fe = 0, _n = {};
-  function Yn(n) {
-    for (; n.length; ) {
-      var e = n.pop();
-      n.pop()(e);
+  r.preloadedImages = {}, r.preloadedAudios = {}, r.locateFile && (ae.startsWith("data:application/octet-stream;base64,") || (Le = ae, ae = r.locateFile ? r.locateFile(Le, v) : v + Le));
+  var Dn = 0, ke = {};
+  function nn(e) {
+    for (; e.length; ) {
+      var n = e.pop();
+      e.pop()(n);
     }
   }
-  function Tn(n) {
-    return this.fromWireType(j[n >> 2]);
+  function We(e) {
+    return this.fromWireType(J[e >> 2]);
   }
-  var un = {}, on = {}, An = {}, Se = 48, Le = 57;
-  function Zn(n) {
-    if (n === void 0) return "_unknown";
-    var e = (n = n.replace(/[^a-zA-Z0-9_]/g, "$")).charCodeAt(0);
-    return e >= Se && e <= Le ? "_" + n : n;
+  var le = {}, ue = {}, Pe = {}, Hn = 48, Vn = 57;
+  function rn(e) {
+    if (e === void 0) return "_unknown";
+    var n = (e = e.replace(/[^a-zA-Z0-9_]/g, "$")).charCodeAt(0);
+    return n >= Hn && n <= Vn ? "_" + e : e;
   }
-  function $n(n, e) {
-    return n = Zn(n), new Function("body", "return function " + n + `() {
+  function tn(e, n) {
+    return e = rn(e), new Function("body", "return function " + e + `() {
     "use strict";    return body.apply(this, arguments);
 };
-`)(e);
+`)(n);
   }
-  function xn(n, e) {
-    var t = $n(e, function(a) {
-      this.name = e, this.message = a;
+  function je(e, n) {
+    var t = tn(n, function(a) {
+      this.name = n, this.message = a;
       var o = new Error(a).stack;
       o !== void 0 && (this.stack = this.toString() + `
 ` + o.replace(/^Error(:[^\n]*)?\n/, ""));
     });
-    return t.prototype = Object.create(n.prototype), t.prototype.constructor = t, t.prototype.toString = function() {
+    return t.prototype = Object.create(e.prototype), t.prototype.constructor = t, t.prototype.toString = function() {
       return this.message === void 0 ? this.name : this.name + ": " + this.message;
     }, t;
   }
-  var Xn = void 0;
-  function Kn(n) {
-    throw new Xn(n);
+  var an = void 0;
+  function on(e) {
+    throw new an(e);
   }
-  function Qn(n, e, t) {
-    function a(u) {
-      var s = t(u);
-      s.length !== n.length && Kn("Mismatched type converter count");
-      for (var c = 0; c < n.length; ++c) $(n[c], s[c]);
+  function un(e, n, t) {
+    function a(s) {
+      var l = t(s);
+      l.length !== e.length && on("Mismatched type converter count");
+      for (var p = 0; p < e.length; ++p) ee(e[p], l[p]);
     }
-    n.forEach(function(u) {
-      An[u] = e;
+    e.forEach(function(s) {
+      Pe[s] = n;
     });
-    var o = new Array(e.length), i = [], l = 0;
-    e.forEach(function(u, s) {
-      on.hasOwnProperty(u) ? o[s] = on[u] : (i.push(u), un.hasOwnProperty(u) || (un[u] = []), un[u].push(function() {
-        o[s] = on[u], ++l === i.length && a(o);
+    var o = new Array(n.length), u = [], c = 0;
+    n.forEach(function(s, l) {
+      ue.hasOwnProperty(s) ? o[l] = ue[s] : (u.push(s), le.hasOwnProperty(s) || (le[s] = []), le[s].push(function() {
+        o[l] = ue[s], ++c === u.length && a(o);
       }));
-    }), i.length === 0 && a(o);
+    }), u.length === 0 && a(o);
   }
-  function Fn(n) {
-    switch (n) {
+  function Me(e) {
+    switch (e) {
       case 1:
         return 0;
       case 2:
@@ -201,46 +201,46 @@ var zn, ur = (zn = import.meta.url, function(r, v) {
       case 8:
         return 3;
       default:
-        throw new TypeError("Unknown type size: " + n);
+        throw new TypeError("Unknown type size: " + e);
     }
   }
-  var ne = void 0;
-  function B(n) {
-    for (var e = "", t = n; E[t]; ) e += ne[E[t++]];
-    return e;
+  var sn = void 0;
+  function B(e) {
+    for (var n = "", t = e; x[t]; ) n += sn[x[t++]];
+    return n;
   }
-  var ee = void 0;
-  function M(n) {
-    throw new ee(n);
+  var ln = void 0;
+  function V(e) {
+    throw new ln(e);
   }
-  function $(n, e, t) {
-    if (t = t || {}, !("argPackAdvance" in e)) throw new TypeError("registerType registeredInstance requires argPackAdvance");
-    var a = e.name;
-    if (n || M('type "' + a + '" must have a positive integer typeid pointer'), on.hasOwnProperty(n)) {
+  function ee(e, n, t) {
+    if (t = t || {}, !("argPackAdvance" in n)) throw new TypeError("registerType registeredInstance requires argPackAdvance");
+    var a = n.name;
+    if (e || V('type "' + a + '" must have a positive integer typeid pointer'), ue.hasOwnProperty(e)) {
       if (t.ignoreDuplicateRegistrations) return;
-      M("Cannot register type '" + a + "' twice");
+      V("Cannot register type '" + a + "' twice");
     }
-    if (on[n] = e, delete An[n], un.hasOwnProperty(n)) {
-      var o = un[n];
-      delete un[n], o.forEach(function(i) {
-        i();
+    if (ue[e] = n, delete Pe[e], le.hasOwnProperty(e)) {
+      var o = le[e];
+      delete le[e], o.forEach(function(u) {
+        u();
       });
     }
   }
-  var Sn = [], V = [{}, { value: void 0 }, { value: null }, { value: !0 }, { value: !1 }];
-  function re(n) {
-    n > 4 && --V[n].refcount == 0 && (V[n] = void 0, Sn.push(n));
+  var Be = [], Y = [{}, { value: void 0 }, { value: null }, { value: !0 }, { value: !1 }];
+  function cn(e) {
+    e > 4 && --Y[e].refcount == 0 && (Y[e] = void 0, Be.push(e));
   }
-  function Oe() {
-    for (var n = 0, e = 5; e < V.length; ++e) V[e] !== void 0 && ++n;
-    return n;
+  function Nn() {
+    for (var e = 0, n = 5; n < Y.length; ++n) Y[n] !== void 0 && ++e;
+    return e;
   }
-  function Be() {
-    for (var n = 5; n < V.length; ++n) if (V[n] !== void 0) return V[n];
+  function qn() {
+    for (var e = 5; e < Y.length; ++e) if (Y[e] !== void 0) return Y[e];
     return null;
   }
-  function En(n) {
-    switch (n) {
+  function Re(e) {
+    switch (e) {
       case void 0:
         return 1;
       case null:
@@ -250,720 +250,782 @@ var zn, ur = (zn = import.meta.url, function(r, v) {
       case !1:
         return 4;
       default:
-        var e = Sn.length ? Sn.pop() : V.length;
-        return V[e] = { refcount: 1, value: n }, e;
+        var n = Be.length ? Be.pop() : Y.length;
+        return Y[n] = { refcount: 1, value: e }, n;
     }
   }
-  function Ln(n) {
-    if (n === null) return "null";
-    var e = typeof n;
-    return e === "object" || e === "array" || e === "function" ? n.toString() : "" + n;
+  function De(e) {
+    if (e === null) return "null";
+    var n = typeof e;
+    return n === "object" || n === "array" || n === "function" ? e.toString() : "" + e;
   }
-  function ze(n, e) {
-    switch (e) {
+  function Gn(e, n) {
+    switch (n) {
       case 2:
         return function(t) {
-          return this.fromWireType(sn[t >> 2]);
+          return this.fromWireType(ce[t >> 2]);
         };
       case 3:
         return function(t) {
-          return this.fromWireType(ln[t >> 3]);
+          return this.fromWireType(se[t >> 3]);
         };
       default:
-        throw new TypeError("Unknown float type: " + n);
+        throw new TypeError("Unknown float type: " + e);
     }
   }
-  function De(n, e, t, a, o) {
-    var i = e.length;
-    i < 2 && M("argTypes array size mismatch! Must at least get return value and 'this' types!");
-    for (var l = e[1] !== null && t !== null, u = !1, s = 1; s < e.length; ++s) if (e[s] !== null && e[s].destructorFunction === void 0) {
-      u = !0;
+  function Jn(e, n, t, a, o) {
+    var u = n.length;
+    u < 2 && V("argTypes array size mismatch! Must at least get return value and 'this' types!");
+    for (var c = n[1] !== null && t !== null, s = !1, l = 1; l < n.length; ++l) if (n[l] !== null && n[l].destructorFunction === void 0) {
+      s = !0;
       break;
     }
-    var c = e[0].name !== "void", m = "", _ = "";
-    for (s = 0; s < i - 2; ++s) m += (s !== 0 ? ", " : "") + "arg" + s, _ += (s !== 0 ? ", " : "") + "arg" + s + "Wired";
-    var y = "return function " + Zn(n) + "(" + m + `) {
-if (arguments.length !== ` + (i - 2) + `) {
-throwBindingError('function ` + n + " called with ' + arguments.length + ' arguments, expected " + (i - 2) + ` args!');
+    var p = n[0].name !== "void", w = "", T = "";
+    for (l = 0; l < u - 2; ++l) w += (l !== 0 ? ", " : "") + "arg" + l, T += (l !== 0 ? ", " : "") + "arg" + l + "Wired";
+    var b = "return function " + rn(e) + "(" + w + `) {
+if (arguments.length !== ` + (u - 2) + `) {
+throwBindingError('function ` + e + " called with ' + arguments.length + ' arguments, expected " + (u - 2) + ` args!');
 }
 `;
-    u && (y += `var destructors = [];
+    s && (b += `var destructors = [];
 `);
-    var b = u ? "destructors" : "null", P = ["throwBindingError", "invoker", "fn", "runDestructors", "retType", "classParam"], H = [M, a, o, Yn, e[0], e[1]];
-    for (l && (y += "var thisWired = classParam.toWireType(" + b + `, this);
-`), s = 0; s < i - 2; ++s) y += "var arg" + s + "Wired = argType" + s + ".toWireType(" + b + ", arg" + s + "); // " + e[s + 2].name + `
-`, P.push("argType" + s), H.push(e[s + 2]);
-    if (l && (_ = "thisWired" + (_.length > 0 ? ", " : "") + _), y += (c ? "var rv = " : "") + "invoker(fn" + (_.length > 0 ? ", " : "") + _ + `);
-`, u) y += `runDestructors(destructors);
+    var A = s ? "destructors" : "null", I = ["throwBindingError", "invoker", "fn", "runDestructors", "retType", "classParam"], N = [V, a, o, nn, n[0], n[1]];
+    for (c && (b += "var thisWired = classParam.toWireType(" + A + `, this);
+`), l = 0; l < u - 2; ++l) b += "var arg" + l + "Wired = argType" + l + ".toWireType(" + A + ", arg" + l + "); // " + n[l + 2].name + `
+`, I.push("argType" + l), N.push(n[l + 2]);
+    if (c && (T = "thisWired" + (T.length > 0 ? ", " : "") + T), b += (p ? "var rv = " : "") + "invoker(fn" + (T.length > 0 ? ", " : "") + T + `);
+`, s) b += `runDestructors(destructors);
 `;
-    else for (s = l ? 1 : 2; s < e.length; ++s) {
-      var N = s === 1 ? "thisWired" : "arg" + (s - 2) + "Wired";
-      e[s].destructorFunction !== null && (y += N + "_dtor(" + N + "); // " + e[s].name + `
-`, P.push(N + "_dtor"), H.push(e[s].destructorFunction));
+    else for (l = c ? 1 : 2; l < n.length; ++l) {
+      var Z = l === 1 ? "thisWired" : "arg" + (l - 2) + "Wired";
+      n[l].destructorFunction !== null && (b += Z + "_dtor(" + Z + "); // " + n[l].name + `
+`, I.push(Z + "_dtor"), N.push(n[l].destructorFunction));
     }
-    return c && (y += `var ret = retType.fromWireType(rv);
+    return p && (b += `var ret = retType.fromWireType(rv);
 return ret;
-`), y += `}
-`, P.push(y), function(T, Wn) {
-      if (!(T instanceof Function)) throw new TypeError("new_ called with constructor type " + typeof T + " which is not a function");
-      var le = $n(T.name || "unknownFunctionName", function() {
+`), b += `}
+`, I.push(b), function(k, Ue) {
+      if (!(k instanceof Function)) throw new TypeError("new_ called with constructor type " + typeof k + " which is not a function");
+      var yn = tn(k.name || "unknownFunctionName", function() {
       });
-      le.prototype = T.prototype;
-      var ce = new le(), fe = T.apply(ce, Wn);
-      return fe instanceof Object ? fe : ce;
-    }(Function, P).apply(null, H);
+      yn.prototype = k.prototype;
+      var hn = new yn(), wn = k.apply(hn, Ue);
+      return wn instanceof Object ? wn : hn;
+    }(Function, I).apply(null, N);
   }
-  function je(n, e, t) {
-    r.hasOwnProperty(n) ? ((t === void 0 || r[n].overloadTable !== void 0 && r[n].overloadTable[t] !== void 0) && M("Cannot register public name '" + n + "' twice"), function(a, o, i) {
+  function Yn(e, n, t) {
+    r.hasOwnProperty(e) ? ((t === void 0 || r[e].overloadTable !== void 0 && r[e].overloadTable[t] !== void 0) && V("Cannot register public name '" + e + "' twice"), function(a, o, u) {
       if (a[o].overloadTable === void 0) {
-        var l = a[o];
+        var c = a[o];
         a[o] = function() {
-          return a[o].overloadTable.hasOwnProperty(arguments.length) || M("Function '" + i + "' called with an invalid number of arguments (" + arguments.length + ") - expects one of (" + a[o].overloadTable + ")!"), a[o].overloadTable[arguments.length].apply(this, arguments);
-        }, a[o].overloadTable = [], a[o].overloadTable[l.argCount] = l;
+          return a[o].overloadTable.hasOwnProperty(arguments.length) || V("Function '" + u + "' called with an invalid number of arguments (" + arguments.length + ") - expects one of (" + a[o].overloadTable + ")!"), a[o].overloadTable[arguments.length].apply(this, arguments);
+        }, a[o].overloadTable = [], a[o].overloadTable[c.argCount] = c;
       }
-    }(r, n, n), r.hasOwnProperty(t) && M("Cannot register multiple overloads of a function with the same number of arguments (" + t + ")!"), r[n].overloadTable[t] = e) : (r[n] = e, t !== void 0 && (r[n].numArguments = t));
+    }(r, e, e), r.hasOwnProperty(t) && V("Cannot register multiple overloads of a function with the same number of arguments (" + t + ")!"), r[e].overloadTable[t] = n) : (r[e] = n, t !== void 0 && (r[e].numArguments = t));
   }
-  function Me(n, e, t) {
-    return n.includes("j") ? function(a, o, i) {
-      var l = r["dynCall_" + a];
-      return i && i.length ? l.apply(null, [o].concat(i)) : l.call(null, o);
-    }(n, e, t) : Q.get(e).apply(null, t);
+  function Zn(e, n, t) {
+    return e.includes("j") ? function(a, o, u) {
+      var c = r["dynCall_" + a];
+      return u && u.length ? c.apply(null, [o].concat(u)) : c.call(null, o);
+    }(e, n, t) : te.get(n).apply(null, t);
   }
-  function fn(n, e) {
-    var t, a, o, i = (n = B(n)).includes("j") ? (t = n, a = e, o = [], function() {
+  function pe(e, n) {
+    var t, a, o, u = (e = B(e)).includes("j") ? (t = e, a = n, o = [], function() {
       o.length = arguments.length;
-      for (var l = 0; l < arguments.length; l++) o[l] = arguments[l];
-      return Me(t, a, o);
-    }) : Q.get(e);
-    return typeof i != "function" && M("unknown function pointer with signature " + n + ": " + e), i;
+      for (var c = 0; c < arguments.length; c++) o[c] = arguments[c];
+      return Zn(t, a, o);
+    }) : te.get(n);
+    return typeof u != "function" && V("unknown function pointer with signature " + e + ": " + n), u;
   }
-  var te = void 0;
-  function ae(n) {
-    var e = se(n), t = B(e);
-    return X(e), t;
+  var fn = void 0;
+  function pn(e) {
+    var n = vn(e), t = B(n);
+    return ne(n), t;
   }
-  function He(n, e, t) {
-    switch (e) {
+  function $n(e, n, t) {
+    switch (n) {
       case 0:
         return t ? function(a) {
-          return G[a];
+          return P[a];
         } : function(a) {
-          return E[a];
+          return x[a];
         };
       case 1:
         return t ? function(a) {
-          return rn[a >> 1];
+          return K[a >> 1];
         } : function(a) {
-          return tn[a >> 1];
+          return H[a >> 1];
         };
       case 2:
         return t ? function(a) {
-          return U[a >> 2];
+          return L[a >> 2];
         } : function(a) {
-          return j[a >> 2];
+          return J[a >> 2];
         };
       default:
-        throw new TypeError("Unknown integer type: " + n);
+        throw new TypeError("Unknown integer type: " + e);
     }
   }
-  var Ve = {};
-  function oe() {
+  var Qn = {};
+  function dn() {
     return typeof globalThis == "object" ? globalThis : Function("return this")();
   }
-  function Ne(n, e) {
-    var t = on[n];
-    return t === void 0 && M(e + " has unknown type " + ae(n)), t;
+  function Kn(e, n) {
+    var t = ue[e];
+    return t === void 0 && V(n + " has unknown type " + pn(e)), t;
   }
-  var ie = {};
-  function qe(n) {
+  var gn = {};
+  function Xn(e) {
     try {
-      return x.grow(n - Y.byteLength + 65535 >>> 16), Vn(x.buffer), 1;
+      return q.grow(e - R.byteLength + 65535 >>> 16), $e(q.buffer), 1;
     } catch {
     }
   }
-  var ue = {};
-  function pn() {
-    if (!pn.strings) {
-      var n = { USER: "web_user", LOGNAME: "web_user", PATH: "/", PWD: "/", HOME: "/home/web_user", LANG: (typeof navigator == "object" && navigator.languages && navigator.languages[0] || "C").replace("-", "_") + ".UTF-8", _: A || "./this.program" };
-      for (var e in ue) n[e] = ue[e];
+  var mn = {};
+  function de() {
+    if (!de.strings) {
+      var e = { USER: "web_user", LOGNAME: "web_user", PATH: "/", PWD: "/", HOME: "/home/web_user", LANG: (typeof navigator == "object" && navigator.languages && navigator.languages[0] || "C").replace("-", "_") + ".UTF-8", _: _ || "./this.program" };
+      for (var n in mn) e[n] = mn[n];
       var t = [];
-      for (var e in n) t.push(e + "=" + n[e]);
-      pn.strings = t;
+      for (var n in e) t.push(n + "=" + e[n]);
+      de.strings = t;
     }
-    return pn.strings;
+    return de.strings;
   }
-  var kn = { mappings: {}, buffers: [null, [], []], printChar: function(n, e) {
-    var t = kn.buffers[n];
-    e === 0 || e === 10 ? ((n === 1 ? D : O)(function(a, o, i) {
-      for (var l = o + i, u = o; a[u] && !(u >= l); ) ++u;
-      return C.decode(a.subarray ? a.subarray(o, u) : new Uint8Array(a.slice(o, u)));
-    }(t, 0)), t.length = 0) : t.push(e);
+  var xe = { mappings: {}, buffers: [null, [], []], printChar: function(e, n) {
+    var t = xe.buffers[e];
+    n === 0 || n === 10 ? ((e === 1 ? z : U)(function(a, o, u) {
+      for (var c = o + u, s = o; a[s] && !(s >= c); ) ++s;
+      return S.decode(a.subarray ? a.subarray(o, s) : new Uint8Array(a.slice(o, s)));
+    }(t, 0)), t.length = 0) : t.push(n);
   }, varargs: void 0, get: function() {
-    return kn.varargs += 4, U[kn.varargs - 4 >> 2];
-  }, getStr: function(n) {
-    return W(n);
-  }, get64: function(n, e) {
-    return n;
+    return xe.varargs += 4, L[xe.varargs - 4 >> 2];
+  }, getStr: function(e) {
+    return W(e);
+  }, get64: function(e, n) {
+    return e;
   } };
-  Xn = r.InternalError = xn(Error, "InternalError"), function() {
-    for (var n = new Array(256), e = 0; e < 256; ++e) n[e] = String.fromCharCode(e);
-    ne = n;
-  }(), ee = r.BindingError = xn(Error, "BindingError"), r.count_emval_handles = Oe, r.get_first_emval = Be, te = r.UnboundTypeError = xn(Error, "UnboundTypeError");
-  var Ge = { B: function(n, e) {
-  }, l: function(n) {
-    var e = _n[n];
-    delete _n[n];
-    var t = e.rawConstructor, a = e.rawDestructor, o = e.fields;
-    Qn([n], o.map(function(i) {
-      return i.getterReturnType;
-    }).concat(o.map(function(i) {
-      return i.setterArgumentType;
-    })), function(i) {
-      var l = {};
-      return o.forEach(function(u, s) {
-        var c = u.fieldName, m = i[s], _ = u.getter, y = u.getterContext, b = i[s + o.length], P = u.setter, H = u.setterContext;
-        l[c] = { read: function(N) {
-          return m.fromWireType(_(y, N));
-        }, write: function(N, T) {
-          var Wn = [];
-          P(H, N, b.toWireType(Wn, T)), Yn(Wn);
+  an = r.InternalError = je(Error, "InternalError"), function() {
+    for (var e = new Array(256), n = 0; n < 256; ++n) e[n] = String.fromCharCode(n);
+    sn = e;
+  }(), ln = r.BindingError = je(Error, "BindingError"), r.count_emval_handles = Nn, r.get_first_emval = qn, fn = r.UnboundTypeError = je(Error, "UnboundTypeError");
+  var er = { B: function(e, n) {
+  }, l: function(e) {
+    var n = ke[e];
+    delete ke[e];
+    var t = n.rawConstructor, a = n.rawDestructor, o = n.fields;
+    un([e], o.map(function(u) {
+      return u.getterReturnType;
+    }).concat(o.map(function(u) {
+      return u.setterArgumentType;
+    })), function(u) {
+      var c = {};
+      return o.forEach(function(s, l) {
+        var p = s.fieldName, w = u[l], T = s.getter, b = s.getterContext, A = u[l + o.length], I = s.setter, N = s.setterContext;
+        c[p] = { read: function(Z) {
+          return w.fromWireType(T(b, Z));
+        }, write: function(Z, k) {
+          var Ue = [];
+          I(N, Z, A.toWireType(Ue, k)), nn(Ue);
         } };
-      }), [{ name: e.name, fromWireType: function(u) {
-        var s = {};
-        for (var c in l) s[c] = l[c].read(u);
-        return a(u), s;
-      }, toWireType: function(u, s) {
-        for (var c in l) if (!(c in s)) throw new TypeError('Missing field:  "' + c + '"');
-        var m = t();
-        for (c in l) l[c].write(m, s[c]);
-        return u !== null && u.push(a, m), m;
-      }, argPackAdvance: 8, readValueFromPointer: Tn, destructorFunction: a }];
+      }), [{ name: n.name, fromWireType: function(s) {
+        var l = {};
+        for (var p in c) l[p] = c[p].read(s);
+        return a(s), l;
+      }, toWireType: function(s, l) {
+        for (var p in c) if (!(p in l)) throw new TypeError('Missing field:  "' + p + '"');
+        var w = t();
+        for (p in c) c[p].write(w, l[p]);
+        return s !== null && s.push(a, w), w;
+      }, argPackAdvance: 8, readValueFromPointer: We, destructorFunction: a }];
     });
-  }, p: function(n, e, t, a, o) {
-  }, y: function(n, e, t, a, o) {
-    var i = Fn(t);
-    $(n, { name: e = B(e), fromWireType: function(l) {
-      return !!l;
-    }, toWireType: function(l, u) {
-      return u ? a : o;
-    }, argPackAdvance: 8, readValueFromPointer: function(l) {
-      var u;
-      if (t === 1) u = G;
-      else if (t === 2) u = rn;
+  }, p: function(e, n, t, a, o) {
+  }, y: function(e, n, t, a, o) {
+    var u = Me(t);
+    ee(e, { name: n = B(n), fromWireType: function(c) {
+      return !!c;
+    }, toWireType: function(c, s) {
+      return s ? a : o;
+    }, argPackAdvance: 8, readValueFromPointer: function(c) {
+      var s;
+      if (t === 1) s = P;
+      else if (t === 2) s = K;
       else {
-        if (t !== 4) throw new TypeError("Unknown boolean type size: " + e);
-        u = U;
+        if (t !== 4) throw new TypeError("Unknown boolean type size: " + n);
+        s = L;
       }
-      return this.fromWireType(u[l >> i]);
+      return this.fromWireType(s[c >> u]);
     }, destructorFunction: null });
-  }, x: function(n, e) {
-    $(n, { name: e = B(e), fromWireType: function(t) {
-      var a = V[t].value;
-      return re(t), a;
+  }, x: function(e, n) {
+    ee(e, { name: n = B(n), fromWireType: function(t) {
+      var a = Y[t].value;
+      return cn(t), a;
     }, toWireType: function(t, a) {
-      return En(a);
-    }, argPackAdvance: 8, readValueFromPointer: Tn, destructorFunction: null });
-  }, i: function(n, e, t) {
-    var a = Fn(t);
-    $(n, { name: e = B(e), fromWireType: function(o) {
+      return Re(a);
+    }, argPackAdvance: 8, readValueFromPointer: We, destructorFunction: null });
+  }, i: function(e, n, t) {
+    var a = Me(t);
+    ee(e, { name: n = B(n), fromWireType: function(o) {
       return o;
-    }, toWireType: function(o, i) {
-      if (typeof i != "number" && typeof i != "boolean") throw new TypeError('Cannot convert "' + Ln(i) + '" to ' + this.name);
-      return i;
-    }, argPackAdvance: 8, readValueFromPointer: ze(e, a), destructorFunction: null });
-  }, f: function(n, e, t, a, o, i) {
-    var l = function(u, s) {
-      for (var c = [], m = 0; m < u; m++) c.push(U[(s >> 2) + m]);
-      return c;
-    }(e, t);
-    n = B(n), o = fn(a, o), je(n, function() {
-      (function(u, s) {
-        var c = [], m = {};
-        throw s.forEach(function _(y) {
-          m[y] || on[y] || (An[y] ? An[y].forEach(_) : (c.push(y), m[y] = !0));
-        }), new te(u + ": " + c.map(ae).join([", "]));
-      })("Cannot call " + n + " due to unbound types", l);
-    }, e - 1), Qn([], l, function(u) {
-      var s = [u[0], null].concat(u.slice(1));
-      return function(c, m, _) {
-        r.hasOwnProperty(c) || Kn("Replacing nonexistant public symbol"), r[c].overloadTable !== void 0 && _ !== void 0 ? r[c].overloadTable[_] = m : (r[c] = m, r[c].argCount = _);
-      }(n, De(n, s, null, o, i), e - 1), [];
+    }, toWireType: function(o, u) {
+      if (typeof u != "number" && typeof u != "boolean") throw new TypeError('Cannot convert "' + De(u) + '" to ' + this.name);
+      return u;
+    }, argPackAdvance: 8, readValueFromPointer: Gn(n, a), destructorFunction: null });
+  }, f: function(e, n, t, a, o, u) {
+    var c = function(s, l) {
+      for (var p = [], w = 0; w < s; w++) p.push(L[(l >> 2) + w]);
+      return p;
+    }(n, t);
+    e = B(e), o = pe(a, o), Yn(e, function() {
+      (function(s, l) {
+        var p = [], w = {};
+        throw l.forEach(function T(b) {
+          w[b] || ue[b] || (Pe[b] ? Pe[b].forEach(T) : (p.push(b), w[b] = !0));
+        }), new fn(s + ": " + p.map(pn).join([", "]));
+      })("Cannot call " + e + " due to unbound types", c);
+    }, n - 1), un([], c, function(s) {
+      var l = [s[0], null].concat(s.slice(1));
+      return function(p, w, T) {
+        r.hasOwnProperty(p) || on("Replacing nonexistant public symbol"), r[p].overloadTable !== void 0 && T !== void 0 ? r[p].overloadTable[T] = w : (r[p] = w, r[p].argCount = T);
+      }(e, Jn(e, l, null, o, u), n - 1), [];
     });
-  }, c: function(n, e, t, a, o) {
-    e = B(e), o === -1 && (o = 4294967295);
-    var i = Fn(t), l = function(c) {
-      return c;
+  }, c: function(e, n, t, a, o) {
+    n = B(n), o === -1 && (o = 4294967295);
+    var u = Me(t), c = function(p) {
+      return p;
     };
     if (a === 0) {
-      var u = 32 - 8 * t;
-      l = function(c) {
-        return c << u >>> u;
+      var s = 32 - 8 * t;
+      c = function(p) {
+        return p << s >>> s;
       };
     }
-    var s = e.includes("unsigned");
-    $(n, { name: e, fromWireType: l, toWireType: function(c, m) {
-      if (typeof m != "number" && typeof m != "boolean") throw new TypeError('Cannot convert "' + Ln(m) + '" to ' + this.name);
-      if (m < a || m > o) throw new TypeError('Passing a number "' + Ln(m) + '" from JS side to C/C++ side to an argument of type "' + e + '", which is outside the valid range [' + a + ", " + o + "]!");
-      return s ? m >>> 0 : 0 | m;
-    }, argPackAdvance: 8, readValueFromPointer: He(e, i, a !== 0), destructorFunction: null });
-  }, b: function(n, e, t) {
-    var a = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array][e];
-    function o(i) {
-      var l = j, u = l[i >>= 2], s = l[i + 1];
-      return new a(Y, s, u);
+    var l = n.includes("unsigned");
+    ee(e, { name: n, fromWireType: c, toWireType: function(p, w) {
+      if (typeof w != "number" && typeof w != "boolean") throw new TypeError('Cannot convert "' + De(w) + '" to ' + this.name);
+      if (w < a || w > o) throw new TypeError('Passing a number "' + De(w) + '" from JS side to C/C++ side to an argument of type "' + n + '", which is outside the valid range [' + a + ", " + o + "]!");
+      return l ? w >>> 0 : 0 | w;
+    }, argPackAdvance: 8, readValueFromPointer: $n(n, u, a !== 0), destructorFunction: null });
+  }, b: function(e, n, t) {
+    var a = [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array][n];
+    function o(u) {
+      var c = J, s = c[u >>= 2], l = c[u + 1];
+      return new a(R, l, s);
     }
-    $(n, { name: t = B(t), fromWireType: o, argPackAdvance: 8, readValueFromPointer: o }, { ignoreDuplicateRegistrations: !0 });
-  }, j: function(n, e) {
-    var t = (e = B(e)) === "std::string";
-    $(n, { name: e, fromWireType: function(a) {
-      var o, i = j[a >> 2];
-      if (t) for (var l = a + 4, u = 0; u <= i; ++u) {
-        var s = a + 4 + u;
-        if (u == i || E[s] == 0) {
-          var c = W(l, s - l);
-          o === void 0 ? o = c : (o += "\0", o += c), l = s + 1;
+    ee(e, { name: t = B(t), fromWireType: o, argPackAdvance: 8, readValueFromPointer: o }, { ignoreDuplicateRegistrations: !0 });
+  }, j: function(e, n) {
+    var t = (n = B(n)) === "std::string";
+    ee(e, { name: n, fromWireType: function(a) {
+      var o, u = J[a >> 2];
+      if (t) for (var c = a + 4, s = 0; s <= u; ++s) {
+        var l = a + 4 + s;
+        if (s == u || x[l] == 0) {
+          var p = W(c, l - c);
+          o === void 0 ? o = p : (o += "\0", o += p), c = l + 1;
         }
       }
       else {
-        var m = new Array(i);
-        for (u = 0; u < i; ++u) m[u] = String.fromCharCode(E[a + 4 + u]);
-        o = m.join("");
+        var w = new Array(u);
+        for (s = 0; s < u; ++s) w[s] = String.fromCharCode(x[a + 4 + s]);
+        o = w.join("");
       }
-      return X(a), o;
+      return ne(a), o;
     }, toWireType: function(a, o) {
-      var i;
+      var u;
       o instanceof ArrayBuffer && (o = new Uint8Array(o));
-      var l = typeof o == "string";
-      l || o instanceof Uint8Array || o instanceof Uint8ClampedArray || o instanceof Int8Array || M("Cannot pass non-string to std::string"), i = t && l ? function() {
-        return function(_) {
-          for (var y = 0, b = 0; b < _.length; ++b) {
-            var P = _.charCodeAt(b);
-            P >= 55296 && P <= 57343 && (P = 65536 + ((1023 & P) << 10) | 1023 & _.charCodeAt(++b)), P <= 127 ? ++y : y += P <= 2047 ? 2 : P <= 65535 ? 3 : 4;
+      var c = typeof o == "string";
+      c || o instanceof Uint8Array || o instanceof Uint8ClampedArray || o instanceof Int8Array || V("Cannot pass non-string to std::string"), u = t && c ? function() {
+        return function(T) {
+          for (var b = 0, A = 0; A < T.length; ++A) {
+            var I = T.charCodeAt(A);
+            I >= 55296 && I <= 57343 && (I = 65536 + ((1023 & I) << 10) | 1023 & T.charCodeAt(++A)), I <= 127 ? ++b : b += I <= 2047 ? 2 : I <= 65535 ? 3 : 4;
           }
-          return y;
+          return b;
         }(o);
       } : function() {
         return o.length;
       };
-      var u = i(), s = On(4 + u + 1);
-      if (j[s >> 2] = u, t && l) (function(_, y, b, P) {
-        if (!(P > 0)) return 0;
-        for (var H = b + P - 1, N = 0; N < _.length; ++N) {
-          var T = _.charCodeAt(N);
-          if (T >= 55296 && T <= 57343 && (T = 65536 + ((1023 & T) << 10) | 1023 & _.charCodeAt(++N)), T <= 127) {
-            if (b >= H) break;
-            y[b++] = T;
-          } else if (T <= 2047) {
-            if (b + 1 >= H) break;
-            y[b++] = 192 | T >> 6, y[b++] = 128 | 63 & T;
-          } else if (T <= 65535) {
-            if (b + 2 >= H) break;
-            y[b++] = 224 | T >> 12, y[b++] = 128 | T >> 6 & 63, y[b++] = 128 | 63 & T;
+      var s = u(), l = He(4 + s + 1);
+      if (J[l >> 2] = s, t && c) (function(T, b, A, I) {
+        if (!(I > 0)) return 0;
+        for (var N = A + I - 1, Z = 0; Z < T.length; ++Z) {
+          var k = T.charCodeAt(Z);
+          if (k >= 55296 && k <= 57343 && (k = 65536 + ((1023 & k) << 10) | 1023 & T.charCodeAt(++Z)), k <= 127) {
+            if (A >= N) break;
+            b[A++] = k;
+          } else if (k <= 2047) {
+            if (A + 1 >= N) break;
+            b[A++] = 192 | k >> 6, b[A++] = 128 | 63 & k;
+          } else if (k <= 65535) {
+            if (A + 2 >= N) break;
+            b[A++] = 224 | k >> 12, b[A++] = 128 | k >> 6 & 63, b[A++] = 128 | 63 & k;
           } else {
-            if (b + 3 >= H) break;
-            y[b++] = 240 | T >> 18, y[b++] = 128 | T >> 12 & 63, y[b++] = 128 | T >> 6 & 63, y[b++] = 128 | 63 & T;
+            if (A + 3 >= N) break;
+            b[A++] = 240 | k >> 18, b[A++] = 128 | k >> 12 & 63, b[A++] = 128 | k >> 6 & 63, b[A++] = 128 | 63 & k;
           }
         }
-        y[b] = 0;
-      })(o, E, s + 4, u + 1);
-      else if (l) for (var c = 0; c < u; ++c) {
-        var m = o.charCodeAt(c);
-        m > 255 && (X(s), M("String has UTF-16 code units that do not fit in 8 bits")), E[s + 4 + c] = m;
+        b[A] = 0;
+      })(o, x, l + 4, s + 1);
+      else if (c) for (var p = 0; p < s; ++p) {
+        var w = o.charCodeAt(p);
+        w > 255 && (ne(l), V("String has UTF-16 code units that do not fit in 8 bits")), x[l + 4 + p] = w;
       }
-      else for (c = 0; c < u; ++c) E[s + 4 + c] = o[c];
-      return a !== null && a.push(X, s), s;
-    }, argPackAdvance: 8, readValueFromPointer: Tn, destructorFunction: function(a) {
-      X(a);
+      else for (p = 0; p < s; ++p) x[l + 4 + p] = o[p];
+      return a !== null && a.push(ne, l), l;
+    }, argPackAdvance: 8, readValueFromPointer: We, destructorFunction: function(a) {
+      ne(a);
     } });
-  }, e: function(n, e, t) {
-    var a, o, i, l, u;
-    t = B(t), e === 2 ? (a = yn, o = wn, l = Re, i = function() {
-      return tn;
-    }, u = 1) : e === 4 && (a = Ie, o = Ue, l = xe, i = function() {
-      return j;
-    }, u = 2), $(n, { name: t, fromWireType: function(s) {
-      for (var c, m = j[s >> 2], _ = i(), y = s + 4, b = 0; b <= m; ++b) {
-        var P = s + 4 + b * e;
-        if (b == m || _[P >> u] == 0) {
-          var H = a(y, P - y);
-          c === void 0 ? c = H : (c += "\0", c += H), y = P + e;
+  }, e: function(e, n, t) {
+    var a, o, u, c, s;
+    t = B(t), n === 2 ? (a = _e, o = Ae, c = Te, u = function() {
+      return H;
+    }, s = 1) : n === 4 && (a = Ee, o = Mn, c = Bn, u = function() {
+      return J;
+    }, s = 2), ee(e, { name: t, fromWireType: function(l) {
+      for (var p, w = J[l >> 2], T = u(), b = l + 4, A = 0; A <= w; ++A) {
+        var I = l + 4 + A * n;
+        if (A == w || T[I >> s] == 0) {
+          var N = a(b, I - b);
+          p === void 0 ? p = N : (p += "\0", p += N), b = I + n;
         }
       }
-      return X(s), c;
-    }, toWireType: function(s, c) {
-      typeof c != "string" && M("Cannot pass non-string to C++ string type " + t);
-      var m = l(c), _ = On(4 + m + e);
-      return j[_ >> 2] = m >> u, o(c, _ + 4, m + e), s !== null && s.push(X, _), _;
-    }, argPackAdvance: 8, readValueFromPointer: Tn, destructorFunction: function(s) {
-      X(s);
+      return ne(l), p;
+    }, toWireType: function(l, p) {
+      typeof p != "string" && V("Cannot pass non-string to C++ string type " + t);
+      var w = c(p), T = He(4 + w + n);
+      return J[T >> 2] = w >> s, o(p, T + 4, w + n), l !== null && l.push(ne, T), T;
+    }, argPackAdvance: 8, readValueFromPointer: We, destructorFunction: function(l) {
+      ne(l);
     } });
-  }, m: function(n, e, t, a, o, i) {
-    _n[n] = { name: B(e), rawConstructor: fn(t, a), rawDestructor: fn(o, i), fields: [] };
-  }, a: function(n, e, t, a, o, i, l, u, s, c) {
-    _n[n].fields.push({ fieldName: B(e), getterReturnType: t, getter: fn(a, o), getterContext: i, setterArgumentType: l, setter: fn(u, s), setterContext: c });
-  }, z: function(n, e) {
-    $(n, { isVoid: !0, name: e = B(e), argPackAdvance: 0, fromWireType: function() {
+  }, m: function(e, n, t, a, o, u) {
+    ke[e] = { name: B(n), rawConstructor: pe(t, a), rawDestructor: pe(o, u), fields: [] };
+  }, a: function(e, n, t, a, o, u, c, s, l, p) {
+    ke[e].fields.push({ fieldName: B(n), getterReturnType: t, getter: pe(a, o), getterContext: u, setterArgumentType: c, setter: pe(s, l), setterContext: p });
+  }, z: function(e, n) {
+    ee(e, { isVoid: !0, name: n = B(n), argPackAdvance: 0, fromWireType: function() {
     }, toWireType: function(t, a) {
     } });
-  }, g: re, u: function(n) {
-    return n === 0 ? En(oe()) : (n = (t = Ve[e = n]) === void 0 ? B(e) : t, En(oe()[n]));
-    var e, t;
-  }, k: function(n) {
-    n > 4 && (V[n].refcount += 1);
-  }, n: function(n, e, t, a) {
-    n = function(i) {
-      return i || M("Cannot use deleted val. handle = " + i), V[i].value;
-    }(n);
-    var o = ie[e];
-    return o || (o = function(i) {
-      for (var l = "", u = 0; u < i; ++u) l += (u !== 0 ? ", " : "") + "arg" + u;
-      var s = "return function emval_allocator_" + i + `(constructor, argTypes, args) {
+  }, g: cn, u: function(e) {
+    return e === 0 ? Re(dn()) : (e = (t = Qn[n = e]) === void 0 ? B(n) : t, Re(dn()[e]));
+    var n, t;
+  }, k: function(e) {
+    e > 4 && (Y[e].refcount += 1);
+  }, n: function(e, n, t, a) {
+    e = function(u) {
+      return u || V("Cannot use deleted val. handle = " + u), Y[u].value;
+    }(e);
+    var o = gn[n];
+    return o || (o = function(u) {
+      for (var c = "", s = 0; s < u; ++s) c += (s !== 0 ? ", " : "") + "arg" + s;
+      var l = "return function emval_allocator_" + u + `(constructor, argTypes, args) {
 `;
-      for (u = 0; u < i; ++u) s += "var argType" + u + " = requireRegisteredType(Module['HEAP32'][(argTypes >>> 2) + " + u + '], "parameter ' + u + `");
-var arg` + u + " = argType" + u + `.readValueFromPointer(args);
-args += argType` + u + `['argPackAdvance'];
+      for (s = 0; s < u; ++s) l += "var argType" + s + " = requireRegisteredType(Module['HEAP32'][(argTypes >>> 2) + " + s + '], "parameter ' + s + `");
+var arg` + s + " = argType" + s + `.readValueFromPointer(args);
+args += argType` + s + `['argPackAdvance'];
 `;
-      return s += "var obj = new constructor(" + l + `);
+      return l += "var obj = new constructor(" + c + `);
 return __emval_register(obj);
 }
-`, new Function("requireRegisteredType", "Module", "__emval_register", s)(Ne, r, En);
-    }(e), ie[e] = o), o(n, t, a);
+`, new Function("requireRegisteredType", "Module", "__emval_register", l)(Kn, r, Re);
+    }(n), gn[n] = o), o(e, t, a);
   }, h: function() {
-    bn();
-  }, r: function(n, e, t) {
-    E.copyWithin(n, e, e + t);
-  }, d: function(n) {
-    var e, t, a = E.length, o = 2147483648;
-    if ((n >>>= 0) > o) return !1;
-    for (var i = 1; i <= 4; i *= 2) {
-      var l = a * (1 + 0.2 / i);
-      if (l = Math.min(l, n + 100663296), qe(Math.min(o, ((e = Math.max(n, l)) % (t = 65536) > 0 && (e += t - e % t), e)))) return !0;
+    Ce();
+  }, r: function(e, n, t) {
+    x.copyWithin(e, n, n + t);
+  }, d: function(e) {
+    var n, t, a = x.length, o = 2147483648;
+    if ((e >>>= 0) > o) return !1;
+    for (var u = 1; u <= 4; u *= 2) {
+      var c = a * (1 + 0.2 / u);
+      if (c = Math.min(c, e + 100663296), Xn(Math.min(o, ((n = Math.max(e, c)) % (t = 65536) > 0 && (n += t - n % t), n)))) return !0;
     }
     return !1;
-  }, s: function(n, e) {
+  }, s: function(e, n) {
     var t = 0;
-    return pn().forEach(function(a, o) {
-      var i = e + t;
-      U[n + 4 * o >> 2] = i, function(l, u, s) {
-        for (var c = 0; c < l.length; ++c) G[0 | u++] = l.charCodeAt(c);
-        G[0 | u] = 0;
-      }(a, i), t += a.length + 1;
+    return de().forEach(function(a, o) {
+      var u = n + t;
+      L[e + 4 * o >> 2] = u, function(c, s, l) {
+        for (var p = 0; p < c.length; ++p) P[0 | s++] = c.charCodeAt(p);
+        P[0 | s] = 0;
+      }(a, u), t += a.length + 1;
     }), 0;
-  }, t: function(n, e) {
-    var t = pn();
-    U[n >> 2] = t.length;
+  }, t: function(e, n) {
+    var t = de();
+    L[e >> 2] = t.length;
     var a = 0;
     return t.forEach(function(o) {
       a += o.length + 1;
-    }), U[e >> 2] = a, 0;
-  }, A: function(n) {
-    (function(e, t) {
-      F || Fe > 0 || (r.onExit && r.onExit(e), k = !0), R(e, new Je(e));
-    })(n);
-  }, w: function(n) {
+    }), L[n >> 2] = a, 0;
+  }, A: function(e) {
+    (function(n, t) {
+      G || Dn > 0 || (r.onExit && r.onExit(n), F = !0), E(n, new nr(n));
+    })(e);
+  }, w: function(e) {
     return 0;
-  }, o: function(n, e, t, a, o) {
-  }, v: function(n, e, t, a) {
-    for (var o = 0, i = 0; i < t; i++) {
-      for (var l = U[e + 8 * i >> 2], u = U[e + (8 * i + 4) >> 2], s = 0; s < u; s++) kn.printChar(n, E[l + s]);
-      o += u;
+  }, o: function(e, n, t, a, o) {
+  }, v: function(e, n, t, a) {
+    for (var o = 0, u = 0; u < t; u++) {
+      for (var c = L[n + 8 * u >> 2], s = L[n + (8 * u + 4) >> 2], l = 0; l < s; l++) xe.printChar(e, x[c + l]);
+      o += s;
     }
-    return U[a >> 2] = o, 0;
-  }, q: function(n) {
+    return L[a >> 2] = o, 0;
+  }, q: function(e) {
   } };
-  (function(n) {
-    var e = { a: Ge };
-    function t(i, l) {
-      var u, s = i.exports;
-      r.asm = s, Vn((x = r.asm.C).buffer), Q = r.asm.I, u = r.asm.D, qn.unshift(u), function(c) {
-        if (an--, r.monitorRunDependencies && r.monitorRunDependencies(an), an == 0 && cn) {
-          var m = cn;
-          cn = null, m();
+  (function(e) {
+    var n = { a: er };
+    function t(u, c) {
+      var s, l = u.exports;
+      r.asm = l, $e((q = r.asm.C).buffer), te = r.asm.I, s = r.asm.D, Ke.unshift(s), function(p) {
+        if (ie--, r.monitorRunDependencies && r.monitorRunDependencies(ie), ie == 0 && fe) {
+          var w = fe;
+          fe = null, w();
         }
       }();
     }
-    function a(i) {
-      t(i.instance);
+    function a(u) {
+      t(u.instance);
     }
-    function o(i) {
-      return (!I && q && typeof fetch == "function" ? fetch(nn, { credentials: "same-origin" }).then(function(l) {
-        if (!l.ok) throw "failed to load wasm binary file at '" + nn + "'";
-        return l.arrayBuffer();
+    function o(u) {
+      return (!C && O && typeof fetch == "function" ? fetch(ae, { credentials: "same-origin" }).then(function(c) {
+        if (!c.ok) throw "failed to load wasm binary file at '" + ae + "'";
+        return c.arrayBuffer();
       }).catch(function() {
-        return Jn(nn);
+        return en(ae);
       }) : Promise.resolve().then(function() {
-        return Jn(nn);
-      })).then(function(l) {
-        return WebAssembly.instantiate(l, e);
-      }).then(i, function(l) {
-        O("failed to asynchronously prepare wasm: " + l), bn(l);
+        return en(ae);
+      })).then(function(c) {
+        return WebAssembly.instantiate(c, n);
+      }).then(u, function(c) {
+        U("failed to asynchronously prepare wasm: " + c), Ce(c);
       });
     }
-    if (an++, r.monitorRunDependencies && r.monitorRunDependencies(an), r.instantiateWasm) try {
-      return r.instantiateWasm(e, t);
-    } catch (i) {
-      return O("Module.instantiateWasm callback failed with error: " + i), !1;
+    if (ie++, r.monitorRunDependencies && r.monitorRunDependencies(ie), r.instantiateWasm) try {
+      return r.instantiateWasm(n, t);
+    } catch (u) {
+      return U("Module.instantiateWasm callback failed with error: " + u), !1;
     }
-    (function(i) {
-      return I || typeof WebAssembly.instantiateStreaming != "function" || typeof fetch != "function" ? o(a) : fetch(i, { credentials: "same-origin" }).then(function(l) {
-        return WebAssembly.instantiateStreaming(l, e).then(a, function(u) {
-          return O("wasm streaming compile failed: " + u), O("falling back to ArrayBuffer instantiation"), o(a);
+    (function(u) {
+      return C || typeof WebAssembly.instantiateStreaming != "function" || typeof fetch != "function" ? o(a) : fetch(u, { credentials: "same-origin" }).then(function(c) {
+        return WebAssembly.instantiateStreaming(c, n).then(a, function(s) {
+          return U("wasm streaming compile failed: " + s), U("falling back to ArrayBuffer instantiation"), o(a);
         });
       });
-    })(n).catch(d);
-  })(v), r.___wasm_call_ctors = function() {
+    })(e).catch(m);
+  })(f), r.___wasm_call_ctors = function() {
     return (r.___wasm_call_ctors = r.asm.D).apply(null, arguments);
   };
-  var Cn, On = r._malloc = function() {
-    return (On = r._malloc = r.asm.E).apply(null, arguments);
-  }, X = r._free = function() {
-    return (X = r._free = r.asm.F).apply(null, arguments);
-  }, se = r.___getTypeName = function() {
-    return (se = r.___getTypeName = r.asm.G).apply(null, arguments);
+  var Ie, He = r._malloc = function() {
+    return (He = r._malloc = r.asm.E).apply(null, arguments);
+  }, ne = r._free = function() {
+    return (ne = r._free = r.asm.F).apply(null, arguments);
+  }, vn = r.___getTypeName = function() {
+    return (vn = r.___getTypeName = r.asm.G).apply(null, arguments);
   };
-  function Je(n) {
-    this.name = "ExitStatus", this.message = "Program terminated with exit(" + n + ")", this.status = n;
+  function nr(e) {
+    this.name = "ExitStatus", this.message = "Program terminated with exit(" + e + ")", this.status = e;
   }
-  function Bn(n) {
-    function e() {
-      Cn || (Cn = !0, r.calledRun = !0, k || (Un(qn), h(r), r.onRuntimeInitialized && r.onRuntimeInitialized(), function() {
-        if (r.postRun) for (typeof r.postRun == "function" && (r.postRun = [r.postRun]); r.postRun.length; ) t = r.postRun.shift(), Gn.unshift(t);
+  function Ve(e) {
+    function n() {
+      Ie || (Ie = !0, r.calledRun = !0, F || (Oe(Ke), h(r), r.onRuntimeInitialized && r.onRuntimeInitialized(), function() {
+        if (r.postRun) for (typeof r.postRun == "function" && (r.postRun = [r.postRun]); r.postRun.length; ) t = r.postRun.shift(), Xe.unshift(t);
         var t;
-        Un(Gn);
+        Oe(Xe);
       }()));
     }
-    an > 0 || (function() {
-      if (r.preRun) for (typeof r.preRun == "function" && (r.preRun = [r.preRun]); r.preRun.length; ) t = r.preRun.shift(), Nn.unshift(t);
+    ie > 0 || (function() {
+      if (r.preRun) for (typeof r.preRun == "function" && (r.preRun = [r.preRun]); r.preRun.length; ) t = r.preRun.shift(), Qe.unshift(t);
       var t;
-      Un(Nn);
-    }(), an > 0 || (r.setStatus ? (r.setStatus("Running..."), setTimeout(function() {
+      Oe(Qe);
+    }(), ie > 0 || (r.setStatus ? (r.setStatus("Running..."), setTimeout(function() {
       setTimeout(function() {
         r.setStatus("");
-      }, 1), e();
-    }, 1)) : e()));
+      }, 1), n();
+    }, 1)) : n()));
   }
   if (r.___embind_register_native_and_builtin_types = function() {
     return (r.___embind_register_native_and_builtin_types = r.asm.H).apply(null, arguments);
   }, r.dynCall_jiji = function() {
     return (r.dynCall_jiji = r.asm.J).apply(null, arguments);
-  }, cn = function n() {
-    Cn || Bn(), Cn || (cn = n);
-  }, r.run = Bn, r.preInit) for (typeof r.preInit == "function" && (r.preInit = [r.preInit]); r.preInit.length > 0; ) r.preInit.pop()();
-  return Bn(), r.ready;
-}), _e = ((r) => (r[r.GRAYSCALE = 1] = "GRAYSCALE", r[r.RGB = 2] = "RGB", r[r.YCbCr = 3] = "YCbCr", r))(_e || {});
-const sr = { quality: 75, baseline: !1, arithmetic: !1, progressive: !0, optimize_coding: !0, smoothing: 0, color_space: _e.YCbCr, quant_table: 3, trellis_multipass: !1, trellis_opt_zero: !1, trellis_opt_table: !1, trellis_loops: 1, auto_subsample: !0, chroma_subsample: 2, separate_chroma_quality: !1, chroma_quality: 75 };
-let jn;
-const Te = async (r) => {
-  jn || (jn = await ur({}, be(r)));
-}, Ae = (r, v) => jn.encode(r.data, r.width, r.height, v);
-let J;
-const Ee = typeof TextDecoder < "u" ? new TextDecoder("utf-8", { ignoreBOM: !0, fatal: !0 }) : { decode: () => {
+  }, fe = function e() {
+    Ie || Ve(), Ie || (fe = e);
+  }, r.run = Ve, r.preInit) for (typeof r.preInit == "function" && (r.preInit = [r.preInit]); r.preInit.length > 0; ) r.preInit.pop()();
+  return Ve(), r.ready;
+}), Rn = ((r) => (r[r.GRAYSCALE = 1] = "GRAYSCALE", r[r.RGB = 2] = "RGB", r[r.YCbCr = 3] = "YCbCr", r))(Rn || {});
+const vr = { quality: 75, baseline: !1, arithmetic: !1, progressive: !0, optimize_coding: !0, smoothing: 0, color_space: Rn.YCbCr, quant_table: 3, trellis_multipass: !1, trellis_opt_zero: !1, trellis_opt_table: !1, trellis_loops: 1, auto_subsample: !0, chroma_subsample: 2, separate_chroma_quality: !1, chroma_quality: 75 };
+let Ge;
+const xn = async (r) => {
+  Ge || (Ge = await mr({}, Ze(r)));
+}, In = (r, f) => Ge.encode(r.data, r.width, r.height, f);
+let X;
+const Un = typeof TextDecoder < "u" ? new TextDecoder("utf-8", { ignoreBOM: !0, fatal: !0 }) : { decode: () => {
   throw Error("TextDecoder not available");
 } };
-typeof TextDecoder < "u" && Ee.decode();
-let dn = null;
-function Mn() {
-  return dn !== null && dn.byteLength !== 0 || (dn = new Uint8Array(J.memory.buffer)), dn;
+typeof TextDecoder < "u" && Un.decode();
+let ge = null;
+function Je() {
+  return ge !== null && ge.byteLength !== 0 || (ge = new Uint8Array(X.memory.buffer)), ge;
 }
-let ge = 0, me, vn = null;
-function he() {
-  return vn !== null && vn.byteLength !== 0 || (vn = new Int32Array(J.memory.buffer)), vn;
+let Tn = 0, En, me = null;
+function Cn() {
+  return me !== null && me.byteLength !== 0 || (me = new Int32Array(X.memory.buffer)), me;
 }
-function lr(r, v, h) {
+function yr(r, f, h) {
   try {
-    const R = J.__wbindgen_add_to_stack_pointer(-16), q = function(I, D) {
-      const O = D(1 * I.length, 1) >>> 0;
-      return Mn().set(I, O / 1), ge = I.length, O;
-    }(r, J.__wbindgen_malloc), p = ge;
-    J.optimize(R, q, p, v, h);
-    var d = he()[R / 4 + 0], f = he()[R / 4 + 1], w = (g = d, A = f, g >>>= 0, Mn().subarray(g / 1, g / 1 + A)).slice();
-    return J.__wbindgen_free(d, 1 * f, 1), w;
+    const E = X.__wbindgen_add_to_stack_pointer(-16), O = function(C, z) {
+      const U = z(1 * C.length, 1) >>> 0;
+      return Je().set(C, U / 1), Tn = C.length, U;
+    }(r, X.__wbindgen_malloc), v = Tn;
+    X.optimize(E, O, v, f, h);
+    var m = Cn()[E / 4 + 0], g = Cn()[E / 4 + 1], y = (d = m, _ = g, d >>>= 0, Je().subarray(d / 1, d / 1 + _)).slice();
+    return X.__wbindgen_free(m, 1 * g, 1), y;
   } finally {
-    J.__wbindgen_add_to_stack_pointer(16);
+    X.__wbindgen_add_to_stack_pointer(16);
   }
-  var g, A;
+  var d, _;
 }
-function cr() {
+function hr() {
   const r = { wbg: {} };
-  return r.wbg.__wbindgen_throw = function(v, h) {
-    throw new Error((d = v, f = h, d >>>= 0, Ee.decode(Mn().subarray(d, d + f))));
-    var d, f;
+  return r.wbg.__wbindgen_throw = function(f, h) {
+    throw new Error((m = f, g = h, m >>>= 0, Un.decode(Je().subarray(m, m + g))));
+    var m, g;
   }, r;
 }
-async function ke(r) {
-  if (J !== void 0) return J;
+async function Fn(r) {
+  if (X !== void 0) return X;
   if (r === void 0) throw new Error("oxipng WASM missing");
-  const v = cr();
+  const f = hr();
   (typeof r == "string" || typeof Request == "function" && r instanceof Request || typeof URL == "function" && r instanceof URL) && (r = fetch(r));
-  const { instance: h, module: d } = await async function(f, w) {
-    if (typeof Response == "function" && f instanceof Response) {
+  const { instance: h, module: m } = await async function(g, y) {
+    if (typeof Response == "function" && g instanceof Response) {
       if (typeof WebAssembly.instantiateStreaming == "function") try {
-        return await WebAssembly.instantiateStreaming(f, w);
-      } catch (A) {
-        if (f.headers.get("Content-Type") == "application/wasm") throw A;
-        console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", A);
+        return await WebAssembly.instantiateStreaming(g, y);
+      } catch (_) {
+        if (g.headers.get("Content-Type") == "application/wasm") throw _;
+        console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", _);
       }
-      const g = await f.arrayBuffer();
-      return await WebAssembly.instantiate(g, w);
+      const d = await g.arrayBuffer();
+      return await WebAssembly.instantiate(d, y);
     }
     {
-      const g = await WebAssembly.instantiate(f, w);
-      return g instanceof WebAssembly.Instance ? { instance: g, module: f } : g;
+      const d = await WebAssembly.instantiate(g, y);
+      return d instanceof WebAssembly.Instance ? { instance: d, module: g } : d;
     }
-  }(await r, v);
-  return function(f, w) {
-    return J = f.exports, ke.__wbindgen_wasm_module = w, vn = null, dn = null, J;
-  }(h, d);
+  }(await r, f);
+  return function(g, y) {
+    return X = g.exports, Fn.__wbindgen_wasm_module = y, me = null, ge = null, X;
+  }(h, m);
 }
-const Ce = async (r) => {
-  me || (me = await ke(be(r)));
-}, We = (r, v) => lr(new Uint8Array(r), (v == null ? void 0 : v.level) ?? 3, (v == null ? void 0 : v.interlace) ?? !1);
-var K = ((r) => (r.Complete = "complete", r.Error = "error", r))(K || {});
+const Sn = async (r) => {
+  En || (En = await Fn(Ze(r)));
+}, zn = (r, f) => yr(new Uint8Array(r), (f == null ? void 0 : f.level) ?? 3, (f == null ? void 0 : f.interlace) ?? !1);
+var $ = ((r) => (r.Complete = "complete", r.Error = "error", r))($ || {});
+let Q;
+const Ln = typeof TextDecoder < "u" ? new TextDecoder("utf-8", { ignoreBOM: !0, fatal: !0 }) : { decode: () => {
+  throw Error("TextDecoder not available");
+} };
+typeof TextDecoder < "u" && Ln.decode();
+let kn, ve = null;
+function wr(r, f) {
+  return r >>>= 0, Ln.decode((ve !== null && ve.byteLength !== 0 || (ve = new Uint8Array(Q.memory.buffer)), ve).subarray(r, r + f));
+}
+async function On(r) {
+  if (Q !== void 0) return Q;
+  const f = function() {
+    const y = { env: { memory: new WebAssembly.Memory({ initial: 256, maximum: 1e4, shared: !0 }) }, wasi: {}, wasi_snapshot_preview1: { fd_prestat_get: (d, _) => 8, fd_close: (d) => 8, fd_seek: (d, _, E, O) => 8, fd_write: (d, _, E, O) => 8, proc_exit(d) {
+      throw new i(d);
+    } }, wbg: {} };
+    return y.wbg.__wbindgen_throw = function(d, _) {
+      throw new Error(wr(d, _));
+    }, y;
+  }(), h = await fetch(r), { instance: m, module: g } = await async function(y, d) {
+    if (typeof Response == "function" && y instanceof Response) {
+      if (typeof WebAssembly.instantiateStreaming == "function") try {
+        return await WebAssembly.instantiateStreaming(y, d);
+      } catch (E) {
+        if (y.headers.get("Content-Type") == "application/wasm") throw E;
+        console.warn("`WebAssembly.instantiateStreaming`:\n", E);
+      }
+      const _ = await y.arrayBuffer();
+      return await WebAssembly.instantiate(_, d);
+    }
+    {
+      const _ = await WebAssembly.instantiate(y, d);
+      return _ instanceof WebAssembly.Instance ? { instance: _, module: y } : _;
+    }
+  }(h, f);
+  return function(y, d) {
+    return Q = y.exports, On.__wbindgen_wasm_module = d, ve = null, Q;
+  }(m, g);
+}
+const br = async (r) => {
+  kn || (kn = await On(Ze(r)));
+}, Fe = (r, f) => r ?? f ? 1 : 0, _r = (r, f) => function(h, m, g, y, d, _, E, O, v, C, z) {
+  const U = Q.malloc(h.length), q = Q.memory;
+  new Uint8Array(q.buffer).set(h, U);
+  let G = Q.malloc(8);
+  const F = Q.encode(U, m, g, 2, 2, G, d, _, E, O, v, C, z);
+  let S = new Uint32Array(q.buffer.slice(G, G + 8));
+  console.log(G, S, F);
+  const W = new Uint8Array(q.buffer.slice(F, F + S[0]));
+  return Q.free(U), Q.free(G), Q.free(F), W;
+}(new Uint8Array(r.data), r.width, r.height, 0, (f == null ? void 0 : f.quality) ?? 80, (f == null ? void 0 : f.progressiveLevel) ?? 2, Fe(f == null ? void 0 : f.optimizeCoding, !0), Fe(f == null ? void 0 : f.adaptiveQuantization, !0), Fe(f == null ? void 0 : f.standardQuantTables, !1), Fe(f == null ? void 0 : f.fancyDownsampling, !1), (f == null ? void 0 : f.dctMethod) ?? 0);
+var he = ((r) => (r.Oxipng = "oxipng", r.Mozjpeg = "mozjpeg", r.Jpegli = "jpegli", r))(he || {});
 self.onmessage = async (r) => {
-  const { file: v, init: h, options: d } = r.data ?? {};
-  if (!v) return;
-  const { buffer: f, data: w } = v;
-  switch (h.assetType) {
-    case Z.Png:
+  const { file: f, init: h, options: m } = r.data ?? {};
+  if (!f) return;
+  const { buffer: g, data: y } = f;
+  switch (h.optimizer) {
+    case he.Oxipng:
       try {
-        if (!f) return void self.postMessage({ type: K.Error, output: "Invalid PNG data" });
-        await Ce(h.oxipngWasm);
-        const g = We(f, d);
-        self.postMessage({ type: K.Complete, output: g });
-      } catch (g) {
-        self.postMessage({ type: K.Error, output: g });
+        if (!g) return void self.postMessage({ type: $.Error, output: "Invalid PNG data" });
+        await Sn(h.oxipngWasm);
+        const d = zn(g, m);
+        self.postMessage({ type: $.Complete, output: d });
+      } catch (d) {
+        self.postMessage({ type: $.Error, output: d });
       }
       break;
-    case Z.Jpeg:
+    case he.Mozjpeg:
       try {
-        if (!w) return void self.postMessage({ type: K.Error, output: "Invalid JPG data" });
-        await Te(h.mozjpegWasm);
-        const g = Ae(w, d);
-        self.postMessage({ type: K.Complete, output: g });
-      } catch (g) {
-        self.postMessage({ type: K.Error, output: g });
+        if (!y) return void self.postMessage({ type: $.Error, output: "Invalid JPG data" });
+        await xn(h.mozjpegWasm);
+        const d = In(y, m);
+        self.postMessage({ type: $.Complete, output: d });
+      } catch (d) {
+        self.postMessage({ type: $.Error, output: d });
+      }
+      break;
+    case he.Jpegli:
+      try {
+        if (!y) return void self.postMessage({ type: $.Error, output: "Invalid PNG data" });
+        await br(h.jpegliWasm);
+        const d = _r(y, m);
+        self.postMessage({ type: $.Complete, output: d });
+      } catch (d) {
+        self.postMessage({ type: $.Error, output: d });
       }
       break;
     default:
-      console.log("Error: unknown worker command", r.data), self.postMessage({ type: K.Error, output: "Unknown command" });
+      console.log("Error: unknown worker command", r.data), self.postMessage({ type: $.Error, output: "Unknown command" });
   }
 };
-const fr = async (r, v, h, d) => {
-  const f = await r.file.arrayBuffer();
-  return v && window.Worker ? new Promise((w, g) => {
-    const A = ((p) => {
-      const I = `import ${JSON.stringify(new URL(p))}`, D = new Blob([I], { type: "application/javascript" }), O = URL.createObjectURL(D), x = new Worker(O, { type: "module", name: "optimize-worker" });
-      return x.addEventListener("error", (F) => {
-        URL.revokeObjectURL(O);
-      }), x;
-    })(v);
-    A.onmessage = (p) => {
-      p.data.type === K.Complete ? w(p.data.output) : g(p.data.output || "Worker failed to optimize");
+const Ar = async (r, f, h, m, g) => {
+  const y = await r.file.arrayBuffer();
+  return f && window.Worker ? new Promise((d, _) => {
+    const E = ((C) => {
+      console.log("WORKER", C);
+      const z = `import ${JSON.stringify(new URL(C))}`, U = new Blob([z], { type: "application/javascript" }), q = URL.createObjectURL(U), G = new Worker(q, { type: "module", name: "optimize-worker" });
+      return G.addEventListener("error", (F) => {
+        URL.revokeObjectURL(q);
+      }), G;
+    })(f);
+    E.onmessage = (C) => {
+      C.data.type === $.Complete ? d(C.data.output) : _(C.data.output || "Worker failed to optimize");
     };
-    const R = { ...d }, q = { init: { ...h, assetType: r.type }, file: { buffer: f, data: r.data }, options: R };
-    A.postMessage(q);
-  }) : (async (w, g, A) => {
-    const { data: R, file: q } = w;
-    if (g === Z.Png) {
-      const p = new Uint8Array(await q.arrayBuffer());
-      return We(p, A);
+    const O = { ...g }, v = { init: { ...h, assetType: r.type, optimizer: m }, file: { buffer: y, data: r.data }, options: O };
+    E.postMessage(v);
+  }) : (async (d, _, E) => {
+    const { data: O, file: v } = d;
+    if (_ === oe.Png) {
+      const C = new Uint8Array(await v.arrayBuffer());
+      return zn(C, E);
     }
-    if (g == Z.Jpeg) return Ae(R, A);
-  })(r, r.type, d);
-}, pr = [S("span", { class: "dot" }, null, -1), S("span", { class: "dot" }, null, -1), S("span", { class: "dot" }, null, -1)], Pe = mn({ __name: "Spinner", props: { size: { default: 10 }, color: { default: "#fff" } }, setup(r, { expose: v }) {
-  Xe((d) => ({ "2454e84c": d.size + "px", "05e43051": d.color }));
-  const h = en();
-  return v({ wrapper: h }), (d, f) => (L(), z("div", { ref_key: "wrapper", ref: h, class: "o-spinner" }, pr, 512));
-} }), dr = ["id"], vr = ["for"], gr = { class: "o-upload-left" }, mr = S("svg", { xmlns: "http://www.w3.org/2000/svg", width: "32", height: "32", viewBox: "0 0 32 32", class: "o-upload-image" }, [S("path", { fill: "currentColor", d: "m6 18l1.41 1.41L15 11.83V30h2V11.83l7.59 7.58L26 18L16 8L6 18zM6 8V4h20v4h2V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4z" })], -1), hr = { class: "o-upload-right" }, yr = { class: "o-upload-title" }, wr = ["innerHTML"], br = { key: 0, class: "o-upload-spinner" }, _r = ["id", "accept", "disabled"], Tr = mn({ __name: "UploadFile", props: { id: { default: "" }, title: { default: void 0 }, subtitle: { default: void 0 }, isDisabled: { type: Boolean, default: !1 }, preview: { default: null }, loading: { type: Boolean, default: !1 }, accept: { default: "image/*" }, width: { default: "100%" }, height: { default: "182px" } }, emits: ["file-select"], setup(r, { emit: v }) {
-  const h = v, d = en(!1), f = en(), w = (p) => {
-    var I;
-    if (p && p.target && p.type === "input") {
-      const D = p.target.files;
-      D && (f.value = D[0], h("file-select", f.value));
-    } else if (p && p.type === "drop") {
-      const D = (I = p.dataTransfer) == null ? void 0 : I.files;
-      D && (f.value = D[0], h("file-select", f.value));
+    if (_ == oe.Jpeg) return In(O, E);
+  })(r, r.type, g);
+}, Tr = [j("span", { class: "dot" }, null, -1), j("span", { class: "dot" }, null, -1), j("span", { class: "dot" }, null, -1)], jn = we({ __name: "Spinner", props: { size: { default: 10 }, color: { default: "#fff" } }, setup(r, { expose: f }) {
+  or((m) => ({ "2454e84c": m.size + "px", "05e43051": m.color }));
+  const h = re();
+  return f({ wrapper: h }), (m, g) => (M(), D("div", { ref_key: "wrapper", ref: h, class: "o-spinner" }, Tr, 512));
+} }), Er = ["id"], Cr = ["for"], kr = { class: "o-upload-left" }, Wr = j("svg", { xmlns: "http://www.w3.org/2000/svg", width: "32", height: "32", viewBox: "0 0 32 32", class: "o-upload-image" }, [j("path", { fill: "currentColor", d: "m6 18l1.41 1.41L15 11.83V30h2V11.83l7.59 7.58L26 18L16 8L6 18zM6 8V4h20v4h2V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4z" })], -1), Pr = { class: "o-upload-right" }, Rr = { class: "o-upload-title" }, xr = ["innerHTML"], Ir = { key: 0, class: "o-upload-spinner" }, Ur = ["id", "accept", "disabled"], Fr = we({ __name: "UploadFile", props: { id: { default: "" }, title: { default: void 0 }, subtitle: { default: void 0 }, isDisabled: { type: Boolean, default: !1 }, preview: { default: null }, loading: { type: Boolean, default: !1 }, accept: { default: "image/*" }, width: { default: "100%" }, height: { default: "182px" } }, emits: ["file-select"], setup(r, { emit: f }) {
+  const h = f, m = re(!1), g = re(), y = (v) => {
+    var C;
+    if (v && v.target && v.type === "input") {
+      const z = v.target.files;
+      z && (g.value = z[0], h("file-select", g.value));
+    } else if (v && v.type === "drop") {
+      const z = (C = v.dataTransfer) == null ? void 0 : C.files;
+      z && (g.value = z[0], h("file-select", g.value));
     }
-    d.value = !1;
-  }, g = (p) => {
-    p.preventDefault(), d.value = !0;
-  }, A = (p) => {
-    p.preventDefault(), d.value = !1;
-  }, R = (p) => {
-    p.preventDefault(), w(p);
-  }, q = (p) => {
-    p && p.target && (p.target.value = "");
+    m.value = !1;
+  }, d = (v) => {
+    v.preventDefault(), m.value = !0;
+  }, _ = (v) => {
+    v.preventDefault(), m.value = !1;
+  }, E = (v) => {
+    v.preventDefault(), y(v);
+  }, O = (v) => {
+    v && v.target && (v.target.value = "");
   };
-  return (p, I) => (L(), z("div", { class: Dn({ "o-upload-wrap": !0, dragging: d.value }), style: ye({ width: p.width, height: p.height }) }, [S("form", { id: p.id, class: "o-upload-form", action: "", enctype: "multipart/form-data", onDrop: R, onDragenter: g, onDragleave: A, onDragend: A, onInput: w }, [S("label", { class: "o-upload-area", for: `image-upload-input${p.id}` }, [Ke(p.$slots, "default", {}, () => [p.loading ? gn("", !0) : (L(), z("div", { key: 0, class: Dn(["o-upload-button", { "has-file": !!p.preview }]) }, [S("div", gr, [mr, p.preview ? (L(), Qe(ar, { key: 0, asset: p.preview, class: "o-upload-background" }, null, 8, ["asset"])) : gn("", !0)]), S("div", hr, [S("div", yr, Pn(p.title), 1), S("div", { class: "o-upload-subtitle", innerHTML: p.subtitle }, null, 8, wr)])], 2))]), p.loading ? (L(), z("div", br, [Rn(Pe, { size: 24, color: "#3a86ff" })])) : gn("", !0)], 8, vr), S("input", { id: `o-upload-input${p.id}`, class: "o-upload", type: "file", accept: p.accept, disabled: p.isDisabled, onClick: q }, null, 8, _r)], 40, dr)], 6));
-} }), Ar = ["disabled"], Er = { key: 0, class: "o-animate" }, kr = { key: 1 }, Cr = { key: 2, class: "o-hidden" }, Wr = mn({ __name: "OButton", props: { text: { default: "" }, disabled: { type: Boolean, default: !1 }, animate: { type: Boolean, default: !1 } }, emits: ["click"], setup(r, { emit: v }) {
-  const h = v, d = r, { disabled: f } = Hn(d), w = (g) => {
-    f.value || h("click", g);
+  return (v, C) => (M(), D("div", { class: qe({ "o-upload-wrap": !0, dragging: m.value }), style: Wn({ width: v.width, height: v.height }) }, [j("form", { id: v.id, class: "o-upload-form", action: "", enctype: "multipart/form-data", onDrop: E, onDragenter: d, onDragleave: _, onDragend: _, onInput: y }, [j("label", { class: "o-upload-area", for: `image-upload-input${v.id}` }, [ir(v.$slots, "default", {}, () => [v.loading ? ye("", !0) : (M(), D("div", { key: 0, class: qe(["o-upload-button", { "has-file": !!v.preview }]) }, [j("div", kr, [Wr, v.preview ? (M(), ur(pr, { key: 0, asset: v.preview, class: "o-upload-background" }, null, 8, ["asset"])) : ye("", !0)]), j("div", Pr, [j("div", Rr, Se(v.title), 1), j("div", { class: "o-upload-subtitle", innerHTML: v.subtitle }, null, 8, xr)])], 2))]), v.loading ? (M(), D("div", Ir, [ze(jn, { size: 24, color: "#3a86ff" })])) : ye("", !0)], 8, Cr), j("input", { id: `o-upload-input${v.id}`, class: "o-upload", type: "file", accept: v.accept, disabled: v.isDisabled, onClick: O }, null, 8, Ur)], 40, Er)], 6));
+} }), Sr = ["disabled"], zr = { key: 0, class: "o-animate" }, Lr = { key: 1 }, Or = { key: 2, class: "o-hidden" }, jr = we({ __name: "OButton", props: { text: { default: "" }, disabled: { type: Boolean, default: !1 }, animate: { type: Boolean, default: !1 } }, emits: ["click"], setup(r, { emit: f }) {
+  const h = f, m = r, { disabled: g } = Ye(m), y = (d) => {
+    g.value || h("click", d);
   };
-  return (g, A) => (L(), z("button", { class: Dn(["o-button", pe(f) && "disabled"]), disabled: pe(f), onClick: w }, [g.animate ? (L(), z("div", Er, [Rn(Pe, { class: "o-spinner" })])) : (L(), z("div", kr, Pn(g.text), 1)), g.animate ? (L(), z("div", Cr, Pn(g.text), 1)) : gn("", !0)], 10, Ar));
-} }), Pr = { class: "optimizer" }, Rr = { class: "opt-wrap" }, Ir = { key: 0, class: "error" }, Ur = we(mn({ __name: "Optimizer", props: { mozjpegWasm: {}, oxipngWasm: {}, workerUrl: {} }, setup(r) {
-  const v = en(), h = en(""), d = en(!1), f = en(), w = en({}), g = r, { mozjpegWasm: A, oxipngWasm: R, workerUrl: q } = Hn(g), p = () => ({ mozjpegWasm: A.value, oxipngWasm: R.value }), I = { FILE_TYPE: "Unsupported file type", unknown: "Unknown error occurred" }, D = async (x) => {
-    if (x) {
-      f.value = void 0, v.value = void 0;
+  return (d, _) => (M(), D("button", { class: qe(["o-button", bn(g) && "disabled"]), disabled: bn(g), onClick: y }, [d.animate ? (M(), D("div", zr, [ze(jn, { class: "o-spinner" })])) : (M(), D("div", Lr, Se(d.text), 1)), d.animate ? (M(), D("div", Or, Se(d.text), 1)) : ye("", !0)], 10, Sr));
+} }), Mr = { class: "optimizer" }, Br = { class: "opt-wrap" }, Dr = { key: 0, class: "error" }, Hr = Pn(we({ __name: "Optimizer", props: { mozjpegWasm: {}, oxipngWasm: {}, jpegliWasm: {}, workerUrl: {} }, setup(r) {
+  const f = re(), h = re(""), m = re(!1), g = re(), y = re({}), d = re(he.Jpegli), _ = r, { jpegliWasm: E, mozjpegWasm: O, oxipngWasm: v, workerUrl: C } = Ye(_), z = () => ({ mozjpegWasm: O.value, oxipngWasm: v.value, jpegliWasm: E.value }), U = { FILE_TYPE: "Unsupported file type", unknown: "Unknown error occurred" }, q = async (F) => {
+    if (F) {
+      g.value = void 0, f.value = void 0;
       try {
-        const F = await async function(k, C) {
-          const W = [], Y = k.types ?? ve, G = C.type, { ext: E, size: rn } = k, tn = rn ?? 0;
-          tn && C.size > tn && W.push("FILE_SIZE_BIG");
-          const U = C.name.split(".").pop();
-          if ((!E || U && E.includes(U)) && Y.includes(G) || W.push("FILE_TYPE"), W.length) throw { fileErrors: W };
+        const S = await async function(W, R) {
+          const P = [], x = W.types ?? An, K = R.type, { ext: H, size: L } = W, J = L ?? 0;
+          J && R.size > J && P.push("FILE_SIZE_BIG");
+          const ce = R.name.split(".").pop();
+          if ((!H || ce && H.includes(ce)) && x.includes(K) || P.push("FILE_TYPE"), P.length) throw { fileErrors: P };
           try {
-            if ((C.type || "").includes("image")) {
-              const j = await ir(C), { minWidth: sn, minHeight: ln, maxWidth: Q, maxHeight: hn } = k, { width: yn = 0, height: wn = 0 } = j ?? {};
-              if (sn && yn < sn && W.push("Image width too small"), ln && wn < ln && W.push("Image height too small"), Q && yn > Q && W.push("Image width too large"), hn && wn > hn && W.push("Image height too large"), !W.length) return { file: C, type: G, data: j };
+            if ((R.type || "").includes("image")) {
+              const se = await gr(R), { minWidth: te, minHeight: be, maxWidth: _e, maxHeight: Ae } = W, { width: Te = 0, height: Ee = 0 } = se ?? {};
+              if (te && Te < te && P.push("Image width too small"), be && Ee < be && P.push("Image height too small"), _e && Te > _e && P.push("Image width too large"), Ae && Ee > Ae && P.push("Image height too large"), !P.length) return { file: R, type: K, data: se };
             }
           } catch {
-            W.push("FILE_TYPE");
+            P.push("FILE_TYPE");
           }
-          throw { fileErrors: W || ["unknown"] };
-        }({ size: 1e7, types: ve }, x);
-        ((k) => {
-          const C = new FileReader();
-          C.readAsDataURL(k.file), C.onload = () => {
-            var W;
-            h.value = ((W = C.result) == null ? void 0 : W.toString()) ?? "";
-          }, f.value = k;
-        })(F), d.value = !0, await ((k) => {
-          const { assetType: C, mozjpegWasm: W, oxipngWasm: Y } = k;
-          return C === Z.Png ? Ce(Y) : C === Z.Jpeg ? Te(W) : void 0;
-        })({ ...p(), assetType: F.type }), w.value = ((k) => k.type === Z.Png ? { level: 3 } : k.type === Z.Jpeg ? { ...sr } : {})(F), d.value = !1;
-      } catch (F) {
-        console.log(F);
-        const k = F.fileErrors[0];
-        v.value = k;
+          throw { fileErrors: P || ["unknown"] };
+        }({ size: 1e7, types: An }, F);
+        ((W) => {
+          const R = new FileReader();
+          R.readAsDataURL(W.file), R.onload = () => {
+            var P;
+            h.value = ((P = R.result) == null ? void 0 : P.toString()) ?? "";
+          }, g.value = W;
+        })(S), m.value = !0, await ((W) => {
+          const { assetType: R, mozjpegWasm: P, oxipngWasm: x } = W;
+          return R === oe.Png ? Sn(x) : R === oe.Jpeg ? xn(P) : void 0;
+        })({ ...z(), assetType: S.type, optimizer: d.value }), y.value = ((W) => W.type === oe.Png ? { level: 3 } : W.type === oe.Jpeg ? { ...vr } : {})(S), m.value = !1;
+      } catch (S) {
+        console.log(S);
+        const W = S.fileErrors[0];
+        f.value = W;
       }
     }
-  }, O = async () => {
-    const x = f.value;
-    if (!d.value && !v.value && x) {
-      d.value = !0;
+  }, G = async () => {
+    const F = g.value;
+    if (!m.value && !f.value && F) {
+      m.value = !0;
       try {
-        const F = await fr(x, q.value, p(), w.value);
-        F ? ((k, C, W) => {
-          const Y = new Blob([C], { type: W }), G = window.navigator;
-          if (G.msSaveOrOpenBlob) G.msSaveBlob(Y, k);
+        const S = await Ar(F, C.value, z(), d.value, y.value);
+        S ? ((W, R, P) => {
+          const x = new Blob([R], { type: P }), K = window.navigator;
+          if (K.msSaveOrOpenBlob) K.msSaveBlob(x, W);
           else {
-            const E = window.document.createElement("a");
-            E.href = window.URL.createObjectURL(Y), E.download = k, document.body.appendChild(E), E.click(), document.body.removeChild(E);
+            const H = window.document.createElement("a");
+            H.href = window.URL.createObjectURL(x), H.download = W, document.body.appendChild(H), H.click(), document.body.removeChild(H);
           }
-        })(x.file.name || "opt.png", F, x.type) : v.value = "";
-      } catch (F) {
-        console.log("Optimize error:", F);
+        })(F.file.name || "opt.png", S, F.type) : f.value = "";
+      } catch (S) {
+        console.log("Optimize error:", S);
       }
-      d.value = !1;
+      m.value = !1;
     }
   };
-  return (x, F) => {
-    var C;
-    return L(), z("div", Pr, [S("div", Rr, [Rn(Tr, { title: "Upload PNG/JPEG", subtitle: "Drag or click here", accept: "image/png,image/jpeg", preview: h.value, onFileSelect: D }, null, 8, ["preview"])]), v.value ? (L(), z("div", Ir, Pn((k = v.value, I[k] ?? I.unknown)), 1)) : gn("", !0), Rn(Wr, { text: "Optimize", animate: d.value, disabled: !((C = f.value) != null && C.file), onClick: O }, null, 8, ["animate", "disabled"])]);
-    var k;
+  return (F, S) => {
+    var R;
+    return M(), D("div", Mr, [j("div", Br, [ze(Fr, { title: "Upload PNG/JPEG", subtitle: "Drag or click here", accept: "image/png,image/jpeg", preview: h.value, onFileSelect: q }, null, 8, ["preview"])]), f.value ? (M(), D("div", Dr, Se((W = f.value, U[W] ?? U.unknown)), 1)) : ye("", !0), ze(jr, { text: "Optimize", animate: m.value, disabled: !((R = g.value) != null && R.file), onClick: G }, null, 8, ["animate", "disabled"])]);
+    var W;
   };
-} }), [["__scopeId", "data-v-a851d018"]]);
-window.Optimizer = Ur;
+} }), [["__scopeId", "data-v-24e73325"]]);
+window.Optimizer = Hr;
 export {
-  Ur as Optimizer
+  Hr as Optimizer
 };
 //# sourceMappingURL=image-opt.es.js.map
