@@ -33,7 +33,6 @@ const bToI = (b: boolean | undefined, defaultVal: boolean): number => {
 
 export const optimizeJpegli = (image: ImageData, options?: IJpegliOptions) => {
   const array = new Uint8Array(image.data)
-  console.log('OPT JPEGLI')
   const result = encode(
     array,
     image.width,

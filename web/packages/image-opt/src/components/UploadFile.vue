@@ -139,6 +139,8 @@ $has-file: #5d99b6;
   align-items: center;
   border-radius: 2px;
   border: 1px solid $outline;
+  position: relative;
+  z-index: 1;
   &.has-file {
     border-color: $has-file;
     .o-upload-left {

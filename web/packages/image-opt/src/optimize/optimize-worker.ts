@@ -19,7 +19,7 @@ self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
         }
         await initOxipng(init.oxipngWasm)
         const opts = options as IOxipngOptions | undefined
-        const result = optimizeOxipng(buffer, opts)
+        const result = optimizeOxipng(new Uint8Array(buffer), opts)
         self.postMessage({ type: WorkerResultType.Complete, output: result })
       } catch (e) {
         self.postMessage({ type: WorkerResultType.Error, output: e })

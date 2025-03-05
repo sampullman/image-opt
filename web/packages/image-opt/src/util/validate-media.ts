@@ -12,6 +12,7 @@ export interface MediaRequirements {
 
 export interface ValidatedFile {
   file: File
+  originalSize: number // Track original size to avoid loss during format conversion
   type: AssetContentType
   src?: string
   data: ImageData
@@ -21,7 +22,11 @@ export interface IValidateMediaError {
   fileErrors: string[]
 }
 
-export function drawableToImageData(drawable: ImageBitmap | HTMLImageElement): ImageData {
+async function fileToImageData(file: File): Promise<ImageData> {
+  // Prefer createImageBitmap as it's the off-thread option for Firefox.
+  const dPromise = 'createImageBitmap' in self ? createImageBitmap(file) : blobToImg(file)
+  const drawable = await dPromise
+
   const width = drawable.width,
     height = drawable.height,
     sw = drawable.width,
@@ -68,10 +73,43 @@ export async function blobToImg(blob: Blob): Promise<HTMLImageElement> {
   }
 }
 
-export async function builtinDecode(file: File): Promise<ImageData> {
-  // Prefer createImageBitmap as it's the off-thread option for Firefox.
-  const drawable = 'createImageBitmap' in self ? createImageBitmap(file) : blobToImg(file)
-  return drawableToImageData(await drawable)
+export async function convertJpegToPngFile(jpeg: File): Promise<File> {
+  const img: HTMLImageElement = await new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const img = new Image()
+      img.onload = () => resolve(img)
+      img.onerror = reject
+      img.src = event.target?.result as string
+    }
+    reader.onerror = reject
+    reader.readAsDataURL(jpeg)
+  })
+  const canvas = document.createElement('canvas')
+  canvas.width = img.width
+  canvas.height = img.height
+  const ctx = canvas.getContext('2d')
+
+  // Draw JPEG onto canvas
+  ctx?.drawImage(img, 0, 0)
+
+  // Convert canvas to PNG Blob
+  const blob = await new Promise((resolve) => {
+    canvas.toBlob(resolve, 'image/png')
+  })
+  if (!blob) {
+    throw new Error('Failed to create PNG blob.')
+  }
+
+  // Try creating a File object (if supported)
+  try {
+    return new File([blob as Blob], jpeg.name.replace(/\.jpe?g$/, '.png'), {
+      type: 'image/png',
+    })
+  } catch (error) {
+    console.warn('File constructor not supported, returning Blob instead.', error)
+    return jpeg
+  }
 }
 
 export async function validateMedia(
@@ -98,7 +136,7 @@ export async function validateMedia(
   try {
     const fileType = file.type || ''
     if (fileType.includes('image')) {
-      const img = await builtinDecode(file)
+      const img = await fileToImageData(file)
       const { minWidth, minHeight, maxWidth, maxHeight } = requirements
       const { width: imgWidth = 0, height: imgHeight = 0 } = img ?? {}
       if (minWidth && imgWidth < minWidth) {
@@ -117,6 +155,7 @@ export async function validateMedia(
       if (!errors.length) {
         return {
           file,
+          originalSize: file.size,
           type,
           data: img,
         }

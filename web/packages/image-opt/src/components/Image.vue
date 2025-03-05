@@ -29,18 +29,15 @@ const props = withDefaults(
   defineProps<{
     asset?: string | null
     asImg?: boolean
-    contentHash?: string | number
   }>(),
   {
     asset: null,
-    contentHash: undefined,
   },
 )
-const { asset, contentHash } = toRefs(props)
+const { asset } = toRefs(props)
 
 const url = computed(() => {
-  const hash = contentHash.value
-  return (asset.value ?? '') + (hash ? `?${hash}` : '')
+  return asset.value ?? ''
 })
 </script>
 

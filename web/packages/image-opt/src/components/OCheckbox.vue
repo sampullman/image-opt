@@ -52,7 +52,7 @@ const handleCheck = (event: MouseEvent, checked: boolean) => {
   align-items: center;
   cursor: pointer;
   user-select: none;
-  margin: 8px 16px 16px 0;
+  margin: 0;
 
   &.disabled {
     cursor: not-allowed;

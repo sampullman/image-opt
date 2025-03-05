@@ -4,7 +4,7 @@
     <div class="content-wrap">
       <div class="optimize-wrap">
         <h1>Image Optimizer</h1>
-        <div class="text">
+        <div class="subtitle">
           Images are optimized in your browser, and never sent to a server.<br />
           Supports Jpeg and Png
         </div>
@@ -85,9 +85,9 @@ a {
 .optimize-wrap {
   text-align: center;
   margin: auto 0;
-  padding-top: 104px;
+  padding: 48px 0;
 }
-.text {
+.subtitle {
   margin-bottom: 16px;
   line-height: 1.5em;
   color: #434448;

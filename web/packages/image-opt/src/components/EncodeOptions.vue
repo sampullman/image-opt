@@ -2,7 +2,7 @@
   <div class="encode-options">
     <div class="label">Image Options</div>
     <div class="row file-type-wrap">
-      <div class="text">Set options for each file type.</div>
+      <div class="text">Options for file type</div>
       <STMultiselect
         :value="optionsStore.selectedType.value"
         :options="types"
@@ -15,12 +15,12 @@
       v-if="optionsStore.selectedType.value === 'jpeg'"
       class="row jpeg-optimizer-wrap"
     >
-      <div class="text">Chose an optimizer (Jpegli recommended)</div>
+      <div class="text">Optimizer (Jpegli recommended)</div>
       <STMultiselect
         :value="optionsStore.jpeg.value.optimizer"
         :options="[Optimizer.Jpegli, Optimizer.Mozjpeg]"
         :clearable="false"
-        class="optimizer select"
+        class="select"
         @select="optionsStore.setJpegOptimizer($event as Optimizer)"
       />
     </div>
@@ -35,13 +35,22 @@
       <template #label> {{ qualityText }}</template>
     </STProgressBar>
     <div class="label general">General Options</div>
-    <div class="row">
-      <div class="text">Optimize and download immediately.</div>
+    <div class="row immediate" @click="optionsStore.toggleImmediate()">
+      <div class="text">Download result immediately</div>
       <OCheckbox
         :item="{
           checked: optionsStore.immediateDownload.value,
         }"
-        @checked="optionsStore.setImmediate($event)"
+      />
+    </div>
+    <div class="row file-type-wrap">
+      <div class="text">Output file type</div>
+      <STMultiselect
+        :value="optionsStore.outputType.value"
+        :options="outputTypes"
+        :clearable="false"
+        class="file-type select"
+        @select="selectOutputType($event!.value)"
       />
     </div>
   </div>
@@ -51,10 +60,24 @@
 import { computed } from 'vue'
 import { STMultiselect, STProgressBar } from '@samatech/vue-components'
 import { FileType, optionsStore } from '../store'
-import { Optimizer } from '../optimize/optimize-options'
+import { Optimizer, OutputType } from '../optimize/optimize-options'
 import OCheckbox from './OCheckbox.vue'
 
 const types: FileType[] = ['jpeg', 'png']
+const outputTypes = [
+  {
+    label: 'Match Input',
+    value: OutputType.MatchInput,
+  },
+  {
+    label: 'Jpeg',
+    value: OutputType.Jpeg,
+  },
+  {
+    label: 'Png',
+    value: OutputType.Png,
+  },
+]
 
 const progressPng = {
   min: 0,
@@ -76,6 +99,10 @@ const progressOptions = computed(() => {
 
 const selectType = (selectedType: FileType) => {
   optionsStore.setType(selectedType)
+}
+
+const selectOutputType = (outputType: OutputType) => {
+  optionsStore.setOutputType(outputType)
 }
 
 const qualityText = computed(() => {
@@ -107,29 +134,29 @@ const setQuality = (value: number) => {
 $grey1: #4c566a;
 
 .encode-options {
-  margin-top: 32px;
-  min-width: 340px;
+  margin: 24px 0;
+  min-width: 360px;
 }
 .label {
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 17px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .text {
-  font-size: 16px;
+  font-size: 15px;
   max-width: 230px;
   text-align: left;
+  color: #434448;
 }
 .row {
-  margin-top: 16px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.select {
-  width: 100px;
-}
 .quality {
-  margin-top: 48px;
+  margin-top: 56px;
 }
 :deep(.st-progressbar) {
   .min,
@@ -147,5 +174,9 @@ $grey1: #4c566a;
 }
 .general {
   margin-top: 40px;
+}
+.immediate {
+  user-select: none;
+  cursor: pointer;
 }
 </style>

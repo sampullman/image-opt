@@ -1,5 +1,5 @@
 import { LocalStoragePlugin, useModule } from '@samatech/vue-store'
-import { Optimizer } from '../optimize/optimize-options'
+import { Optimizer, OutputType } from '../optimize/optimize-options'
 import { AssetContentType } from '../util'
 
 export interface IPngOptions {
@@ -18,6 +18,7 @@ export type FileType = 'jpeg' | 'png'
 
 export interface IOptionsState {
   immediateDownload: boolean
+  outputType: OutputType
   selectedType: FileType
   zip: boolean
   png: IPngOptions
@@ -48,11 +49,14 @@ export const getImageOptions = (assetType: AssetContentType) => {
 const getters = (state: IOptionsState) => ({})
 
 const mutations = (state: IOptionsState) => ({
-  setImmediate(immediate: boolean) {
-    state.immediateDownload = immediate
+  toggleImmediate() {
+    state.immediateDownload = !state.immediateDownload
   },
   setType(selectedType: FileType) {
     state.selectedType = selectedType
+  },
+  setOutputType(outputType: OutputType) {
+    state.outputType = outputType
   },
   setQuality(quality: number) {
     state.jpeg.quality = quality
@@ -71,9 +75,10 @@ export const optionsStore = useModule<
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 6,
+  version: 7,
   stateInit: () => ({
-    immediateDownload: false,
+    immediateDownload: true,
+    outputType: OutputType.MatchInput,
     zip: false,
     selectedType: 'jpeg',
     png: {
