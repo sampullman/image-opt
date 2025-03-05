@@ -5,13 +5,12 @@ import { WorkerResult, WorkerResultType, WorkerCommand } from './worker-enum'
 
 // Avoids CORS issue, see https://github.com/vitejs/vite/issues/13680
 const workerHack = (url: string) => {
-  console.log('WORKER', url)
   const js = `import ${JSON.stringify(new URL(url))}`
   const blob = new Blob([js], { type: 'application/javascript' })
 
   const objURL = URL.createObjectURL(blob)
   const worker = new Worker(objURL, { type: 'module', name: 'optimize-worker' })
-  worker.addEventListener('error', (e) => {
+  worker.addEventListener('error', (_e) => {
     URL.revokeObjectURL(objURL)
   })
   return worker

@@ -44,7 +44,7 @@ const click = (e: Event) => {
 </script>
 
 <style lang="postcss">
-$bg-color: #3a86ff;
+$bg-color: #4c566a;
 
 .o-button {
   font-weight: 500;
@@ -58,8 +58,8 @@ $bg-color: #3a86ff;
   outline: none;
   cursor: pointer;
   text-align: center;
-  border-radius: 6px;
-  transition: background-color 0.15s ease;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
   min-width: 100px;
   position: relative;
   height: 38px;
@@ -74,8 +74,8 @@ $bg-color: #3a86ff;
     background-color: rgba($bg-color, 0.8);
   }
   &.disabled {
-    background-color: #9e9ea1;
-    color: white;
+    background-color: rgba($bg-color, 0.4);
+    color: rgb(220, 220, 220);
     cursor: not-allowed;
     user-select: none;
   }

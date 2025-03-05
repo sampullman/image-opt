@@ -24,6 +24,8 @@ export default defineConfig({
       strict: true,
       allow: ['../../../'],
     },
+    host: true,
+    port: 2345,
   },
   plugins: [vue(), wasmContentTypePlugin],
 })

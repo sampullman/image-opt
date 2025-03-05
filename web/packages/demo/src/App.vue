@@ -3,7 +3,11 @@
     <div></div>
     <div class="content-wrap">
       <div class="optimize-wrap">
-        <h1>Optimizer Web Demo</h1>
+        <h1>Image Optimizer</h1>
+        <div class="text">
+          Images are optimized in your browser, and never sent to a server.<br />
+          Supports Jpeg and Png
+        </div>
         <Optimizer
           :mozjpegWasm="mozjpegWasm"
           :oxipngWasm="oxipngWasm"
@@ -11,7 +15,6 @@
           :workerUrl="OptimizeWorker.toString()"
         />
       </div>
-      <div class="footer">© SamaTech 2024. All rights reserved.</div>
     </div>
   </div>
 </template>
@@ -43,7 +46,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: $grey-100;
-  color: $color-primary;
+  color: #1a1a1a;
   * {
     box-sizing: border-box;
   }
@@ -51,6 +54,7 @@ body {
 
 h1 {
   @mixin title 32px;
+  margin: 16px 0;
 }
 
 p {
@@ -81,12 +85,12 @@ a {
 .optimize-wrap {
   text-align: center;
   margin: auto 0;
+  padding-top: 104px;
 }
-
-.footer {
-  @mixin caption 10px 16px;
-  padding: 12px 0 8px;
-  margin-top: auto;
+.text {
+  margin-bottom: 16px;
+  line-height: 1.5em;
+  color: #434448;
 }
 
 @media (max-width: 640px) {

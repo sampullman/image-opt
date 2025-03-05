@@ -16,6 +16,7 @@ export const initOxipng = async (oxipngWasm: string | undefined) => {
 
 export const optimizeOxipng = (buffer: ArrayBuffer, options?: IOxipngOptions) => {
   const array = new Uint8Array(buffer)
+  console.log('IMAGE OPTIONS', options)
   const result = optimize(array, options?.level ?? 3, options?.interlace ?? false)
   return result
 }

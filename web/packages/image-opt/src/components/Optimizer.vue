@@ -2,7 +2,7 @@
   <div class="optimizer">
     <div class="opt-wrap">
       <UploadFile
-        title="Upload PNG/JPEG"
+        title="Select PNG/JPEG"
         subtitle="Drag or click here"
         accept="image/png,image/jpeg"
         :preview="assetBase64"
@@ -13,6 +13,7 @@
       {{ getError(error) }}
     </div>
     <OButton
+      v-if="!optionsStore.immediateDownload.value"
       text="Optimize"
       :animate="loading"
       :disabled="!validatedFile?.file"
@@ -30,19 +31,19 @@ import {
   ValidatedFile,
   CONTENT_TYPES,
   saveFile,
+  AssetContentType,
 } from '../util'
 import { optimizeInitWrap, optimizeImage, getDefaultOptions } from '../optimize'
 import UploadFile from './UploadFile.vue'
 import OButton from './OButton.vue'
 import { Optimizer, WasmInitOptions } from '../optimize/optimize-options'
 import EncodeOptions from './EncodeOptions.vue'
+import { getImageOptions, optionsStore } from '../store'
 
 const error = ref()
 const assetBase64 = ref('')
 const loading = ref(false)
 const validatedFile = ref<ValidatedFile | undefined>()
-const imageOptions = ref<Record<string, unknown>>({})
-const optimizer = ref<Optimizer>(Optimizer.Jpegli)
 
 const props = defineProps<{
   mozjpegWasm: string
@@ -78,6 +79,14 @@ const handleImageSelect = (validFile: ValidatedFile) => {
   validatedFile.value = validFile
 }
 
+const getOptimizer = (contentType: AssetContentType) => {
+  if (contentType === AssetContentType.Jpeg) {
+    return optionsStore.jpeg.value.optimizer
+  } else {
+    return Optimizer.Oxipng
+  }
+}
+
 const updateAsset = async (file: File | null | undefined) => {
   if (file) {
     validatedFile.value = undefined
@@ -92,10 +101,12 @@ const updateAsset = async (file: File | null | undefined) => {
       await optimizeInitWrap({
         ...wasmInit(),
         assetType: validFile.type,
-        optimizer: optimizer.value,
+        optimizer: getOptimizer(validFile.type),
       })
-      imageOptions.value = getDefaultOptions(validFile)
       loading.value = false
+      if (optionsStore.immediateDownload.value) {
+        confirmOptimize()
+      }
     } catch (e) {
       console.log(e)
       const key = (e as IValidateMediaError).fileErrors[0]
@@ -109,12 +120,16 @@ const confirmOptimize = async () => {
   if (!loading.value && !error.value && file) {
     loading.value = true
     try {
+      const imageOptions = {
+        ...getDefaultOptions(file.type),
+        ...getImageOptions(file.type),
+      }
       const result = await optimizeImage(
         file,
         workerUrl.value,
         wasmInit(),
-        optimizer.value,
-        imageOptions.value,
+        getOptimizer(file.type),
+        imageOptions,
       )
       if (result) {
         saveFile(file.file.name || 'opt.png', result, file.type)

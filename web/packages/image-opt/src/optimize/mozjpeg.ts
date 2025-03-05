@@ -35,6 +35,7 @@ export const initMozjpeg = async (mozjpegWasm: string | undefined) => {
 }
 
 export const optimizeMozjpeg = (image: ImageData, options: IMozjpegOptions) => {
+  console.log('OPT MOZ')
   const result = mozjpeg.encode(image.data, image.width, image.height, options)
   return result
 }

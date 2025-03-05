@@ -1,5 +1,9 @@
 <template>
-  <div :class="{ 'o-upload-wrap': true, dragging }" :style="{ width, height }">
+  <div
+    class="o-upload-wrap"
+    :class="{ dragging, 'has-file': !!preview }"
+    :style="{ width, height }"
+  >
     <form
       :id="id"
       class="o-upload-form"
@@ -13,7 +17,7 @@
     >
       <label class="o-upload-area" :for="`image-upload-input${id}`">
         <slot>
-          <div v-if="!loading" class="o-upload-button" :class="{ 'has-file': !!preview }">
+          <div v-if="!loading" class="o-upload-button">
             <div class="o-upload-left">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -127,12 +131,26 @@ const clickInputFile = (e: MouseEvent) => {
 <style lang="postcss">
 $outline: #bdbfc2;
 $blue-500: #3a86ff;
+$has-file: #5d99b6;
 
 .o-upload-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 2px;
   border: 1px solid $outline;
+  &.has-file {
+    border-color: $has-file;
+    .o-upload-left {
+      border-color: $has-file;
+    }
+  }
+  &.dragging {
+    border-color: $blue-500;
+    .o-upload-left {
+      border-color: $blue-500;
+    }
+  }
 }
 .o-upload-form {
   position: relative;
@@ -195,7 +213,7 @@ $blue-500: #3a86ff;
 }
 .o-upload-subtitle {
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 16px;
   font-weight: 300;
   display: inline;
@@ -203,15 +221,6 @@ $blue-500: #3a86ff;
   span {
     margin: 0 3px;
     color: $blue-500;
-  }
-}
-&.has-file {
-  border: $blue-500;
-}
-&.dragging {
-  border-color: $blue-500;
-  .file-upload-left {
-    border-color: $blue-500;
   }
 }
 .o-upload-spinner {

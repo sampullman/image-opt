@@ -1,5 +1,6 @@
 import { LocalStoragePlugin, useModule } from '@samatech/vue-store'
 import { Optimizer } from '../optimize/optimize-options'
+import { AssetContentType } from '../util'
 
 export interface IPngOptions {
   level: number
@@ -23,14 +24,44 @@ export interface IOptionsState {
   jpeg: IJpegOptions
 }
 
+export const getImageOptions = (assetType: AssetContentType) => {
+  if (assetType === AssetContentType.Jpeg) {
+    const jpeg = optionsStore.jpeg.value
+    if (jpeg.optimizer === Optimizer.Jpegli) {
+      return {
+        quality: jpeg.quality,
+        progressive: jpeg.jpegliProgressive,
+      }
+    } else {
+      return {
+        quality: jpeg.quality,
+        progressive: jpeg.mozProgressive,
+      }
+    }
+  } else {
+    return {
+      ...optionsStore.png.value,
+    }
+  }
+}
+
 const getters = (state: IOptionsState) => ({})
 
 const mutations = (state: IOptionsState) => ({
-  setImediateDownload(immediate: boolean) {
+  setImmediate(immediate: boolean) {
     state.immediateDownload = immediate
   },
   setType(selectedType: FileType) {
     state.selectedType = selectedType
+  },
+  setQuality(quality: number) {
+    state.jpeg.quality = quality
+  },
+  setJpegOptimizer(optimizer: Optimizer) {
+    state.jpeg.optimizer = optimizer
+  },
+  setLevel(level: number) {
+    state.png.level = level
   },
 })
 
@@ -40,7 +71,7 @@ export const optionsStore = useModule<
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 5,
+  version: 6,
   stateInit: () => ({
     immediateDownload: false,
     zip: false,

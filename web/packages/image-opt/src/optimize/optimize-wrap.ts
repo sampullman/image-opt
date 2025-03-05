@@ -31,11 +31,13 @@ export const optimizeImageWrap = async (
   }
 }
 
-export const getDefaultOptions = (file: ValidatedFile): Record<string, unknown> => {
-  if (file.type === AssetContentType.Png) {
+export const getDefaultOptions = (
+  fileType: AssetContentType,
+): Record<string, unknown> => {
+  if (fileType === AssetContentType.Png) {
     const options: IOxipngOptions = { level: 3 }
     return options as Record<string, unknown>
-  } else if (file.type === AssetContentType.Jpeg) {
+  } else if (fileType === AssetContentType.Jpeg) {
     const options: IMozjpegOptions = {
       ...defaultMozjpegOptions,
     }
