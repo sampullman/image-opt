@@ -82,7 +82,6 @@ export function encode(
     dctMethod
   );
   let b = new Uint32Array(mem.buffer.slice(size, size + 8));
-  console.log(size, b, result);
   const img = new Uint8Array(mem.buffer.slice(result, result + b[0]));
   wasm.free(inBuf);
   wasm.free(size);

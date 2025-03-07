@@ -6,7 +6,7 @@
         subtitle="Drag or click here"
         accept="image/png,image/jpeg"
         :preview="assetBase64"
-        @fileSelect="updateAsset"
+        @fileSelect="selectFiles"
       />
       <div v-if="loading" class="load-wrap">
         <Spinner :size="24" color="#5d99b6" />
@@ -19,7 +19,7 @@
       v-if="images.length"
       :images="images"
       class="list"
-      @download="download"
+      @download="saveImage($event, optionsStore.outputType.value)"
       @remove="removeImage"
       @clear="images = []"
     />
@@ -34,24 +34,24 @@ import {
   IValidateMediaError,
   ValidatedFile,
   CONTENT_TYPES,
-  saveFile,
   AssetContentType,
-  contentTypeToExt,
   convertJpegToPngFile,
+  IListImage,
+  saveImage,
+  OutputType,
+  outputTypeToAssetType,
 } from '../util'
 import { optimizeInitWrap, optimizeImage, getDefaultOptions } from '../optimize'
 import UploadFile from './UploadFile.vue'
-import { Optimizer, OutputType, WasmInitOptions } from '../optimize/optimize-options'
+import { Optimizer, WasmInitOptions } from '../optimize/optimize-options'
 import EncodeOptions from './EncodeOptions.vue'
 import { getImageOptions, optionsStore } from '../store'
-import { IListImage } from './i-list-image'
 import ImageList from './ImageList.vue'
 import Spinner from './Spinner.vue'
 
 const error = ref()
 const assetBase64 = ref('')
 const loading = ref(false)
-const validatedFile = ref<ValidatedFile | undefined>()
 const images = ref<IListImage[]>([])
 
 const props = defineProps<{
@@ -79,27 +79,11 @@ const getError = (key: string): string => {
   return ErrorMap[key] ?? ErrorMap.unknown
 }
 
-const handleImageSelect = (validFile: ValidatedFile) => {
+const setImagePreview = (file: File) => {
   const reader = new FileReader()
-  reader.readAsDataURL(validFile.file)
+  reader.readAsDataURL(file)
   reader.onload = () => {
     assetBase64.value = reader.result?.toString() ?? ''
-  }
-  validatedFile.value = validFile
-}
-
-// Converts OutputType to AssetContentType, falling back to input type on OutputType.MatchInput
-const outputTypeToAssetType = (
-  outputType: OutputType,
-  inputType: AssetContentType,
-): AssetContentType => {
-  switch (outputType) {
-    case OutputType.MatchInput:
-      return inputType
-    case OutputType.Jpeg:
-      return AssetContentType.Jpeg
-    case OutputType.Png:
-      return AssetContentType.Png
   }
 }
 
@@ -112,36 +96,43 @@ const getOptimizer = (contentType: AssetContentType) => {
   }
 }
 
-const updateAsset = async (file: File | null | undefined) => {
-  if (file) {
-    validatedFile.value = undefined
-    error.value = undefined
+const optimizeFile = async (file: File) => {
+  // Hack to avoid Oxipng crash on JPG file input
+  let fileHack = file
+  if (
+    file.type === AssetContentType.Jpeg &&
+    optionsStore.outputType.value === OutputType.Png
+  ) {
+    fileHack = await convertJpegToPngFile(file)
+  }
+  const validFile = await validateMedia(
+    { size: 50000000, types: CONTENT_TYPES },
+    fileHack,
+  )
+  // Set original size since PNG conversion changes the file
+  validFile.originalSize = file.size
+  await optimizeInitWrap({
+    ...wasmInit(),
+    assetType: validFile.type,
+    optimizer: getOptimizer(validFile.type),
+  })
+  await confirmOptimize(validFile)
+}
+
+const selectFiles = async (files: File[] | null | undefined) => {
+  if (files) {
     try {
-      // Hack to avoid Oxipng crash on JPG file input
-      let fileHack = file
-      if (
-        file.type === AssetContentType.Jpeg &&
-        optionsStore.outputType.value === OutputType.Png
-      ) {
-        fileHack = await convertJpegToPngFile(file)
-      }
-      const validFile = await validateMedia(
-        { size: 10000000, types: CONTENT_TYPES },
-        fileHack,
-      )
-      validFile.originalSize = file.size
-      handleImageSelect(validFile)
+      setImagePreview(files[0])
       loading.value = true
-      await optimizeInitWrap({
-        ...wasmInit(),
-        assetType: validFile.type,
-        optimizer: getOptimizer(validFile.type),
-      })
-      confirmOptimize()
+      for (const file of files) {
+        await optimizeFile(file)
+      }
     } catch (e) {
       console.log('Optimize error', e)
       const key = (e as IValidateMediaError).fileErrors[0]
       error.value = key
+    } finally {
+      loading.value = false
     }
   }
 }
@@ -150,24 +141,7 @@ const removeImage = (index: number) => {
   images.value.splice(index, 1)
 }
 
-const replaceType = (fileName: string, outputType: AssetContentType): string => {
-  const ext = contentTypeToExt(outputType)
-  const fileArr = fileName.split('.')
-  if (fileArr.length > 1) {
-    fileArr[fileArr.length - 1] = ext
-    return fileArr.join('.')
-  }
-  return `${fileArr}.${ext}`
-}
-
-const download = (image: IListImage) => {
-  const outputType = outputTypeToAssetType(optionsStore.outputType.value, image.file.type)
-  const name = replaceType(image.file.file.name || 'opt.png', outputType)
-  saveFile(name, image.result, outputType)
-}
-
-const confirmOptimize = async () => {
-  const file = validatedFile.value
+const confirmOptimize = async (file: ValidatedFile) => {
   if (!error.value && file) {
     try {
       const imageOptions = {
@@ -187,17 +161,15 @@ const confirmOptimize = async () => {
           result,
         }
         if (optionsStore.immediateDownload.value) {
-          download(image)
+          saveImage(image, optionsStore.outputType.value)
         }
         images.value.push(image)
-        console.log(images.value)
       } else {
         error.value = 'Failed to optimize'
       }
     } catch (e) {
       console.log('Optimize error:', e)
     }
-    loading.value = false
   }
 }
 </script>
@@ -216,6 +188,12 @@ const confirmOptimize = async () => {
   border-radius: 2px;
   width: 120px;
 }
+.error {
+  font-size: 14px;
+  margin-top: 8px;
+  color: #d53434;
+}
+
 .opt-wrap {
   width: 100%;
   background: rgba(0, 0, 0, 0.03);

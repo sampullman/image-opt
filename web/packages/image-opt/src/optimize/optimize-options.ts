@@ -12,12 +12,6 @@ export enum Optimizer {
   Jpegli = 'jpegli',
 }
 
-export enum OutputType {
-  MatchInput = 'matchInput',
-  Jpeg = 'jpg',
-  Png = 'png',
-}
-
 export interface OptimizeInitOptions extends WasmInitOptions {
   assetType: AssetContentType
   optimizer: Optimizer

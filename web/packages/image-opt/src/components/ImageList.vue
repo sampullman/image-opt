@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts" setup>
+import { IListImage } from '../util'
 import Download from './Download.vue'
-import { IListImage } from './i-list-image'
 import Trash from './Trash.vue'
 
 defineProps<{

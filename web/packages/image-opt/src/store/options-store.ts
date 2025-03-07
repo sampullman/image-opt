@@ -1,6 +1,6 @@
 import { LocalStoragePlugin, useModule } from '@samatech/vue-store'
-import { Optimizer, OutputType } from '../optimize/optimize-options'
-import { AssetContentType } from '../util'
+import { Optimizer } from '../optimize/optimize-options'
+import { AssetContentType, OutputType } from '../util'
 
 export interface IPngOptions {
   level: number

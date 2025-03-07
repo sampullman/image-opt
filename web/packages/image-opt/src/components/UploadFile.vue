@@ -51,6 +51,8 @@
         type="file"
         :accept="accept"
         :disabled="isDisabled"
+        multiple
+        webkitdirectory
         @click="clickInputFile"
       />
     </form>
@@ -87,28 +89,75 @@ withDefaults(
   },
 )
 const emit = defineEmits<{
-  (e: 'file-select', value: File): void
+  (e: 'file-select', value: File[]): void
 }>()
 
 const dragging = ref(false)
-const selectedFile = ref<File>()
+const selectedFiles = ref<File[]>()
 
-const handleFileSelect = (e: InputEvent | Event) => {
-  if (e && e.target && e.type === 'input') {
-    const files = (e.target as HTMLInputElement).files
-    if (files) {
-      selectedFile.value = files[0]
-      emit('file-select', selectedFile.value)
+const handleFileSelect = async (e: Event) => {
+  e.preventDefault()
+  let files: File[] | undefined = undefined
+
+  if (e.target && (e.target as HTMLInputElement).files?.length) {
+    files = Array.from((e.target as HTMLInputElement).files ?? [])
+  } else if ('dataTransfer' in e && (e as InputEvent).dataTransfer) {
+    const dataTransfer = (e as InputEvent).dataTransfer
+    if (dataTransfer?.items) {
+      files = await processDropItems(dataTransfer.items)
+    } else if (dataTransfer?.files.length) {
+      // Fall back to file list
+      files = Array.from(dataTransfer.files)
     }
-  } else if (e && e.type === 'drop') {
-    const files = (e as InputEvent).dataTransfer?.files
-    if (files) {
-      selectedFile.value = files[0]
-      emit('file-select', selectedFile.value)
-    }
+    files = files?.filter((f) => f.type.startsWith('image'))
+  }
+
+  if (files) {
+    selectedFiles.value = files
+    emit('file-select', selectedFiles.value)
   }
   dragging.value = false
 }
+
+// Recursively process folders from drag-and-drop
+const processDropItems = async (items: DataTransferItemList): Promise<File[]> => {
+  const files: File[] = []
+
+  const traverseFileTree = async (item: FileSystemEntry | null): Promise<void> => {
+    if (item?.isFile) {
+      // Read file from file entry
+      await new Promise<void>((resolve) => {
+        ;(item as FileSystemFileEntry).file((file) => {
+          files.push(file)
+          resolve()
+        })
+      })
+    } else if (item?.isDirectory) {
+      // Read directory recursively
+      const reader = (item as FileSystemDirectoryEntry).createReader()
+      const readEntries = async () => {
+        return new Promise<FileSystemEntry[]>((resolve) => {
+          reader.readEntries((entries) => resolve(entries))
+        })
+      }
+      let entries = await readEntries()
+      while (entries.length > 0) {
+        await Promise.all(entries.map(traverseFileTree))
+        entries = await readEntries()
+      }
+    }
+  }
+
+  // Iterate over all dropped items
+  const entryPromises = Array.from(items).map((item) => {
+    const entry = item.webkitGetAsEntry()
+    return traverseFileTree(entry)
+  })
+
+  await Promise.all(entryPromises)
+  return files
+}
+
 const dragStart = (e: Event) => {
   e.preventDefault()
   dragging.value = true

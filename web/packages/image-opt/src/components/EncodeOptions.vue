@@ -60,7 +60,8 @@
 import { computed } from 'vue'
 import { STMultiselect, STProgressBar } from '@samatech/vue-components'
 import { FileType, optionsStore } from '../store'
-import { Optimizer, OutputType } from '../optimize/optimize-options'
+import { Optimizer } from '../optimize/optimize-options'
+import { OutputType } from '../util'
 import OCheckbox from './OCheckbox.vue'
 
 const types: FileType[] = ['jpeg', 'png']
