@@ -1,4 +1,4 @@
-import init, { optimize, InitOutput } from '../../../../../oxipng/pkg/image_opt'
+import init, { optimize, InitOutput } from '../../../../oxipng/pkg/image_opt'
 import { urlFromString } from '../util'
 
 export interface IOxipngOptions {

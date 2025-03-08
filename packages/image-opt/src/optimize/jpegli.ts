@@ -1,4 +1,4 @@
-import { JpegliModule, encode, init } from '../../../../../jpegli/jpegli'
+import { JpegliModule, encode, init } from '../../../../jpegli/jpegli'
 import { urlFromString } from '../util'
 
 export interface IJpegliOptions {

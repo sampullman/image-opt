@@ -6,12 +6,35 @@
 
 ## Demo
 
-Test the widget at [day4.pubstud.io](https://day4.pubstud.io)
+Test the widget at [image.samatech.tw](https://image.samatech.tw)
 
-## Instructions
+### Development
 
-TBD
+**Install packages**
+
+```
+pnpm i
+```
+
+**Build library**
+
+```bash
+pnpm run build:lib
+```
+
+**Run demo**
+
+```bash
+# View at http://localhost:2345
+pnpm run demo
+```
+
+The library must be rebuilt to view changes in the demo. It is possible to set up a file watcher to rebuild, or directly import `Optimizer` (instead of the built package) in the app for live reloading.
+
+## NPM
+
+TODO - include WASM in library build.
 
 ## License
 
-MIT License © 2024 [Sam Pullman](https://github.com/sampullman)
+MIT License © 2025 [Sam Pullman](https://github.com/sampullman)
