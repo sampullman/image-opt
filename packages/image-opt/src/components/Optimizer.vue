@@ -120,6 +120,7 @@ const optimizeFile = async (file: File) => {
 }
 
 const selectFiles = async (files: File[] | null | undefined) => {
+  error.value = undefined
   if (files) {
     try {
       setImagePreview(files[0])
