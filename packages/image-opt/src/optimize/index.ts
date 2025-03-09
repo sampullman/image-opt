@@ -1,5 +1,4 @@
 export * from './optimize-wrap'
-export * from './optimize-worker'
 export * from './optimize-image'
 export * from './mozjpeg'
 export * from './oxipng'

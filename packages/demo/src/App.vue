@@ -9,10 +9,10 @@
           Supports Jpeg and Png
         </div>
         <Optimizer
-          :mozjpegWasm="mozjpegWasm"
-          :oxipngWasm="oxipngWasm"
-          :jpegliWasm="jpegliWasm"
-          :workerUrl="OptimizeWorker.toString()"
+          :mozjpegWasm="HOST + MozjpegWasm"
+          :oxipngWasm="HOST + OxipngWasm"
+          :jpegliWasm="HOST + JpegliWasm"
+          :workerUrl="HOST + OptimizeWorker"
         />
       </div>
     </div>
@@ -20,19 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import { Optimizer, OptimizeWorker } from '@samatech/image-opt'
+import { Optimizer } from '@samatech/image-opt'
+import JpegliWasm from '@samatech/image-opt/jpegli.wasm?url'
+import MozjpegWasm from '@samatech/image-opt/mozjpeg.wasm?url'
+import OxipngWasm from '@samatech/image-opt/oxipng.wasm?url'
+import OptimizeWorker from '@samatech/image-opt/worker?url'
 
+// Must prefix URLs in dev
+const HOST = 'http://localhost:2345'
+
+// Use direct import for live reload in dev
 // import OptimizeWorker from '/node_modules/@samatech/image-opt/src/optimize/optimize-worker.ts?url'
-
-const mozjpegWasm = new URL(
-  '../../../../mozjpeg/enc/mozjpeg_enc.wasm',
-  import.meta.url,
-).toString()
-const oxipngWasm = new URL(
-  '../../../../oxipng/pkg/image_opt_bg.wasm',
-  import.meta.url,
-).toString()
-const jpegliWasm = new URL('../../../../jpegli/jpegli.wasm', import.meta.url).toString()
 </script>
 
 <style lang="postcss">

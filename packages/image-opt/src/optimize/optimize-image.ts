@@ -28,6 +28,9 @@ export const optimizeImage = async (
   if (workerUrl && window.Worker) {
     return new Promise((resolve, reject) => {
       const worker = workerHack(workerUrl)
+      worker.onerror = (e: ErrorEvent) => {
+        console.log('Worker error', e)
+      }
       worker.onmessage = (e: MessageEvent<WorkerResult>) => {
         switch (e.data.type) {
           case WorkerResultType.Complete:

@@ -1,7 +1,8 @@
 export * from './components'
 export * from './optimize'
 export * from './util'
+import * as JpegliWasm from '../../../optimizers/jpegli/jpegli.wasm?no-inline'
+import * as MozjpegWasm from '../../../optimizers/mozjpeg/enc/mozjpeg_enc.wasm?no-inline'
+import * as OxipngWasm from '../../../optimizers/oxipng/pkg/image_opt_bg.wasm?no-inline'
 
-// import OptimizeWorker from './optimize/optimize-worker?url'
-const OptimizeWorker = new URL('./optimize/optimize-worker', import.meta.url).href
-export { OptimizeWorker }
+export { JpegliWasm, MozjpegWasm, OxipngWasm }
