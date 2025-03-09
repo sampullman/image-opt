@@ -46,7 +46,7 @@ export const getImageOptions = (assetType: AssetContentType) => {
   }
 }
 
-const getters = (state: IOptionsState) => ({})
+const getters = (_state: IOptionsState) => ({})
 
 const mutations = (state: IOptionsState) => ({
   toggleImmediate() {

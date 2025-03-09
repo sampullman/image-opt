@@ -161,7 +161,8 @@ export async function validateMedia(
         }
       }
     }
-  } catch (error) {
+  } catch (e) {
+    console.log(e)
     errors.push('FILE_TYPE')
   }
   throw { fileErrors: errors || ['unknown'] }

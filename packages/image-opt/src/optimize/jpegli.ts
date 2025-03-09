@@ -28,7 +28,7 @@ export const initJpegli = async (jpegliWasm: string | undefined) => {
 }
 
 const bToI = (b: boolean | undefined, defaultVal: boolean): number => {
-  return b ?? defaultVal ? 1 : 0
+  return (b ?? defaultVal) ? 1 : 0
 }
 
 export const optimizeJpegli = (image: ImageData, options?: IJpegliOptions) => {
