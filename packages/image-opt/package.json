@@ -1,6 +1,6 @@
 {
   "name": "@samatech/image-opt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Library for WASM image optimizer",
   "main": "dist/index.js",
   "module": "dist/index.js",
