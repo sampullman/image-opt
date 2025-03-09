@@ -1,0 +1,22 @@
+{
+  "name": "image-opt",
+  "collaborators": [
+    "Sam Pullman <sam@samatech.tw>"
+  ],
+  "description": "WASM PNG optimizer",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samatechtw/image-opt"
+  },
+  "files": [
+    "image_opt_bg.wasm",
+    "image_opt.js",
+    "image_opt.d.ts"
+  ],
+  "module": "image_opt.js",
+  "types": "image_opt.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
