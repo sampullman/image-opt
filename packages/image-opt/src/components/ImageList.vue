@@ -124,8 +124,8 @@ const toSize = (size: number): string => {
   }
 }
 .disabled {
-  opacity: 0.4;
-  cursor: default;
+  opacity: 0.3;
+  cursor: not-allowed;
   &:hover {
     opacity: 0.4;
   }
