@@ -79,7 +79,7 @@ export const optionsStore = useModule<
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 7,
+  version: 8,
   stateInit: () => ({
     immediateDownload: true,
     keepImageData: true,
