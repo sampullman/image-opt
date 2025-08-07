@@ -164,6 +164,10 @@ const confirmOptimize = async (file: ValidatedFile) => {
         if (optionsStore.immediateDownload.value) {
           saveImage(image, optionsStore.outputType.value)
         }
+        if (!optionsStore.keepImageData.value) {
+          image.result = new Uint8Array()
+          image.file.data = new Uint8Array()
+        }
         images.value.push(image)
       } else {
         error.value = 'Failed to optimize'

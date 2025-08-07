@@ -43,6 +43,14 @@
         }"
       />
     </div>
+    <div class="row immediate" @click="optionsStore.toggleKeepImageData()">
+      <div class="text">Keep image data</div>
+      <OCheckbox
+        :item="{
+          checked: optionsStore.keepImageData.value,
+        }"
+      />
+    </div>
     <div class="row file-type-wrap">
       <div class="text">Output file type</div>
       <STMultiselect

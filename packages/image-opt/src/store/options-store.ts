@@ -18,6 +18,7 @@ export type FileType = 'jpeg' | 'png'
 
 export interface IOptionsState {
   immediateDownload: boolean
+  keepImageData: boolean
   outputType: OutputType
   selectedType: FileType
   zip: boolean
@@ -52,6 +53,9 @@ const mutations = (state: IOptionsState) => ({
   toggleImmediate() {
     state.immediateDownload = !state.immediateDownload
   },
+  toggleKeepImageData() {
+    state.keepImageData = !state.keepImageData
+  },
   setType(selectedType: FileType) {
     state.selectedType = selectedType
   },
@@ -78,6 +82,7 @@ export const optionsStore = useModule<
   version: 7,
   stateInit: () => ({
     immediateDownload: true,
+    keepImageData: true,
     outputType: OutputType.MatchInput,
     zip: false,
     selectedType: 'jpeg',

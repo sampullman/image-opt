@@ -16,7 +16,11 @@
       <div class="after">{{ toSize(image.result.length) }}</div>
       <div class="saved">{{ savings(image) }}</div>
       <div class="actions">
-        <Download class="download icon" @click="emit('download', image)" />
+        <Download
+          class="download icon"
+          :class="{ disabled: !image.result.length }"
+          @click="download(image)"
+        />
         <Trash class="trash icon" @click="emit('remove', index)" />
       </div>
     </div>
@@ -37,6 +41,12 @@ const emit = defineEmits<{
   (e: 'remove', index: number): void
   (e: 'download', image: IListImage): void
 }>()
+
+const download = (image: IListImage) => {
+  if (image.result.length) {
+    emit('download', image)
+  }
+}
 
 const savings = (image: IListImage): string => {
   const { file, result } = image
@@ -111,6 +121,13 @@ const toSize = (size: number): string => {
   transition: opacity 0.2s ease;
   &:hover {
     opacity: 0.7;
+  }
+}
+.disabled {
+  opacity: 0.4;
+  cursor: default;
+  &:hover {
+    opacity: 0.4;
   }
 }
 .header {
