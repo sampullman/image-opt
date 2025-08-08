@@ -1,6 +1,7 @@
 import { OptimizeInitOptions } from './optimize-options'
 
 export interface WorkerFileData {
+  name?: string
   buffer?: ArrayBuffer
   data?: ImageData
 }
