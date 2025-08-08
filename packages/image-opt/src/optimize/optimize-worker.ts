@@ -58,5 +58,3 @@ self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
       self.postMessage({ type: WorkerResultType.Error, output: 'Unknown command' })
   }
 }
-
-export {}

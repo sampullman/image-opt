@@ -22,6 +22,7 @@ export interface IOptionsState {
   outputType: OutputType
   selectedType: FileType
   zip: boolean
+  poolSize: number
   png: IPngOptions
   jpeg: IJpegOptions
 }
@@ -71,6 +72,9 @@ const mutations = (state: IOptionsState) => ({
   setLevel(level: number) {
     state.png.level = level
   },
+  setPoolSize(size: number) {
+    state.poolSize = size
+  },
 })
 
 export const optionsStore = useModule<
@@ -79,13 +83,14 @@ export const optionsStore = useModule<
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 8,
+  version: 9,
   stateInit: () => ({
     immediateDownload: true,
     keepImageData: true,
     outputType: OutputType.MatchInput,
     zip: false,
     selectedType: 'jpeg',
+    poolSize: navigator.hardwareConcurrency || 4,
     png: {
       level: 4,
       interlace: false,

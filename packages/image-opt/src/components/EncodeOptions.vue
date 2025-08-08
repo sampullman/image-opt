@@ -61,6 +61,17 @@
         @select="selectOutputType($event!.value)"
       />
     </div>
+    <div class="row">
+      <div class="text">Worker pool size</div>
+      <input
+        type="number"
+        class="pool-size"
+        :value="optionsStore.poolSize.value"
+        min="1"
+        :max="maxPoolSize"
+        @change="setPoolSize"
+      />
+    </div>
   </div>
 </template>
 
@@ -137,6 +148,12 @@ const setQuality = (value: number) => {
     return optionsStore.setLevel(value)
   }
 }
+
+const maxPoolSize = navigator.hardwareConcurrency || 4
+const setPoolSize = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  optionsStore.setPoolSize(Number(target.value))
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -187,5 +204,8 @@ $grey1: #4c566a;
 .immediate {
   user-select: none;
   cursor: pointer;
+}
+.pool-size {
+  width: 60px;
 }
 </style>

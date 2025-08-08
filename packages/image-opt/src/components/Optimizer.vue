@@ -41,7 +41,7 @@ import {
   OutputType,
   outputTypeToAssetType,
 } from '../util'
-import { optimizeInitWrap, optimizeImage, getDefaultOptions } from '../optimize'
+import { optimizeInitWrap, optimizeImages, getDefaultOptions } from '../optimize'
 import UploadFile from './UploadFile.vue'
 import { Optimizer, WasmInitOptions } from '../optimize/optimize-options'
 import EncodeOptions from './EncodeOptions.vue'
@@ -96,27 +96,31 @@ const getOptimizer = (contentType: AssetContentType) => {
   }
 }
 
-const optimizeFile = async (file: File) => {
-  // Hack to avoid Oxipng crash on JPG file input
-  let fileHack = file
-  if (
-    file.type === AssetContentType.Jpeg &&
-    optionsStore.outputType.value === OutputType.Png
-  ) {
-    fileHack = await convertJpegToPngFile(file)
-  }
-  const validFile = await validateMedia(
-    { size: 50000000, types: CONTENT_TYPES },
-    fileHack,
+const prepareFiles = async (files: File[]): Promise<ValidatedFile[]> => {
+  return Promise.all(
+    files.map(async (file) => {
+      // Hack to avoid Oxipng crash on JPG file input
+      let fileHack = file
+      if (
+        file.type === AssetContentType.Jpeg &&
+        optionsStore.outputType.value === OutputType.Png
+      ) {
+        fileHack = await convertJpegToPngFile(file)
+      }
+      const validFile = await validateMedia(
+        { size: 50000000, types: CONTENT_TYPES },
+        fileHack,
+      )
+      // Set original size since PNG conversion changes the file
+      validFile.originalSize = file.size
+      await optimizeInitWrap({
+        ...wasmInit(),
+        assetType: validFile.type,
+        optimizer: getOptimizer(validFile.type),
+      })
+      return validFile
+    }),
   )
-  // Set original size since PNG conversion changes the file
-  validFile.originalSize = file.size
-  await optimizeInitWrap({
-    ...wasmInit(),
-    assetType: validFile.type,
-    optimizer: getOptimizer(validFile.type),
-  })
-  await confirmOptimize(validFile)
 }
 
 const selectFiles = async (files: File[] | null | undefined) => {
@@ -125,9 +129,7 @@ const selectFiles = async (files: File[] | null | undefined) => {
     try {
       setImagePreview(files[0])
       loading.value = true
-      for (const file of files) {
-        await optimizeFile(file)
-      }
+      optimizeFiles(await prepareFiles(files))
     } catch (e) {
       console.log('Optimize error', e)
       const key = (e as IValidateMediaError).fileErrors[0]
@@ -142,39 +144,49 @@ const removeImage = (index: number) => {
   images.value.splice(index, 1)
 }
 
-const confirmOptimize = async (file: ValidatedFile) => {
-  if (!error.value && file) {
-    try {
-      const imageOptions = {
+const optimizeFiles = async (files: ValidatedFile[]) => {
+  if (error.value || !files.length) {
+    return
+  }
+  try {
+    const request = files.map((file) => ({
+      file,
+      optimizer: getOptimizer(file.type),
+      options: {
         ...getDefaultOptions(file.type),
         ...getImageOptions(file.type),
-      }
-      const result = await optimizeImage(
-        file,
-        workerUrl.value,
-        wasmInit(),
-        getOptimizer(file.type),
-        imageOptions,
-      )
-      if (result) {
+      },
+    }))
+    const results = await optimizeImages(
+      request,
+      workerUrl.value,
+      wasmInit(),
+      optionsStore.poolSize.value,
+    )
+    for (const result of results) {
+      if (result.data) {
         const image: IListImage = {
-          file,
-          result,
+          file: result.file,
+          result: result.data,
         }
+        console.log(result)
         if (optionsStore.immediateDownload.value) {
           saveImage(image, optionsStore.outputType.value)
         }
         if (!optionsStore.keepImageData.value) {
           image.result = new Uint8Array()
-          image.file.data = new Uint8Array()
+          image.file = {
+            file: {} as File,
+            originalSize: image.file.originalSize,
+            type: image.file.type,
+            data: {} as ImageData,
+          }
         }
         images.value.push(image)
-      } else {
-        error.value = 'Failed to optimize'
       }
-    } catch (e) {
-      console.log('Optimize error:', e)
     }
+  } catch (e) {
+    console.log('Optimize error:', e)
   }
 }
 </script>
