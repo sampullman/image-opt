@@ -21,7 +21,11 @@ export const optimizeImages = async (
   } else {
     return Promise.all(
       images.map(async ({ file, options }) => {
-        const data = await optimizeImageWrap(file, file.type, options)
+        const data = await optimizeImageWrap(
+          file,
+          file.type,
+          (options as Record<string, unknown>)?.options,
+        )
         return { data, file }
       }),
     )

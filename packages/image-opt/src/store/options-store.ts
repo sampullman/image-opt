@@ -11,7 +11,12 @@ export interface IJpegOptions {
   quality: number
   optimizer: Optimizer
   mozProgressive: boolean
-  jpegliProgressive: number
+  progressiveLevel: number
+  optimizeCoding: number
+  adaptiveQuantization: number
+  standardQuantTables: number
+  fancyDownsampling: number
+  dctMethod: number
 }
 
 export type FileType = 'jpeg' | 'png'
@@ -33,7 +38,12 @@ export const getImageOptions = (assetType: AssetContentType) => {
     if (jpeg.optimizer === Optimizer.Jpegli) {
       return {
         quality: jpeg.quality,
-        progressive: jpeg.jpegliProgressive,
+        progressiveLevel: jpeg.progressiveLevel,
+        optimizeCoding: jpeg.optimizeCoding,
+        adaptiveQuantization: jpeg.adaptiveQuantization,
+        standardQuantTables: jpeg.standardQuantTables,
+        fancyDownsampling: jpeg.fancyDownsampling,
+        dctMethod: jpeg.dctMethod,
       }
     } else {
       return {
@@ -75,6 +85,24 @@ const mutations = (state: IOptionsState) => ({
   setPoolSize(size: number) {
     state.poolSize = size
   },
+  setJpegliProgressiveLevel(level: number) {
+    state.jpeg.progressiveLevel = level
+  },
+  setJpegliOptimizeCoding(value: number) {
+    state.jpeg.optimizeCoding = value
+  },
+  setJpegliAdaptiveQuantization(value: number) {
+    state.jpeg.adaptiveQuantization = value
+  },
+  setJpegliStandardQuantTables(value: number) {
+    state.jpeg.standardQuantTables = value
+  },
+  setJpegliFancyDownsampling(value: number) {
+    state.jpeg.fancyDownsampling = value
+  },
+  setJpegliDctMethod(method: number) {
+    state.jpeg.dctMethod = method
+  },
 })
 
 export const optionsStore = useModule<
@@ -83,7 +111,7 @@ export const optionsStore = useModule<
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 9,
+  version: 10,
   stateInit: () => ({
     immediateDownload: true,
     keepImageData: true,
@@ -99,7 +127,12 @@ export const optionsStore = useModule<
       quality: 75,
       optimizer: Optimizer.Jpegli,
       mozProgressive: true,
-      jpegliProgressive: 2,
+      progressiveLevel: 2,
+      optimizeCoding: 1,
+      adaptiveQuantization: 1,
+      standardQuantTables: 0,
+      fancyDownsampling: 1,
+      dctMethod: 0,
     },
   }),
   getters,
