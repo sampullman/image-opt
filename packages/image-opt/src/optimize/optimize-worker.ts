@@ -1,8 +1,9 @@
 import { WorkerCommand, WorkerResultType } from './worker-enum'
-import { IOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
+import { initJpegli, optimizeJpegli } from './jpegli'
 import { IMozjpegOptions, initMozjpeg, optimizeMozjpeg } from './mozjpeg'
-import { IJpegliOptions, initJpegli, optimizeJpegli } from './jpegli'
 import { Optimizer } from './optimize-options'
+import { IOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
+import { IJpegOptions } from '../store'
 
 self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
   const { file, init, options } = (e.data ?? {}) as WorkerCommand
@@ -42,11 +43,11 @@ self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
     case Optimizer.Jpegli:
       try {
         if (!data) {
-          self.postMessage({ type: WorkerResultType.Error, output: 'Invalid PNG data' })
+          self.postMessage({ type: WorkerResultType.Error, output: 'Invalid JPG data' })
           return
         }
         await initJpegli(init.jpegliWasm)
-        const opts = options as IJpegliOptions | undefined
+        const opts = options as IJpegOptions
         const result = optimizeJpegli(data, opts)
         self.postMessage({ type: WorkerResultType.Complete, output: result })
       } catch (e) {

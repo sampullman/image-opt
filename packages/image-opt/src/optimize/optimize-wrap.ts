@@ -1,19 +1,25 @@
 import { AssetContentType, ValidatedFile } from '../util'
+import { IJpegOptions } from '../store'
+import { initJpegli, optimizeJpegli } from './jpegli'
 import {
   IMozjpegOptions,
   defaultMozjpegOptions,
   initMozjpeg,
   optimizeMozjpeg,
 } from './mozjpeg'
-import { OptimizeInitOptions } from './optimize-options'
+import { Optimizer, OptimizeInitOptions } from './optimize-options'
 import { IOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
 
 export const optimizeInitWrap = (options: OptimizeInitOptions) => {
-  const { assetType, mozjpegWasm, oxipngWasm } = options
+  const { assetType, jpegliWasm, mozjpegWasm, oxipngWasm } = options
   if (assetType === AssetContentType.Png) {
     return initOxipng(oxipngWasm)
   } else if (assetType === AssetContentType.Jpeg) {
-    return initMozjpeg(mozjpegWasm)
+    if (options.optimizer === Optimizer.Jpegli) {
+      return initJpegli(jpegliWasm)
+    } else {
+      return initMozjpeg(mozjpegWasm)
+    }
   }
 }
 
@@ -27,21 +33,32 @@ export const optimizeImageWrap = async (
     const array = new Uint8Array(await file.arrayBuffer())
     return optimizeOxipng(array, options as IOxipngOptions)
   } else if (assetType == AssetContentType.Jpeg) {
-    return optimizeMozjpeg(data, options as IMozjpegOptions)
+    const jpegOptions = options as IJpegOptions
+    if (jpegOptions.optimizer === Optimizer.Jpegli) {
+      return optimizeJpegli(data, jpegOptions)
+    } else {
+      return optimizeMozjpeg(data, jpegOptions as unknown as IMozjpegOptions)
+    }
   }
 }
 
 export const getDefaultOptions = (
   fileType: AssetContentType,
+  options?: Record<string, unknown>,
 ): Record<string, unknown> => {
   if (fileType === AssetContentType.Png) {
-    const options: IOxipngOptions = { level: 3 }
-    return options as Record<string, unknown>
+    const pngOptions: IOxipngOptions = { level: 3 }
+    return pngOptions as Record<string, unknown>
   } else if (fileType === AssetContentType.Jpeg) {
-    const options: IMozjpegOptions = {
-      ...defaultMozjpegOptions,
+    const jpegOptions = options as IJpegOptions
+    if (jpegOptions.optimizer === Optimizer.Jpegli) {
+      return jpegOptions as unknown as Record<string, unknown>
+    } else {
+      const mozjpegOptions: IMozjpegOptions = {
+        ...defaultMozjpegOptions,
+      }
+      return mozjpegOptions as unknown as Record<string, unknown>
     }
-    return options as unknown as Record<string, unknown>
   }
   return {}
 }

@@ -149,14 +149,17 @@ const optimizeFiles = async (files: ValidatedFile[]) => {
     return
   }
   try {
-    const request = files.map((file) => ({
-      file,
-      optimizer: getOptimizer(file.type),
-      options: {
-        ...getDefaultOptions(file.type),
-        ...getImageOptions(file.type),
-      },
-    }))
+    const request = files.map((file) => {
+      const options = getImageOptions(file.type)
+      return {
+        file,
+        optimizer: getOptimizer(file.type),
+        options: {
+          ...getDefaultOptions(file.type, options),
+          ...options,
+        },
+      }
+    })
     const results = await optimizeImages(
       request,
       workerUrl.value,
