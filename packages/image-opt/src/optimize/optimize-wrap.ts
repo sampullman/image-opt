@@ -1,5 +1,5 @@
 import { AssetContentType, ValidatedFile } from '../util'
-import { IJpegOptions } from '../store'
+import { IOptimizerJpegOptions, IOptimizerPngOptions } from '../store'
 import { initJpegli, optimizeJpegli } from './jpegli'
 import {
   IMozjpegOptions,
@@ -8,7 +8,7 @@ import {
   optimizeMozjpeg,
 } from './mozjpeg'
 import { Optimizer, OptimizeInitOptions } from './optimize-options'
-import { IOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
+import { initOxipng, optimizeOxipng } from './oxipng'
 
 export const optimizeInitWrap = (options: OptimizeInitOptions) => {
   const { assetType, jpegliWasm, mozjpegWasm, oxipngWasm } = options
@@ -31,9 +31,12 @@ export const optimizeImageWrap = async (
   const { data, file } = validFile
   if (assetType === AssetContentType.Png) {
     const array = new Uint8Array(await file.arrayBuffer())
-    return optimizeOxipng(array, options as IOxipngOptions)
+    return optimizeOxipng(array, options as IOptimizerPngOptions)
   } else if (assetType == AssetContentType.Jpeg) {
-    const jpegOptions = options as IJpegOptions
+    const jpegOptions = options as IOptimizerJpegOptions
+    if (jpegOptions.preserveMetadata) {
+      return new Uint8Array(await file.arrayBuffer())
+    }
     if (jpegOptions.optimizer === Optimizer.Jpegli) {
       return optimizeJpegli(data, jpegOptions)
     } else {
@@ -47,10 +50,10 @@ export const getDefaultOptions = (
   options?: Record<string, unknown>,
 ): Record<string, unknown> => {
   if (fileType === AssetContentType.Png) {
-    const pngOptions: IOxipngOptions = { level: 3 }
+    const pngOptions: IOptimizerPngOptions = { level: 3, strip: true }
     return pngOptions as Record<string, unknown>
   } else if (fileType === AssetContentType.Jpeg) {
-    const jpegOptions = options as IJpegOptions
+    const jpegOptions = options as IOptimizerJpegOptions
     if (jpegOptions.optimizer === Optimizer.Jpegli) {
       return jpegOptions as unknown as Record<string, unknown>
     } else {

@@ -7,6 +7,10 @@ export interface IPngOptions {
   interlace: boolean
 }
 
+export interface IOptimizerPngOptions extends IPngOptions {
+  strip: boolean
+}
+
 export interface IJpegOptions {
   quality: number
   optimizer: Optimizer
@@ -17,6 +21,11 @@ export interface IJpegOptions {
   standardQuantTables: number
   fancyDownsampling: number
   dctMethod: number
+}
+
+export interface IOptimizerJpegOptions extends IJpegOptions {
+  preserveMetadata: boolean
+  progressive?: boolean
 }
 
 export type FileType = 'jpeg' | 'png'
@@ -30,30 +39,30 @@ export interface IOptionsState {
   poolSize: number
   png: IPngOptions
   jpeg: IJpegOptions
+  preserveMetadata: boolean
 }
 
-export const getImageOptions = (assetType: AssetContentType) => {
+export const getImageOptions = (
+  assetType: AssetContentType,
+): IOptimizerPngOptions | IOptimizerJpegOptions => {
   if (assetType === AssetContentType.Jpeg) {
     const jpeg = optionsStore.jpeg.value
     if (jpeg.optimizer === Optimizer.Jpegli) {
       return {
-        quality: jpeg.quality,
-        progressiveLevel: jpeg.progressiveLevel,
-        optimizeCoding: jpeg.optimizeCoding,
-        adaptiveQuantization: jpeg.adaptiveQuantization,
-        standardQuantTables: jpeg.standardQuantTables,
-        fancyDownsampling: jpeg.fancyDownsampling,
-        dctMethod: jpeg.dctMethod,
+        ...jpeg,
+        preserveMetadata: optionsStore.preserveMetadata.value,
       }
     } else {
       return {
-        quality: jpeg.quality,
+        ...jpeg,
         progressive: jpeg.mozProgressive,
+        preserveMetadata: optionsStore.preserveMetadata.value,
       }
     }
   } else {
     return {
       ...optionsStore.png.value,
+      strip: !optionsStore.preserveMetadata.value,
     }
   }
 }
@@ -66,6 +75,9 @@ const mutations = (state: IOptionsState) => ({
   },
   toggleKeepImageData() {
     state.keepImageData = !state.keepImageData
+  },
+  togglePreserveMetadata() {
+    state.preserveMetadata = !state.preserveMetadata
   },
   setType(selectedType: FileType) {
     state.selectedType = selectedType
@@ -111,7 +123,7 @@ export const optionsStore = useModule<
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 10,
+  version: 11,
   stateInit: () => ({
     immediateDownload: true,
     keepImageData: true,
@@ -119,6 +131,7 @@ export const optionsStore = useModule<
     zip: false,
     selectedType: 'jpeg',
     poolSize: navigator.hardwareConcurrency || 4,
+    preserveMetadata: false,
     png: {
       level: 4,
       interlace: false,
