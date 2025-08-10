@@ -1,13 +1,16 @@
-use oxipng::Interlacing;
+use oxipng::{Interlacing, StripChunks};
 #[cfg(feature = "parallel")]
 pub use wasm_bindgen_rayon::init_thread_pool;
 
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn optimize(data: &[u8], level: u8, interlace: bool) -> Vec<u8> {
+pub fn optimize(data: &[u8], level: u8, interlace: bool, strip: bool) -> Vec<u8> {
     let mut options = oxipng::Options::from_preset(level);
     options.fix_errors = true;
+    if strip {
+        options.strip = StripChunks::Safe;
+    }
     options.interlace = Some(if interlace {
         Interlacing::Adam7
     } else {

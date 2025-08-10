@@ -1,5 +1,5 @@
 import { JpegliModule, encode, init } from '../../../../optimizers/jpegli/jpegli'
-import { IJpegOptions } from '../store'
+import { IOptimizerJpegOptions } from '../store'
 import { urlFromString } from '../util'
 
 let jpegli: JpegliModule
@@ -10,7 +10,10 @@ export const initJpegli = async (jpegliWasm: string | undefined) => {
   }
 }
 
-export const optimizeJpegli = (image: ImageData, options: IJpegOptions) => {
+export const optimizeJpegli = (
+  image: ImageData,
+  options: IOptimizerJpegOptions,
+) => {
   const array = new Uint8Array(image.data)
   const result = encode(
     array,

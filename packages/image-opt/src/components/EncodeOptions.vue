@@ -72,6 +72,14 @@
         }"
       />
     </div>
+    <div class="row immediate" @click="optionsStore.togglePreserveMetadata()">
+      <div class="text">Preserve metadata</div>
+      <OCheckbox
+        :item="{
+          checked: optionsStore.preserveMetadata.value,
+        }"
+      />
+    </div>
     <div class="row immediate" @click="optionsStore.toggleKeepImageData()">
       <div class="text">Keep image data</div>
       <OCheckbox
