@@ -31,13 +31,13 @@
       "
       class="advanced-options"
     >
-      <div class="row immediate" @click="showAdvanced = !showAdvanced">
+      <div class="toggle-advanced" @click="showAdvanced = !showAdvanced">
         <div class="text">Show advanced options</div>
         <svg
           class="caret"
           :class="{ 'caret-rotated': showAdvanced }"
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -236,19 +236,21 @@ $grey1: #4c566a;
   user-select: none;
   cursor: pointer;
 }
+.toggle-advanced {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
 .pool-size {
   width: 60px;
 }
 .advanced-options {
   margin-top: 12px;
 }
-.advanced-options-content {
-  margin-top: 12px;
-  padding-left: 12px;
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
-}
 .caret {
   transition: transform 0.3s ease;
+  margin: 0 0 -2px 4px;
 }
 .caret-rotated {
   transform: rotate(90deg);

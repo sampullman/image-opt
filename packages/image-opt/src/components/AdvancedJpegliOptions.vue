@@ -10,76 +10,34 @@
       class="quality"
       @change="optionsStore.setJpegliProgressiveLevel"
     >
-      <template #label>
-        Progressive Level: <span>{{ progressiveLevel }}</span>
-      </template>
+      <template #label> Progressive Level </template>
     </STProgressBar>
-    <div
-      class="row immediate"
-      @click="
-        optionsStore.setJpegliOptimizeCoding(
-          optionsStore.jpeg.value.optimizeCoding === 1 ? 0 : 1,
-        )
-      "
-    >
-      <div class="text">
-        Optimize Coding:
-        <span>{{ optionsStore.jpeg.value.optimizeCoding }}</span>
-      </div>
+    <div class="row" @click="optionsStore.toggleJpegliOptimizeCoding()">
+      <div class="text">Optimize Coding</div>
       <OCheckbox
         :item="{
           checked: optionsStore.jpeg.value.optimizeCoding === 1,
         }"
       />
     </div>
-    <div
-      class="row immediate"
-      @click="
-        optionsStore.setJpegliAdaptiveQuantization(
-          optionsStore.jpeg.value.adaptiveQuantization === 1 ? 0 : 1,
-        )
-      "
-    >
-      <div class="text">
-        Adaptive Quantization:
-        <span>{{ optionsStore.jpeg.value.adaptiveQuantization }}</span>
-      </div>
+    <div class="row" @click="optionsStore.toggleJpegliAdaptiveQuantization()">
+      <div class="text">Adaptive Quantization</div>
       <OCheckbox
         :item="{
           checked: optionsStore.jpeg.value.adaptiveQuantization === 1,
         }"
       />
     </div>
-    <div
-      class="row immediate"
-      @click="
-        optionsStore.setJpegliStandardQuantTables(
-          optionsStore.jpeg.value.standardQuantTables === 1 ? 0 : 1,
-        )
-      "
-    >
-      <div class="text">
-        Standard Quant Tables:
-        <span>{{ optionsStore.jpeg.value.standardQuantTables }}</span>
-      </div>
+    <div class="row" @click="optionsStore.toggleJpegliStandardQuantTables()">
+      <div class="text">Standard Quant Tables</div>
       <OCheckbox
         :item="{
           checked: optionsStore.jpeg.value.standardQuantTables === 1,
         }"
       />
     </div>
-    <div
-      class="row immediate"
-      @click="
-        optionsStore.setJpegliFancyDownsampling(
-          optionsStore.jpeg.value.fancyDownsampling === 1 ? 0 : 1,
-        )
-      "
-    >
-      <div class="text">
-        Fancy Downsampling:
-        <span>{{ optionsStore.jpeg.value.fancyDownsampling }}</span>
-      </div>
+    <div class="row" @click="optionsStore.toggleJpegliFancyDownsampling()">
+      <div class="text">Fancy Downsampling</div>
       <OCheckbox
         :item="{
           checked: optionsStore.jpeg.value.fancyDownsampling === 1,
@@ -112,9 +70,7 @@ import { STProgressBar } from '@samatech/vue-components'
 import { optionsStore } from '../store'
 import OCheckbox from './OCheckbox.vue'
 
-const progressiveLevel = computed(
-  () => optionsStore.jpeg.value.progressiveLevel,
-)
+const progressiveLevel = computed(() => optionsStore.jpeg.value.progressiveLevel)
 </script>
 
 <style lang="postcss" scoped>
@@ -141,15 +97,11 @@ $grey1: #4c566a;
     color: $grey1;
   }
 }
-.immediate {
-  user-select: none;
-  cursor: pointer;
-}
 .pool-size {
   width: 60px;
 }
 .advanced-options-content {
-  margin-top: 12px;
+  margin-top: 48px;
   padding-left: 12px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
