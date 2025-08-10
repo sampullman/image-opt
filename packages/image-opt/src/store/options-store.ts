@@ -88,17 +88,17 @@ const mutations = (state: IOptionsState) => ({
   setJpegliProgressiveLevel(level: number) {
     state.jpeg.progressiveLevel = level
   },
-  setJpegliOptimizeCoding(value: number) {
-    state.jpeg.optimizeCoding = value
+  toggleJpegliOptimizeCoding() {
+    state.jpeg.optimizeCoding = state.jpeg.optimizeCoding ? 0 : 1
   },
-  setJpegliAdaptiveQuantization(value: number) {
-    state.jpeg.adaptiveQuantization = value
+  toggleJpegliAdaptiveQuantization() {
+    state.jpeg.adaptiveQuantization = state.jpeg.adaptiveQuantization ? 0 : 1
   },
-  setJpegliStandardQuantTables(value: number) {
-    state.jpeg.standardQuantTables = value
+  toggleJpegliStandardQuantTables() {
+    state.jpeg.standardQuantTables = state.jpeg.standardQuantTables ? 0 : 1
   },
-  setJpegliFancyDownsampling(value: number) {
-    state.jpeg.fancyDownsampling = value
+  toggleJpegliFancyDownsampling() {
+    state.jpeg.fancyDownsampling = state.jpeg.fancyDownsampling ? 0 : 1
   },
   setJpegliDctMethod(method: number) {
     state.jpeg.dctMethod = method
