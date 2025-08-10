@@ -33,101 +33,25 @@
     >
       <div class="row immediate" @click="showAdvanced = !showAdvanced">
         <div class="text">Show advanced options</div>
-        <OCheckbox
-          :item="{
-            checked: showAdvanced,
-          }"
-        />
+        <svg
+          class="caret"
+          :class="{ 'caret-rotated': showAdvanced }"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 18L15 12L9 6"
+            stroke="black"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </div>
-      <div v-if="showAdvanced" class="advanced-options-content">
-        <STProgressBar
-          id="progressive"
-          :value="optionsStore.jpeg.value.progressiveLevel"
-          :min="0"
-          :max="2"
-          :show-percent="false"
-          :height="5"
-          class="quality"
-          @change="optionsStore.setJpegliProgressiveLevel"
-        >
-          <template #label>Progressive Level</template>
-        </STProgressBar>
-        <div
-          class="row immediate"
-          @click="
-            optionsStore.setJpegliOptimizeCoding(
-              optionsStore.jpeg.value.optimizeCoding === 1 ? 0 : 1,
-            )
-          "
-        >
-          <div class="text">Optimize Coding</div>
-          <OCheckbox
-            :item="{
-              checked: optionsStore.jpeg.value.optimizeCoding === 1,
-            }"
-          />
-        </div>
-        <div
-          class="row immediate"
-          @click="
-            optionsStore.setJpegliAdaptiveQuantization(
-              optionsStore.jpeg.value.adaptiveQuantization === 1 ? 0 : 1,
-            )
-          "
-        >
-          <div class="text">Adaptive Quantization</div>
-          <OCheckbox
-            :item="{
-              checked: optionsStore.jpeg.value.adaptiveQuantization === 1,
-            }"
-          />
-        </div>
-        <div
-          class="row immediate"
-          @click="
-            optionsStore.setJpegliStandardQuantTables(
-              optionsStore.jpeg.value.standardQuantTables === 1 ? 0 : 1,
-            )
-          "
-        >
-          <div class="text">Standard Quant Tables</div>
-          <OCheckbox
-            :item="{
-              checked: optionsStore.jpeg.value.standardQuantTables === 1,
-            }"
-          />
-        </div>
-        <div
-          class="row immediate"
-          @click="
-            optionsStore.setJpegliFancyDownsampling(
-              optionsStore.jpeg.value.fancyDownsampling === 1 ? 0 : 1,
-            )
-          "
-        >
-          <div class="text">Fancy Downsampling</div>
-          <OCheckbox
-            :item="{
-              checked: optionsStore.jpeg.value.fancyDownsampling === 1,
-            }"
-          />
-        </div>
-        <div class="row">
-          <div class="text">DCT Method</div>
-          <input
-            type="number"
-            class="pool-size"
-            :value="optionsStore.jpeg.value.dctMethod"
-            min="0"
-            max="2"
-            @change="
-              optionsStore.setJpegliDctMethod(
-                Number(($event.target as HTMLInputElement).value),
-              )
-            "
-          />
-        </div>
-      </div>
+      <AdvancedJpegliOptions v-if="showAdvanced" />
     </div>
     <STProgressBar
       id="quality"
@@ -186,6 +110,7 @@ import { STMultiselect, STProgressBar } from '@samatech/vue-components'
 import { FileType, optionsStore } from '../store'
 import { Optimizer } from '../optimize/optimize-options'
 import { OutputType } from '../util'
+import AdvancedJpegliOptions from './AdvancedJpegliOptions.vue'
 import OCheckbox from './OCheckbox.vue'
 
 const showAdvanced = ref(false)
@@ -321,5 +246,11 @@ $grey1: #4c566a;
   margin-top: 12px;
   padding-left: 12px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.caret {
+  transition: transform 0.3s ease;
+}
+.caret-rotated {
+  transform: rotate(90deg);
 }
 </style>
