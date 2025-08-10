@@ -9,13 +9,17 @@
     "build:lib": "pnpm --filter '@samatech/image-opt' run build",
     "build:export": "pnpm --filter '@samatech/image-opt' run build:export",
     "lint": "oxlint -c .oxlintrc.json packages",
-    "release": "cd packages/image-opt && node scripts/release.cjs"
+    "release": "cd packages/image-opt && node scripts/release.cjs",
+    "test": "vitest",
+    "test:cov": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@vitest/coverage-v8": "^3.2.4",
     "oxlint": "^0.15.13",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "vitest": "^3.2.4"
   }
 }

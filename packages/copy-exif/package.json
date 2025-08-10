@@ -1,0 +1,31 @@
+{
+  "name": "@samatech/copy-exif",
+  "version": "0.1.0",
+  "description": "A package to copy EXIF data from one image to another.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "lint": "oxlint -c ../../.oxlintrc.json .",
+    "format": "prettier -w \"{**/*,*}.{ts,js,json}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "piexifjs": "^1.0.6"
+  },
+  "devDependencies": {
+    "@types/piexifjs": "^1.0.0",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
