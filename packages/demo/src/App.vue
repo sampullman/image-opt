@@ -27,7 +27,7 @@ import OxipngWasm from '@samatech/image-opt/oxipng.wasm?url'
 import OptimizeWorker from '@samatech/image-opt/worker?url'
 
 // Must prefix URLs in dev
-const HOST = 'http://localhost:2345'
+const HOST = 'http://127.0.0.1:3050'
 
 // Use direct import for live reload in dev
 // import OptimizeWorker from '/node_modules/@samatech/image-opt/src/optimize/optimize-worker.ts?url'

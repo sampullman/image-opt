@@ -9,7 +9,8 @@
     "build:lib": "pnpm --filter '@samatech/image-opt' run build",
     "build:export": "pnpm --filter '@samatech/image-opt' run build:export",
     "lint": "oxlint -c .oxlintrc.json packages",
-    "release": "cd packages/image-opt && node scripts/release.cjs"
+    "release": "cd packages/image-opt && node scripts/release.cjs",
+    "claude": "echo 'Running tests before starting...' && if { [ -f /.dockerenv ] || [ -f /run/.containerenv ]; } && ! curl -s --max-time 5 https://example.com >/dev/null 2>&1; then claude --dangerously-skip-permissions; else echo 'Claude may only be run in a Docker container with general network firewall, see .devcontainer/README.md'; exit 1; fi"
   },
   "keywords": [],
   "author": "",

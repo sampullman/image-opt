@@ -52,7 +52,6 @@
         :accept="accept"
         :disabled="isDisabled"
         multiple
-        webkitdirectory
         @click="clickInputFile"
       />
     </form>

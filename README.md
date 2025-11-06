@@ -25,7 +25,7 @@ pnpm run build:lib
 **Run demo**
 
 ```bash
-# View at http://localhost:2345
+# View at http://127.0.0.1:3050
 pnpm run demo
 ```
 
@@ -63,7 +63,7 @@ import OxipngWasm from '@samatech/image-opt/oxipng.wasm?url'
 import OptimizeWorker from '@samatech/image-opt/worker?url'
 
 // Must prefix URLs in dev
-const HOST = 'http://localhost:2345'
+const HOST = 'http://127.0.0.1:3050'
 </script>
 ```
 
