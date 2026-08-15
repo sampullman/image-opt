@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "build": "./build-lib.sh",
-    "build:export": "vite build --config vite-export.config.ts"
+    "build:export": "vite build --config vite-export.config.ts",
+    "prepare": "./build-lib.sh"
   },
   "keywords": [],
   "author": "",
