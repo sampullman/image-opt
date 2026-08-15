@@ -27,17 +27,20 @@
   "license": "MIT",
   "dependencies": {
     "@samatech/vue-components": "1.3.2",
-    "@samatech/vue-store": "^0.7.0",
-    "vue": "catalog:"
+    "@samatech/vue-store": "^0.7.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
   },
   "devDependencies": {
     "@laynezh/vite-plugin-lib-assets": "^1.1.0",
     "terser": "5.39.0",
-    "@samatech/postcss-basics": "catalog:",
-    "@vitejs/plugin-vue": "catalog:",
-    "postcss": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vite-plugin-css-injected-by-js": "^3.5.2"
+    "@samatech/postcss-basics": "0.7.4",
+    "@vitejs/plugin-vue": "5.2.1",
+    "postcss": "8.5.3",
+    "typescript": "5.7.3",
+    "vite": "6.1.1",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
+    "vue": "3.5.13"
   }
 }
