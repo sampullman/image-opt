@@ -1,3 +1,4 @@
+/// <reference path="./emscripten.d.ts" />
 import { MozJpegColorSpace } from "./mozjpeg-color-space";
 
 export interface EncodeOptions {

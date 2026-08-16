@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "demo": "pnpm --filter '*demo' run dev",
+    "demo": "pnpm --filter image-opt-demo run dev",
     "format": "prettier -w \"{**/*,*}.{ts,js,json}\"",
     "format:check": "prettier --check \"{**/*,*}.{ts,js,json}\"",
     "build:lib": "pnpm --filter '@samatech/image-opt' run build",
     "build:export": "pnpm --filter '@samatech/image-opt' run build:export",
     "lint": "oxlint -c .oxlintrc.json packages",
+    "typecheck": "pnpm -r run typecheck",
+    "test:e2e": "pnpm --filter image-opt-demo-e2e run test",
     "release": "cd packages/image-opt && node scripts/release.cjs",
     "claude": "echo 'Running tests before starting...' && if { [ -f /.dockerenv ] || [ -f /run/.containerenv ]; } && ! curl -s --max-time 5 https://example.com >/dev/null 2>&1; then claude --dangerously-skip-permissions; else echo 'Claude may only be run in a Docker container with general network firewall, see .devcontainer/README.md'; exit 1; fi"
   },

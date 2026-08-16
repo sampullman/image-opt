@@ -2,6 +2,7 @@
   "env": {
     "browser": true
   },
+  "ignorePatterns": ["packages/image-opt/src/wasm/**"],
   "globals": {},
   "settings": {},
   "rules": {}

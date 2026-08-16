@@ -4,8 +4,10 @@
   "description": "Library for WASM image optimizer",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js"
     },
     "./jpegli.wasm": "./dist/jpegli.wasm",
@@ -14,12 +16,12 @@
     "./worker": "./dist/optimize-worker.js"
   },
   "files": [
-    "dist",
-    "./dist/*.wasm"
+    "dist"
   ],
   "scripts": {
     "build": "./build-lib.sh",
     "build:export": "vite build --config vite-export.config.ts",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "prepare": "./build-lib.sh"
   },
   "keywords": [],
@@ -34,10 +36,11 @@
   },
   "devDependencies": {
     "@laynezh/vite-plugin-lib-assets": "^1.1.0",
-    "terser": "5.39.0",
     "@samatech/postcss-basics": "0.7.4",
+    "@types/node": "^22.20.1",
     "@vitejs/plugin-vue": "5.2.1",
     "postcss": "8.5.3",
+    "terser": "5.39.0",
     "typescript": "5.7.3",
     "vite": "6.1.1",
     "vite-plugin-css-injected-by-js": "^3.5.2",

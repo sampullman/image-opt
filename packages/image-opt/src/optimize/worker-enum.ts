@@ -9,7 +9,7 @@ export interface WorkerFileData {
 export interface WorkerCommand {
   init: OptimizeInitOptions
   file?: WorkerFileData
-  options?: unknown
+  options?: Record<string, unknown>
 }
 
 export interface WorkerResult {

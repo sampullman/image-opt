@@ -1,77 +1,17 @@
 <template>
-  <div class="checkbox" :class="{ disabled }" @click="handleCheck($event, !item.checked)">
-    <input
-      type="checkbox"
-      :value="item.label"
-      :checked="item.checked"
-      :modelValue="item.checked"
-      :disabled="disabled"
-    />
-    <span class="checkmark" :class="{ checked: item.checked }" />
-    <span v-if="item.label" class="checkbox-text" v-html="item.label" />
-  </div>
+  <span class="checkmark" :class="{ checked, disabled }" />
 </template>
 
 <script lang="ts" setup>
-import { toRefs, PropType } from 'vue'
-
-export interface CheckboxData {
-  label?: string
-  checked: boolean | undefined
-}
-
-const emit = defineEmits<{
-  (e: 'checked', value: boolean): void
+// Presentational only. The surrounding row owns the state and the interaction,
+// so this never mutates or emits.
+defineProps<{
+  checked?: boolean
+  disabled?: boolean
 }>()
-const props = defineProps({
-  // Format: `reactive({ label: <string>, checked: <boolean> })`)
-  item: {
-    type: Object as PropType<CheckboxData>,
-    required: true,
-  },
-  disabled: {
-    type: Boolean,
-  },
-})
-const { item, disabled } = toRefs(props)
-
-const handleCheck = (event: MouseEvent, checked: boolean) => {
-  if (!disabled.value && event.target) {
-    const el = event.target as Element
-    if (el.nodeName !== 'A') {
-      item.value.checked = checked
-      emit('checked', checked)
-    }
-  }
-}
 </script>
 
 <style lang="postcss" scoped>
-.checkbox {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  margin: 0;
-
-  &.disabled {
-    cursor: not-allowed;
-  }
-}
-
-input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.checkbox-text {
-  font-size: 15px;
-  padding-top: 2px;
-}
-
 .checkmark {
   height: 16px;
   width: 16px;
@@ -96,6 +36,10 @@ input {
       border-width: 0 2px 2px 0;
       transform: translate(0, -1px) rotate(45deg);
     }
+  }
+
+  &.disabled {
+    opacity: 0.5;
   }
 }
 </style>

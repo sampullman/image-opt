@@ -1,22 +1,19 @@
 import { LocalStoragePlugin, useModule } from '@samatech/vue-store'
-import { Optimizer } from '../optimize/optimize-options'
-import { AssetContentType, OutputType } from '../util'
+import { IJpegliOptions } from '../optimize/jpegli'
+import { OptimizerType } from '../optimize/optimize-options'
+import { IOxipngOptions } from '../optimize/oxipng'
+import { OutputType } from '../util'
 
-export interface IPngOptions {
+export interface IPngOptions extends IOxipngOptions {
   level: number
   interlace: boolean
 }
 
-export interface IJpegOptions {
-  quality: number
-  optimizer: Optimizer
+// Every JPEG setting the UI offers, across both encoders. `getImageOptions`
+// narrows it to what the selected encoder actually reads.
+export interface IJpegOptions extends IJpegliOptions {
+  optimizer: OptimizerType
   mozProgressive: boolean
-  progressiveLevel: number
-  optimizeCoding: number
-  adaptiveQuantization: number
-  standardQuantTables: number
-  fancyDownsampling: number
-  dctMethod: number
 }
 
 export type FileType = 'jpeg' | 'png'
@@ -26,16 +23,17 @@ export interface IOptionsState {
   keepImageData: boolean
   outputType: OutputType
   selectedType: FileType
-  zip: boolean
   poolSize: number
   png: IPngOptions
   jpeg: IJpegOptions
 }
 
-export const getImageOptions = (assetType: AssetContentType) => {
-  if (assetType === AssetContentType.Jpeg) {
-    const jpeg = optionsStore.jpeg.value
-    if (jpeg.optimizer === Optimizer.Jpegli) {
+// The stored settings an optimizer understands. Keyed on the optimizer rather
+// than the input format, because the output format may differ from the input.
+export const getImageOptions = (optimizer: OptimizerType): Record<string, unknown> => {
+  const jpeg = optionsStore.jpeg.value
+  switch (optimizer) {
+    case OptimizerType.Jpegli:
       return {
         quality: jpeg.quality,
         progressiveLevel: jpeg.progressiveLevel,
@@ -45,20 +43,15 @@ export const getImageOptions = (assetType: AssetContentType) => {
         fancyDownsampling: jpeg.fancyDownsampling,
         dctMethod: jpeg.dctMethod,
       }
-    } else {
+    case OptimizerType.Mozjpeg:
       return {
         quality: jpeg.quality,
         progressive: jpeg.mozProgressive,
       }
-    }
-  } else {
-    return {
-      ...optionsStore.png.value,
-    }
+    case OptimizerType.Oxipng:
+      return { ...optionsStore.png.value }
   }
 }
-
-const getters = (_state: IOptionsState) => ({})
 
 const mutations = (state: IOptionsState) => ({
   toggleImmediate() {
@@ -76,7 +69,7 @@ const mutations = (state: IOptionsState) => ({
   setQuality(quality: number) {
     state.jpeg.quality = quality
   },
-  setJpegOptimizer(optimizer: Optimizer) {
+  setJpegOptimizer(optimizer: OptimizerType) {
     state.jpeg.optimizer = optimizer
   },
   setLevel(level: number) {
@@ -107,16 +100,15 @@ const mutations = (state: IOptionsState) => ({
 
 export const optionsStore = useModule<
   IOptionsState,
-  ReturnType<typeof getters>,
+  Record<string, never>,
   ReturnType<typeof mutations>
 >({
   name: 'options-store',
-  version: 10,
+  version: 11,
   stateInit: () => ({
     immediateDownload: true,
     keepImageData: true,
     outputType: OutputType.MatchInput,
-    zip: false,
     selectedType: 'jpeg',
     poolSize: navigator.hardwareConcurrency || 4,
     png: {
@@ -125,7 +117,7 @@ export const optionsStore = useModule<
     },
     jpeg: {
       quality: 75,
-      optimizer: Optimizer.Jpegli,
+      optimizer: OptimizerType.Jpegli,
       mozProgressive: true,
       progressiveLevel: 2,
       optimizeCoding: 1,
@@ -135,7 +127,6 @@ export const optionsStore = useModule<
       dctMethod: 0,
     },
   }),
-  getters,
   mutations,
   plugins: [LocalStoragePlugin],
 })

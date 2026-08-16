@@ -1,6 +1,7 @@
 <template>
   <div class="image-list">
     <div class="row header">
+      <div class="handle" />
       <div class="name">Name</div>
       <div class="before">Before</div>
       <div class="after">After</div>
@@ -8,13 +9,44 @@
       <div class="actions" @click="emit('clear')">Clear All</div>
     </div>
     <div v-if="!images.length" class="empty">No images</div>
-    <div v-for="(image, index) in images" class="row image">
+    <div
+      v-for="(image, index) in images"
+      :key="image.id"
+      class="row image"
+      :class="{
+        dragging: dragIndex === index,
+        'drag-over': dropIndex === index,
+        failed: !!image.error,
+      }"
+      draggable="true"
+      @dragstart="dragStart(index, $event)"
+      @dragover.prevent="dropIndex = index"
+      @dragleave="dragLeave(index)"
+      @drop.prevent="drop(index)"
+      @dragend="dragReset"
+    >
+      <div class="handle">
+        <button
+          :ref="(el) => setHandle(image.id, el)"
+          type="button"
+          class="grip"
+          :aria-label="`Reorder ${image.file.file.name}`"
+          @keydown.up.prevent="moveByKey(index, -1)"
+          @keydown.down.prevent="moveByKey(index, 1)"
+        >
+          <Grip class="grip-icon" />
+        </button>
+      </div>
       <div class="name">
-        {{ image.file.file.name }}
+        <div class="file-name">{{ image.file.file.name }}</div>
+        <!-- The column is narrow, so keep the full message reachable on hover -->
+        <div v-if="image.error" class="row-error" :title="image.error">
+          {{ image.error }}
+        </div>
       </div>
       <div class="before">{{ toSize(image.file.originalSize) }}</div>
-      <div class="after">{{ toSize(image.result.length) }}</div>
-      <div class="saved">{{ savings(image) }}</div>
+      <div class="after">{{ image.error ? '—' : toSize(image.resultSize) }}</div>
+      <div class="saved">{{ image.error ? '—' : savings(image) }}</div>
       <div class="actions">
         <Download
           class="download icon"
@@ -28,19 +60,71 @@
 </template>
 
 <script lang="ts" setup>
+import { nextTick, ref } from 'vue'
 import { IListImage } from '../util'
 import Download from './Download.vue'
+import Grip from './Grip.vue'
 import Trash from './Trash.vue'
 
-defineProps<{
+const props = defineProps<{
   images: IListImage[]
 }>()
 
 const emit = defineEmits<{
   (e: 'clear'): void
   (e: 'remove', index: number): void
+  (e: 'reorder', from: number, to: number): void
   (e: 'download', image: IListImage): void
 }>()
+
+const dragIndex = ref<number>()
+const dropIndex = ref<number>()
+const handles = new Map<string, HTMLElement>()
+
+const setHandle = (id: string, el: unknown) => {
+  if (el instanceof HTMLElement) {
+    handles.set(id, el)
+  } else {
+    handles.delete(id)
+  }
+}
+
+// Chrome blurs an element when it is moved in the DOM, which would drop focus
+// after every keypress. Put it back so the same image can be moved repeatedly.
+const moveByKey = async (index: number, offset: number) => {
+  const { id } = props.images[index]
+  emit('reorder', index, index + offset)
+  await nextTick()
+  handles.get(id)?.focus()
+}
+
+const dragStart = (index: number, event: DragEvent) => {
+  dragIndex.value = index
+  if (event.dataTransfer) {
+    event.dataTransfer.effectAllowed = 'move'
+    // Firefox ignores drags that carry no data
+    event.dataTransfer.setData('text/plain', String(index))
+  }
+}
+
+const dragLeave = (index: number) => {
+  if (dropIndex.value === index) {
+    dropIndex.value = undefined
+  }
+}
+
+const drop = (index: number) => {
+  const from = dragIndex.value
+  dragReset()
+  if (from !== undefined) {
+    emit('reorder', from, index)
+  }
+}
+
+const dragReset = () => {
+  dragIndex.value = undefined
+  dropIndex.value = undefined
+}
 
 const download = (image: IListImage) => {
   if (image.result.length) {
@@ -49,12 +133,14 @@ const download = (image: IListImage) => {
 }
 
 const savings = (image: IListImage): string => {
-  const { file, result } = image
-  const sizeBefore = file.file.size
-  if (sizeBefore === 0) {
+  // Compare against the size shown in the "Before" column. `file.file.size` is
+  // the converted file when the output type forces a format change, so it would
+  // measure the saving against a number the user never sees.
+  const sizeBefore = image.file.originalSize
+  if (!sizeBefore) {
     return '?'
   }
-  const saved = (sizeBefore - result.length) / sizeBefore
+  const saved = (sizeBefore - image.resultSize) / sizeBefore
   return `${Math.round(saved * 100)}%`
 }
 
@@ -84,13 +170,51 @@ const toSize = (size: number): string => {
   font-size: 13px;
   padding: 6px 8px;
 }
+.handle {
+  width: 6%;
+  display: flex;
+  align-items: center;
+}
+.grip {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: none;
+  cursor: grab;
+  transition: opacity 0.2s ease;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:focus-visible {
+    outline: 2px solid #5d99b6;
+    outline-offset: 1px;
+  }
+}
+.grip-icon {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
 .name {
-  width: 43%;
+  width: 37%;
+  overflow: hidden;
+  text-align: left;
+  padding-right: 8px;
+}
+.file-name {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: left;
-  padding-right: 8px;
+}
+.row-error {
+  font-size: 11px;
+  line-height: 14px;
+  color: #d53434;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .before {
   width: 15%;
@@ -129,6 +253,20 @@ const toSize = (size: number): string => {
   &:hover {
     opacity: 0.4;
   }
+}
+.image {
+  border-top: 2px solid transparent;
+}
+.failed .before,
+.failed .after,
+.failed .saved {
+  color: #9a9ca0;
+}
+.dragging {
+  opacity: 0.4;
+}
+.drag-over:not(.dragging) {
+  border-top-color: #5d99b6;
 }
 .header {
   font-weight: bold;

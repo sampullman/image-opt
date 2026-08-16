@@ -27,17 +27,42 @@ jobs:
       - name: Lint source code
         run: pnpm run lint
 
-  # unit-tests:
-  #   name: Unit Tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout out repository code
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
-  #     - uses: ./.github/actions/env-setup
-  #     - name: Run unit tests
-  #       run: pnpm run test
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/env-setup
+      # The demo typechecks against the library's published declarations, so
+      # they have to be generated first
+      - name: Build libraries
+        run: pnpm run build:lib
+      - name: Typecheck packages
+        run: pnpm run typecheck
+
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/env-setup
+      - name: Install Playwright browsers
+        run: pnpm --filter image-opt-demo-e2e exec playwright install --with-deps chromium
+      - name: Run end-to-end tests
+        run: pnpm run test:e2e
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: packages/demo-e2e/playwright-report/
+          retention-days: 7
 
   build:
     name: Build library

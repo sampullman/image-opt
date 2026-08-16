@@ -21,6 +21,7 @@
       class="list"
       @download="saveImage($event, optionsStore.outputType.value)"
       @remove="removeImage"
+      @reorder="reorderImage"
       @clear="images = []"
     />
     <EncodeOptions />
@@ -37,13 +38,21 @@ import {
   AssetContentType,
   convertJpegToPngFile,
   IListImage,
+  moveImage,
+  nextImageId,
+  releaseImageData,
   saveImage,
   OutputType,
   outputTypeToAssetType,
 } from '../util'
-import { optimizeInitWrap, optimizeImages, getDefaultOptions } from '../optimize'
+import {
+  getDefaultOptions,
+  optimizeImages,
+  optimizerForType,
+  OptimizerType,
+  WasmInitOptions,
+} from '../optimize'
 import UploadFile from './UploadFile.vue'
-import { Optimizer, WasmInitOptions } from '../optimize/optimize-options'
 import EncodeOptions from './EncodeOptions.vue'
 import { getImageOptions, optionsStore } from '../store'
 import ImageList from './ImageList.vue'
@@ -79,6 +88,13 @@ const getError = (key: string): string => {
   return ErrorMap[key] ?? ErrorMap.unknown
 }
 
+// Validation rejects with a list of keys; anything else (a missing WASM binary,
+// a worker that failed to start) has no key and reads as an unknown error.
+const getErrorKey = (e: unknown): string => {
+  const fileErrors = (e as IValidateMediaError | undefined)?.fileErrors
+  return Array.isArray(fileErrors) ? fileErrors[0] : 'unknown'
+}
+
 const setImagePreview = (file: File) => {
   const reader = new FileReader()
   reader.readAsDataURL(file)
@@ -87,13 +103,10 @@ const setImagePreview = (file: File) => {
   }
 }
 
-const getOptimizer = (contentType: AssetContentType) => {
-  const overrideType = outputTypeToAssetType(optionsStore.outputType.value, contentType)
-  if (overrideType === AssetContentType.Jpeg) {
-    return optionsStore.jpeg.value.optimizer
-  } else {
-    return Optimizer.Oxipng
-  }
+// The optimizer that produces the configured output format for an input format
+const getOptimizer = (contentType: AssetContentType): OptimizerType => {
+  const outputType = outputTypeToAssetType(optionsStore.outputType.value, contentType)
+  return optimizerForType(outputType, optionsStore.jpeg.value.optimizer)
 }
 
 const prepareFiles = async (files: File[]): Promise<ValidatedFile[]> => {
@@ -113,11 +126,6 @@ const prepareFiles = async (files: File[]): Promise<ValidatedFile[]> => {
       )
       // Set original size since PNG conversion changes the file
       validFile.originalSize = file.size
-      await optimizeInitWrap({
-        ...wasmInit(),
-        assetType: validFile.type,
-        optimizer: getOptimizer(validFile.type),
-      })
       return validFile
     }),
   )
@@ -125,18 +133,19 @@ const prepareFiles = async (files: File[]): Promise<ValidatedFile[]> => {
 
 const selectFiles = async (files: File[] | null | undefined) => {
   error.value = undefined
-  if (files) {
-    try {
-      setImagePreview(files[0])
-      loading.value = true
-      optimizeFiles(await prepareFiles(files))
-    } catch (e) {
-      console.log('Optimize error', e)
-      const key = (e as IValidateMediaError).fileErrors[0]
-      error.value = key
-    } finally {
-      loading.value = false
-    }
+  if (!files?.length) {
+    return
+  }
+  loading.value = true
+  try {
+    setImagePreview(files[0])
+    // Awaited, so the spinner covers the encode and not just the decode
+    await optimizeFiles(await prepareFiles(files))
+  } catch (e) {
+    console.error('Optimize error', e)
+    error.value = getErrorKey(e)
+  } finally {
+    loading.value = false
   }
 }
 
@@ -144,52 +153,49 @@ const removeImage = (index: number) => {
   images.value.splice(index, 1)
 }
 
+const reorderImage = (from: number, to: number) => {
+  images.value = moveImage(images.value, from, to)
+}
+
 const optimizeFiles = async (files: ValidatedFile[]) => {
-  if (error.value || !files.length) {
+  if (!files.length) {
     return
   }
-  try {
-    const request = files.map((file) => {
-      const options = getImageOptions(file.type)
-      return {
-        file,
-        optimizer: getOptimizer(file.type),
-        options: {
-          ...getDefaultOptions(file.type, options),
-          ...options,
-        },
+  const request = files.map((file) => {
+    const optimizer = getOptimizer(file.type)
+    return {
+      file,
+      optimizer,
+      options: {
+        ...getDefaultOptions(optimizer),
+        ...getImageOptions(optimizer),
+      },
+    }
+  })
+  const results = await optimizeImages(
+    request,
+    workerUrl.value,
+    wasmInit(),
+    optionsStore.poolSize.value,
+  )
+  for (const result of results) {
+    const image: IListImage = {
+      id: nextImageId(),
+      file: result.file,
+      result: result.data ?? new Uint8Array(),
+      resultSize: result.data?.length ?? 0,
+      error: result.error,
+    }
+    // A failed image still gets a row, so it is not silently missing
+    if (!result.error) {
+      if (optionsStore.immediateDownload.value) {
+        saveImage(image, optionsStore.outputType.value)
       }
-    })
-    const results = await optimizeImages(
-      request,
-      workerUrl.value,
-      wasmInit(),
-      optionsStore.poolSize.value,
-    )
-    for (const result of results) {
-      if (result.data) {
-        const image: IListImage = {
-          file: result.file,
-          result: result.data,
-        }
-        console.log(result)
-        if (optionsStore.immediateDownload.value) {
-          saveImage(image, optionsStore.outputType.value)
-        }
-        if (!optionsStore.keepImageData.value) {
-          image.result = new Uint8Array()
-          image.file = {
-            file: {} as File,
-            originalSize: image.file.originalSize,
-            type: image.file.type,
-            data: {} as ImageData,
-          }
-        }
-        images.value.push(image)
+      if (!optionsStore.keepImageData.value) {
+        releaseImageData(image)
       }
     }
-  } catch (e) {
-    console.log('Optimize error:', e)
+    images.value.push(image)
   }
 }
 </script>

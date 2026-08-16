@@ -1,8 +1,5 @@
-import init, {
-  MozJPEGModule,
-  EncodeOptions,
-} from '../../../../optimizers/mozjpeg/enc/mozjpeg_enc'
-import { MozJpegColorSpace } from '../../../../optimizers/mozjpeg/enc/mozjpeg-color-space'
+import init, { MozJPEGModule, EncodeOptions } from '../wasm/mozjpeg/mozjpeg_enc'
+import { MozJpegColorSpace } from '../wasm/mozjpeg/mozjpeg-color-space'
 import { urlFromString } from '../util'
 
 export type IMozjpegOptions = EncodeOptions

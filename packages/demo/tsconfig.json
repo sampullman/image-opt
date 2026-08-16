@@ -3,12 +3,17 @@
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "strict": true,
     "sourceMap": true,
+    "noEmit": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    // @samatech/vue-components ships a transitive declaration that imports
+    // @floating-ui/vue through an unresolvable `catalog:` specifier
+    "skipLibCheck": true,
+    "types": ["vite/client", "node"],
     "lib": ["esnext", "dom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts"]
 }

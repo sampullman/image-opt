@@ -18,16 +18,16 @@
       <div class="text">Optimizer (Jpegli recommended)</div>
       <STMultiselect
         :value="optionsStore.jpeg.value.optimizer"
-        :options="[Optimizer.Jpegli, Optimizer.Mozjpeg]"
+        :options="[OptimizerType.Jpegli, OptimizerType.Mozjpeg]"
         :clearable="false"
         class="select"
-        @select="optionsStore.setJpegOptimizer($event as Optimizer)"
+        @select="optionsStore.setJpegOptimizer($event as OptimizerType)"
       />
     </div>
     <div
       v-if="
         optionsStore.selectedType.value === 'jpeg' &&
-        optionsStore.jpeg.value.optimizer === Optimizer.Jpegli
+        optionsStore.jpeg.value.optimizer === OptimizerType.Jpegli
       "
       class="advanced-options"
     >
@@ -64,22 +64,16 @@
       <template #label> {{ qualityText }}</template>
     </STProgressBar>
     <div class="label general">General Options</div>
-    <div class="row immediate" @click="optionsStore.toggleImmediate()">
-      <div class="text">Download result immediately</div>
-      <OCheckbox
-        :item="{
-          checked: optionsStore.immediateDownload.value,
-        }"
-      />
-    </div>
-    <div class="row immediate" @click="optionsStore.toggleKeepImageData()">
-      <div class="text">Keep image data</div>
-      <OCheckbox
-        :item="{
-          checked: optionsStore.keepImageData.value,
-        }"
-      />
-    </div>
+    <CheckboxRow
+      label="Download result immediately"
+      :checked="optionsStore.immediateDownload.value"
+      @toggle="optionsStore.toggleImmediate()"
+    />
+    <CheckboxRow
+      label="Keep image data"
+      :checked="optionsStore.keepImageData.value"
+      @toggle="optionsStore.toggleKeepImageData()"
+    />
     <div class="row file-type-wrap">
       <div class="text">Output file type</div>
       <STMultiselect
@@ -108,10 +102,10 @@
 import { computed, ref } from 'vue'
 import { STMultiselect, STProgressBar } from '@samatech/vue-components'
 import { FileType, optionsStore } from '../store'
-import { Optimizer } from '../optimize/optimize-options'
+import { OptimizerType } from '../optimize/optimize-options'
 import { OutputType } from '../util'
 import AdvancedJpegliOptions from './AdvancedJpegliOptions.vue'
-import OCheckbox from './OCheckbox.vue'
+import CheckboxRow from './CheckboxRow.vue'
 
 const showAdvanced = ref(false)
 const types: FileType[] = ['jpeg', 'png']
@@ -231,10 +225,6 @@ $grey1: #4c566a;
 }
 .general {
   margin-top: 40px;
-}
-.immediate {
-  user-select: none;
-  cursor: pointer;
 }
 .toggle-advanced {
   display: flex;

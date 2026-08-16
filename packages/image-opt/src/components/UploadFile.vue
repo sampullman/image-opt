@@ -15,7 +15,7 @@
       @dragend="dragEnd"
       @input="handleFileSelect"
     >
-      <label class="o-upload-area" :for="`image-upload-input${id}`">
+      <label class="o-upload-area" :for="`o-upload-input${id}`">
         <slot>
           <div v-if="!loading" class="o-upload-button">
             <div class="o-upload-left">

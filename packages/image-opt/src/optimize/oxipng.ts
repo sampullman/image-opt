@@ -1,9 +1,14 @@
-import init, { optimize, InitOutput } from '../../../../optimizers/oxipng/pkg/image_opt'
+import init, { optimize, InitOutput } from '../wasm/oxipng/image_opt'
 import { urlFromString } from '../util'
 
 export interface IOxipngOptions {
   level?: number
   interlace?: boolean
+}
+
+export const defaultOxipngOptions: IOxipngOptions = {
+  level: 3,
+  interlace: false,
 }
 
 let oxipng: InitOutput

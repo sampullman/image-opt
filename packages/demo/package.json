@@ -6,21 +6,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@samatech/vue-store": "^0.6.0",
-    "vue": "catalog:",
-    "@samatech/image-opt": "workspace:*"
+    "@samatech/image-opt": "workspace:*",
+    "vue": "catalog:"
   },
   "devDependencies": {
     "@samatech/postcss-basics": "catalog:",
+    "@types/node": "^22.20.1",
     "@vitejs/plugin-vue": "catalog:",
     "postcss": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vue-tsc": "2.2.12"
   }
 }
