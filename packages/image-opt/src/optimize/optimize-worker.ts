@@ -1,14 +1,21 @@
+import { IOptimizeSpec } from './optimize-request'
 import { WorkerCommand, WorkerResultType } from './worker-enum'
 import { encodeImage, optimizeInitWrap } from './optimize-wrap'
 
 self.onmessage = async (e: MessageEvent<WorkerCommand>) => {
-  const { file, init, options } = (e.data ?? {}) as WorkerCommand
-  if (!file) {
-    return
-  }
+  const command = e.data
   try {
-    await optimizeInitWrap(init)
-    const output = encodeImage(init.optimizer, file, options ?? {})
+    if (!command?.file || !command.optimizer) {
+      // The pool waits for a message, so answer even this
+      throw new Error('Malformed optimize command')
+    }
+    // Restores the pairing the structured clone erased
+    const spec = {
+      optimizer: command.optimizer,
+      options: command.options,
+    } as IOptimizeSpec
+    await optimizeInitWrap(command.optimizer, command.init ?? {})
+    const output = encodeImage(spec, command.file)
     self.postMessage({ type: WorkerResultType.Complete, output })
   } catch (e) {
     self.postMessage({

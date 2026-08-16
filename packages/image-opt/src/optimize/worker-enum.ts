@@ -1,15 +1,17 @@
-import { OptimizeInitOptions } from './optimize-options'
+import { OptimizerType, WasmInitOptions } from './optimize-options'
 
+/** The image as it crosses into the worker; only the half to be read is sent. */
 export interface WorkerFileData {
-  name?: string
   buffer?: ArrayBuffer
   data?: ImageData
 }
 
 export interface WorkerCommand {
-  init: OptimizeInitOptions
-  file?: WorkerFileData
-  options?: Record<string, unknown>
+  init: WasmInitOptions
+  file: WorkerFileData
+  optimizer: OptimizerType
+  /** Options for `optimizer`; the worker pairs them back up on arrival. */
+  options?: unknown
 }
 
 export interface WorkerResult {

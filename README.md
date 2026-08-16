@@ -68,10 +68,10 @@ This assumes Vite is used as the bundler.
 ```Vue
 <template>
   <Optimizer
-    :mozjpegWasm="HOST + MozjpegWasm"
-    :oxipngWasm="HOST + OxipngWasm"
-    :jpegliWasm="HOST + JpegliWasm"
-    :workerUrl="HOST + OptimizeWorker"
+    :mozjpegWasm="MozjpegWasm"
+    :oxipngWasm="OxipngWasm"
+    :jpegliWasm="JpegliWasm"
+    :workerUrl="OptimizeWorker"
   />
 </template>
 
@@ -81,10 +81,31 @@ import JpegliWasm from '@samatech/image-opt/jpegli.wasm?url'
 import MozjpegWasm from '@samatech/image-opt/mozjpeg.wasm?url'
 import OxipngWasm from '@samatech/image-opt/oxipng.wasm?url'
 import OptimizeWorker from '@samatech/image-opt/worker?url'
-
-// Must prefix URLs in dev
-const HOST = 'http://127.0.0.1:3050'
 </script>
+```
+
+URLs may be relative. The worker runs from a `blob:` URL, where a root-relative
+path cannot be resolved at all, so the library makes every URL absolute against
+the page before handing it over — in a build as much as in dev.
+
+### Without the widget
+
+The encoders do not need Vue. Import them from `@samatech/image-opt/optimize`,
+which carries no components and no store:
+
+```ts
+import { optimizeImages, OptimizerType } from '@samatech/image-opt/optimize'
+import JpegliWasm from '@samatech/image-opt/jpegli.wasm?url'
+import OptimizeWorker from '@samatech/image-opt/worker?url'
+
+// `input` carries whichever form the optimizer reads: `data` for the JPEG
+// encoders, `file` for oxipng. Omitted options keep the encoder's default.
+// Results come back in request order, each with `data` or `error`.
+const [result] = await optimizeImages(
+  [{ input: { data: imageData }, optimizer: OptimizerType.Jpegli, options: { quality: 90 } }],
+  OptimizeWorker,
+  { jpegliWasm: JpegliWasm },
+)
 ```
 
 ## License

@@ -22,6 +22,17 @@ export interface IValidateMediaError {
   fileErrors: string[]
 }
 
+/** Validation failure. `fileErrors` holds the keys a UI translates. */
+export class ValidateMediaError extends Error implements IValidateMediaError {
+  fileErrors: string[]
+
+  constructor(fileErrors: string[]) {
+    super(`Invalid media: ${fileErrors.join(', ')}`)
+    this.name = 'ValidateMediaError'
+    this.fileErrors = fileErrors
+  }
+}
+
 async function fileToImageData(file: File): Promise<ImageData> {
   // Prefer createImageBitmap as it's the off-thread option for Firefox.
   const dPromise = 'createImageBitmap' in self ? createImageBitmap(file) : blobToImg(file)
@@ -130,7 +141,7 @@ export async function validateMedia(
     errors.push('FILE_TYPE')
   }
   if (errors.length) {
-    throw { fileErrors: errors }
+    throw new ValidateMediaError(errors)
   }
 
   try {
@@ -165,5 +176,5 @@ export async function validateMedia(
     console.log(e)
     errors.push('FILE_TYPE')
   }
-  throw { fileErrors: errors || ['unknown'] }
+  throw new ValidateMediaError(errors.length ? errors : ['unknown'])
 }

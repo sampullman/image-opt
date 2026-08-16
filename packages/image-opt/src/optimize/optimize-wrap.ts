@@ -1,93 +1,82 @@
-import { AssetContentType, ValidatedFile } from '../util'
+import { AssetContentType } from '../util'
+import { defaultJpegliOptions, initJpegli, optimizeJpegli } from './jpegli'
+import { defaultMozjpegOptions, initMozjpeg, optimizeMozjpeg } from './mozjpeg'
+import { OptimizerType, WasmInitOptions } from './optimize-options'
 import {
-  IJpegliOptions,
-  defaultJpegliOptions,
-  initJpegli,
-  optimizeJpegli,
-} from './jpegli'
-import {
-  IMozjpegOptions,
-  defaultMozjpegOptions,
-  initMozjpeg,
-  optimizeMozjpeg,
-} from './mozjpeg'
-import { OptimizerType, OptimizeInitOptions } from './optimize-options'
-import {
-  IOxipngOptions,
-  defaultOxipngOptions,
-  initOxipng,
-  optimizeOxipng,
-} from './oxipng'
+  IOptimizeInput,
+  IOptimizerOption,
+  IOptimizerOptions,
+  IOptimizeSpec,
+} from './optimize-request'
+import { defaultOxipngOptions, initOxipng, optimizeOxipng } from './oxipng'
 
-export const optimizeInitWrap = (options: OptimizeInitOptions) => {
-  const { jpegliWasm, mozjpegWasm, oxipngWasm } = options
-  switch (options.optimizer) {
+export const optimizeInitWrap = (
+  optimizer: OptimizerType,
+  wasm: WasmInitOptions,
+): Promise<unknown> => {
+  switch (optimizer) {
     case OptimizerType.Oxipng:
-      return initOxipng(oxipngWasm)
+      return initOxipng(wasm.oxipngWasm)
     case OptimizerType.Jpegli:
-      return initJpegli(jpegliWasm)
+      return initJpegli(wasm.jpegliWasm)
     case OptimizerType.Mozjpeg:
-      return initMozjpeg(mozjpegWasm)
+      return initMozjpeg(wasm.mozjpegWasm)
   }
 }
 
-// What an optimizer needs from an image. Oxipng rewrites the encoded PNG, while
-// the JPEG encoders work from decoded pixels.
+/** `IOptimizeInput` with the encoded bytes already read. */
 export interface IEncodeInput {
   buffer?: ArrayBuffer
   data?: ImageData
 }
 
-// The single place an optimizer is chosen, shared by the worker and the
-// in-thread fallback so the two cannot drift apart.
-export const encodeImage = (
-  optimizer: OptimizerType,
-  input: IEncodeInput,
-  options: Record<string, unknown>,
-): Uint8Array => {
-  switch (optimizer) {
+const DEFAULT_OPTIONS: IOptimizerOptions = {
+  [OptimizerType.Oxipng]: defaultOxipngOptions,
+  [OptimizerType.Jpegli]: defaultJpegliOptions,
+  [OptimizerType.Mozjpeg]: defaultMozjpegOptions,
+}
+
+// Chooses the optimizer for both the worker and the in-thread fallback, and
+// fills in the encoder's defaults under the caller's options.
+export const encodeImage = (spec: IOptimizeSpec, input: IEncodeInput): Uint8Array => {
+  switch (spec.optimizer) {
     case OptimizerType.Oxipng:
       if (!input.buffer) {
         throw new Error('Optimizing a PNG requires the encoded file')
       }
-      return optimizeOxipng(new Uint8Array(input.buffer), options as IOxipngOptions)
+      return optimizeOxipng(new Uint8Array(input.buffer), {
+        ...defaultOxipngOptions,
+        ...spec.options,
+      })
     case OptimizerType.Jpegli:
       if (!input.data) {
         throw new Error('Optimizing a JPEG requires decoded image data')
       }
-      return optimizeJpegli(input.data, options as unknown as IJpegliOptions)
+      return optimizeJpegli(input.data, { ...defaultJpegliOptions, ...spec.options })
     case OptimizerType.Mozjpeg:
       if (!input.data) {
         throw new Error('Optimizing a JPEG requires decoded image data')
       }
-      return optimizeMozjpeg(input.data, options as unknown as IMozjpegOptions)
+      return optimizeMozjpeg(input.data, { ...defaultMozjpegOptions, ...spec.options })
     default:
-      throw new Error(`Unknown optimizer: ${optimizer}`)
+      // Only reachable from JS
+      throw new Error(`Unknown optimizer: ${JSON.stringify(spec)}`)
   }
 }
 
 export const optimizeImageWrap = async (
-  validFile: ValidatedFile,
-  optimizer: OptimizerType,
-  options: Record<string, unknown>,
+  input: IOptimizeInput,
+  spec: IOptimizeSpec,
 ): Promise<Uint8Array> => {
-  const { data, file } = validFile
   // Only oxipng reads the encoded file, so avoid the copy otherwise
-  const buffer = optimizer === OptimizerType.Oxipng ? await file.arrayBuffer() : undefined
-  return encodeImage(optimizer, { buffer, data }, options)
+  const buffer =
+    spec.optimizer === OptimizerType.Oxipng ? await input.file?.arrayBuffer() : undefined
+  return encodeImage(spec, { buffer, data: input.data })
 }
 
-// Every option an optimizer understands, so a caller can supply as few or as
-// many as it likes.
-export const getDefaultOptions = (optimizer: OptimizerType): Record<string, unknown> => {
-  switch (optimizer) {
-    case OptimizerType.Oxipng:
-      return { ...defaultOxipngOptions }
-    case OptimizerType.Jpegli:
-      return { ...defaultJpegliOptions }
-    case OptimizerType.Mozjpeg:
-      return { ...defaultMozjpegOptions }
-  }
+// For a UI that displays or edits them; a request need not pass them back.
+export const getDefaultOptions = (optimizer: OptimizerType): IOptimizerOption => {
+  return { ...DEFAULT_OPTIONS[optimizer] }
 }
 
 // The optimizer that produces `assetType`, honouring the JPEG encoder choice.

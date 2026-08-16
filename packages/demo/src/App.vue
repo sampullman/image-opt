@@ -9,10 +9,10 @@
           Supports Jpeg and Png
         </div>
         <Optimizer
-          :mozjpegWasm="HOST + MozjpegWasm"
-          :oxipngWasm="HOST + OxipngWasm"
-          :jpegliWasm="HOST + JpegliWasm"
-          :workerUrl="HOST + OptimizeWorker"
+          :mozjpegWasm="MozjpegWasm"
+          :oxipngWasm="OxipngWasm"
+          :jpegliWasm="JpegliWasm"
+          :workerUrl="OptimizeWorker"
         />
       </div>
     </div>
@@ -26,8 +26,7 @@ import MozjpegWasm from '@samatech/image-opt/mozjpeg.wasm?url'
 import OxipngWasm from '@samatech/image-opt/oxipng.wasm?url'
 import OptimizeWorker from '@samatech/image-opt/worker?url'
 
-// Must prefix URLs in dev
-const HOST = 'http://127.0.0.1:3050'
+// Vite's URLs are root-relative; the library resolves them against the page
 
 // Use direct import for live reload in dev
 // import OptimizeWorker from '/node_modules/@samatech/image-opt/src/optimize/optimize-worker.ts?url'

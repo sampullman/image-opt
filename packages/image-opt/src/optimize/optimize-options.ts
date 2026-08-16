@@ -9,7 +9,3 @@ export enum OptimizerType {
   Mozjpeg = 'mozjpeg',
   Jpegli = 'jpegli',
 }
-
-export interface OptimizeInitOptions extends WasmInitOptions {
-  optimizer: OptimizerType
-}

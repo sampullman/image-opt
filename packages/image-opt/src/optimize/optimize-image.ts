@@ -1,11 +1,8 @@
+import { absoluteUrl } from '../util'
 import { WasmInitOptions } from './optimize-options'
+import { IOptimizeRequest, IOptimizeResult, optimizeError } from './optimize-request'
 import { optimizeImageWrap, optimizeInitWrap } from './optimize-wrap'
-import {
-  IOptimizeRequest,
-  IOptimizeResult,
-  optimizeError,
-  WorkerPool,
-} from './worker-pool'
+import { WorkerPool } from './worker-pool'
 
 let workerPool: WorkerPool | undefined
 let workerPoolKey = ''
@@ -23,24 +20,36 @@ const getWorkerPool = (workerUrl: string, poolSize?: number): WorkerPool => {
   return workerPool
 }
 
+const optionalUrl = (url: string | undefined): string | undefined =>
+  url ? absoluteUrl(url) : undefined
+
+// See `absoluteUrl`
+const resolveWasmUrls = (wasmInit: WasmInitOptions): WasmInitOptions => ({
+  oxipngWasm: optionalUrl(wasmInit.oxipngWasm),
+  mozjpegWasm: optionalUrl(wasmInit.mozjpegWasm),
+  jpegliWasm: optionalUrl(wasmInit.jpegliWasm),
+})
+
 // Optimizes images using web workers, falling back to the calling thread.
-// One image failing does not fail the rest; each result carries its own error.
+// One image failing does not fail the rest; results come back in request order.
 export const optimizeImages = async (
   images: IOptimizeRequest[],
   workerUrl: string | undefined,
   wasmInit: WasmInitOptions,
   poolSize?: number,
 ): Promise<IOptimizeResult[]> => {
+  const wasm = resolveWasmUrls(wasmInit)
   if (workerUrl && self.Worker) {
-    return getWorkerPool(workerUrl, poolSize).optimize(images, wasmInit)
+    return getWorkerPool(absoluteUrl(workerUrl), poolSize).optimize(images, wasm)
   }
   return Promise.all(
-    images.map(async ({ file, optimizer, options }): Promise<IOptimizeResult> => {
+    images.map(async (request): Promise<IOptimizeResult> => {
+      const { input } = request
       try {
-        await optimizeInitWrap({ ...wasmInit, optimizer })
-        return { file, data: await optimizeImageWrap(file, optimizer, options) }
+        await optimizeInitWrap(request.optimizer, wasm)
+        return { input, data: await optimizeImageWrap(input, request) }
       } catch (e) {
-        return { file, error: optimizeError(e) }
+        return { input, error: optimizeError(e) }
       }
     }),
   )

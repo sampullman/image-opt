@@ -26,8 +26,7 @@ export default defineConfig({
     allowedHosts: true,
     port: 3050,
     host: '127.0.0.1',
-    // The app builds its WASM and worker URLs from this exact origin, so
-    // silently moving to another port would break it
+    // The end-to-end tests expect the demo at exactly this address
     strictPort: true,
   },
   plugins: [vue(), wasmContentTypePlugin],

@@ -5,8 +5,8 @@ import { PluginOption, UserConfig } from 'vite'
 const resolve = (p: string): string => path.resolve(__dirname, p)
 
 export interface ILibBuildOptions {
-  // Entry module, relative to this package
-  entry: string
+  // Entry module(s), relative to this package
+  entry: string | string[]
   outDir: string
   // Off for a build that adds to what an earlier one produced
   emptyOutDir?: boolean
@@ -32,7 +32,7 @@ export const libConfig = (options: ILibBuildOptions): UserConfig => {
       minify: 'terser',
       lib: {
         formats: ['es'],
-        entry: [resolve(entry)],
+        entry: (Array.isArray(entry) ? entry : [entry]).map(resolve),
         name: '@samatech/image-opt',
         ...(fileName ? { fileName: () => fileName } : {}),
       },

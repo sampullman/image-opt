@@ -1,7 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-// The demo hardcodes this origin when building the WASM/worker URLs it passes to
-// the widget, so the dev server has to be reachable at exactly this address.
+// Where the demo's Vite server binds (`strictPort`, so it is this or nothing)
 export const DEMO_URL = 'http://127.0.0.1:3050'
 
 export default defineConfig({

@@ -23,16 +23,22 @@ export const defaultJpegliOptions: IJpegliOptions = {
 
 const YCbCr = 2
 
-let jpegli: JpegliModule
+let jpegliInit: Promise<JpegliModule> | undefined
 
-export const initJpegli = async (jpegliWasm: string | undefined) => {
-  if (!jpegli) {
+// Caches the in-flight promise, so a concurrent batch shares one
+// instantiation. Failures are not cached, so a later attempt can retry.
+export const initJpegli = (jpegliWasm: string | undefined): Promise<JpegliModule> => {
+  if (!jpegliInit) {
     const url = urlFromString(jpegliWasm)
     if (!url) {
-      throw new Error('A jpegli WASM URL is required')
+      return Promise.reject(new Error('A jpegli WASM URL is required'))
     }
-    jpegli = await init(url)
+    jpegliInit = init(url).catch((e) => {
+      jpegliInit = undefined
+      throw e
+    })
   }
+  return jpegliInit
 }
 
 export const optimizeJpegli = (image: ImageData, options: IJpegliOptions): Uint8Array => {

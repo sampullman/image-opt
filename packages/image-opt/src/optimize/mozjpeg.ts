@@ -23,15 +23,29 @@ export const defaultMozjpegOptions: EncodeOptions = {
   chroma_quality: 75,
 }
 
-let mozjpeg: MozJPEGModule
+let mozjpeg: MozJPEGModule | undefined
+let mozjpegInit: Promise<MozJPEGModule> | undefined
 
-export const initMozjpeg = async (mozjpegWasm: string | undefined) => {
-  if (!mozjpeg) {
-    mozjpeg = await init({}, urlFromString(mozjpegWasm))
+// As `initJpegli`
+export const initMozjpeg = (mozjpegWasm: string | undefined): Promise<MozJPEGModule> => {
+  if (!mozjpegInit) {
+    mozjpegInit = init({}, urlFromString(mozjpegWasm))
+      .then((module) => {
+        mozjpeg = module
+        return module
+      })
+      .catch((e) => {
+        mozjpegInit = undefined
+        throw e
+      })
   }
+  return mozjpegInit
 }
 
 export const optimizeMozjpeg = (image: ImageData, options: IMozjpegOptions) => {
+  if (!mozjpeg) {
+    throw new Error('Mozjpeg has not been initialized')
+  }
   const result = mozjpeg.encode(image.data, image.width, image.height, options)
   return result
 }

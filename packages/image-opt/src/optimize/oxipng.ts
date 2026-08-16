@@ -11,12 +11,17 @@ export const defaultOxipngOptions: IOxipngOptions = {
   interlace: false,
 }
 
-let oxipng: InitOutput
+let oxipngInit: Promise<InitOutput> | undefined
 
-export const initOxipng = async (oxipngWasm: string | undefined) => {
-  if (!oxipng) {
-    oxipng = await init(urlFromString(oxipngWasm))
+// As `initJpegli`
+export const initOxipng = (oxipngWasm: string | undefined): Promise<InitOutput> => {
+  if (!oxipngInit) {
+    oxipngInit = init(urlFromString(oxipngWasm)).catch((e) => {
+      oxipngInit = undefined
+      throw e
+    })
   }
+  return oxipngInit
 }
 
 export const optimizeOxipng = (data: Uint8Array, options?: IOxipngOptions) => {

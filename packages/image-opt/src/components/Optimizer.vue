@@ -46,7 +46,7 @@ import {
   outputTypeToAssetType,
 } from '../util'
 import {
-  getDefaultOptions,
+  IOptimizeRequest,
   optimizeImages,
   optimizerForType,
   OptimizerType,
@@ -161,27 +161,21 @@ const optimizeFiles = async (files: ValidatedFile[]) => {
   if (!files.length) {
     return
   }
-  const request = files.map((file) => {
-    const optimizer = getOptimizer(file.type)
-    return {
-      file,
-      optimizer,
-      options: {
-        ...getDefaultOptions(optimizer),
-        ...getImageOptions(optimizer),
-      },
-    }
-  })
+  const request: IOptimizeRequest[] = files.map((file) => ({
+    ...getImageOptions(getOptimizer(file.type)),
+    input: { file: file.file, data: file.data },
+  }))
   const results = await optimizeImages(
     request,
     workerUrl.value,
     wasmInit(),
     optionsStore.poolSize.value,
   )
-  for (const result of results) {
+  // Results are in request order
+  results.forEach((result, index) => {
     const image: IListImage = {
       id: nextImageId(),
-      file: result.file,
+      file: files[index],
       result: result.data ?? new Uint8Array(),
       resultSize: result.data?.length ?? 0,
       error: result.error,
@@ -196,7 +190,7 @@ const optimizeFiles = async (files: ValidatedFile[]) => {
       }
     }
     images.value.push(image)
-  }
+  })
 }
 </script>
 

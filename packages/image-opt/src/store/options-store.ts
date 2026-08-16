@@ -1,6 +1,7 @@
 import { LocalStoragePlugin, useModule } from '@samatech/vue-store'
 import { IJpegliOptions } from '../optimize/jpegli'
 import { OptimizerType } from '../optimize/optimize-options'
+import { IOptimizeSpec } from '../optimize/optimize-request'
 import { IOxipngOptions } from '../optimize/oxipng'
 import { OutputType } from '../util'
 
@@ -30,26 +31,32 @@ export interface IOptionsState {
 
 // The stored settings an optimizer understands. Keyed on the optimizer rather
 // than the input format, because the output format may differ from the input.
-export const getImageOptions = (optimizer: OptimizerType): Record<string, unknown> => {
+export const getImageOptions = (optimizer: OptimizerType): IOptimizeSpec => {
   const jpeg = optionsStore.jpeg.value
   switch (optimizer) {
     case OptimizerType.Jpegli:
       return {
-        quality: jpeg.quality,
-        progressiveLevel: jpeg.progressiveLevel,
-        optimizeCoding: jpeg.optimizeCoding,
-        adaptiveQuantization: jpeg.adaptiveQuantization,
-        standardQuantTables: jpeg.standardQuantTables,
-        fancyDownsampling: jpeg.fancyDownsampling,
-        dctMethod: jpeg.dctMethod,
+        optimizer,
+        options: {
+          quality: jpeg.quality,
+          progressiveLevel: jpeg.progressiveLevel,
+          optimizeCoding: jpeg.optimizeCoding,
+          adaptiveQuantization: jpeg.adaptiveQuantization,
+          standardQuantTables: jpeg.standardQuantTables,
+          fancyDownsampling: jpeg.fancyDownsampling,
+          dctMethod: jpeg.dctMethod,
+        },
       }
     case OptimizerType.Mozjpeg:
       return {
-        quality: jpeg.quality,
-        progressive: jpeg.mozProgressive,
+        optimizer,
+        options: {
+          quality: jpeg.quality,
+          progressive: jpeg.mozProgressive,
+        },
       }
     case OptimizerType.Oxipng:
-      return { ...optionsStore.png.value }
+      return { optimizer, options: { ...optionsStore.png.value } }
   }
 }
 

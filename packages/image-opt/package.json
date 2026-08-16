@@ -10,6 +10,10 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./optimize": {
+      "types": "./dist/types/index-optimize.d.ts",
+      "import": "./dist/index-optimize.js"
+    },
     "./jpegli.wasm": "./dist/jpegli.wasm",
     "./mozjpeg.wasm": "./dist/mozjpeg_enc.wasm",
     "./oxipng.wasm": "./dist/image_opt_bg.wasm",
@@ -33,6 +37,11 @@
   },
   "peerDependencies": {
     "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@laynezh/vite-plugin-lib-assets": "^1.1.0",

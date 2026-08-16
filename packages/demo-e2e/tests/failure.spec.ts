@@ -47,6 +47,27 @@ test.describe('failed images', () => {
     ).toHaveCount(2)
   })
 
+  test('reports every image when the worker itself will not load', async ({ page }) => {
+    // One worker and three images, so the second and third are handed to a
+    // worker that has already failed. Such a worker never answers, so a pool
+    // that kept using it would hang here rather than report three failures.
+    await seedOptions(page, { immediateDownload: false, poolSize: 1 })
+    const optimizer = new OptimizerPage(page)
+    // Only the worker's own fetch; the `?url` module of the same name is how
+    // the app learns the URL.
+    await page.route(
+      (url) => url.pathname.endsWith('optimize-worker.js') && !url.search,
+      (route) => route.fulfill({ status: 404 }),
+    )
+    await optimizer.goto()
+    await optimizer.optimize('red.png', 'green.png', 'blue.png')
+
+    expect(await optimizer.names()).toEqual(['red.png', 'green.png', 'blue.png'])
+    await expect(optimizer.rows.filter({ has: page.locator('.row-error') })).toHaveCount(
+      3,
+    )
+  })
+
   test('a failed image can still be removed and reordered', async ({ page }) => {
     const optimizer = new OptimizerPage(page)
     await page.route('**/*.wasm', (route) => route.fulfill({ status: 404 }))

@@ -1,27 +1,6 @@
-import { ValidatedFile } from '../util'
 import { OptimizerType, WasmInitOptions } from './optimize-options'
-import { WorkerResult, WorkerResultType, WorkerCommand } from './worker-enum'
-
-export interface IOptimizeRequest {
-  file: ValidatedFile
-  optimizer: OptimizerType
-  options: Record<string, unknown>
-}
-
-// One image's outcome: either `data` or `error` is set. A failed image does not
-// fail its batch, so the caller can report it next to the ones that succeeded.
-export interface IOptimizeResult {
-  file: ValidatedFile
-  data?: Uint8Array
-  error?: string
-}
-
-export const optimizeError = (e: unknown): string => {
-  if (e instanceof Error) {
-    return e.message
-  }
-  return typeof e === 'string' && e ? e : 'Failed to optimize'
-}
+import { IOptimizeRequest, IOptimizeResult, optimizeError } from './optimize-request'
+import { WorkerCommand, WorkerResult, WorkerResultType } from './worker-enum'
 
 // Avoids CORS issue, see https://github.com/vitejs/vite/issues/13680
 const workerHack = (url: string) => {
@@ -37,10 +16,8 @@ const workerHack = (url: string) => {
 }
 
 interface Task {
-  file: ValidatedFile
+  request: IOptimizeRequest
   wasmInit: WasmInitOptions
-  optimizer: OptimizerType
-  options: Record<string, unknown>
   resolve: (result: IOptimizeResult) => void
 }
 
@@ -50,15 +27,92 @@ export class WorkerPool {
   private idleWorkers: Worker[] = []
   private activeTasks: Map<Worker, Task> = new Map()
   private workerUrl: string
+  private poolSize: number
 
   constructor(workerUrl: string, poolSize: number) {
     this.workerUrl = workerUrl
-    for (let i = 0; i < poolSize; i++) {
-      const worker = workerHack(this.workerUrl)
-      worker.onmessage = this.onWorkerMessage.bind(this, worker)
-      worker.onerror = (event) => this.failTask(worker, event.message || 'Worker error')
-      this.workers.push(worker)
-      this.idleWorkers.push(worker)
+    this.poolSize = Math.max(1, poolSize)
+  }
+
+  public optimize(
+    images: IOptimizeRequest[],
+    wasmInit: WasmInitOptions,
+  ): Promise<IOptimizeResult[]> {
+    return Promise.all(images.map((image) => this.queueRequest(image, wasmInit)))
+  }
+
+  public terminate() {
+    for (const worker of this.workers) {
+      worker.terminate()
+    }
+    this.workers = []
+    this.idleWorkers = []
+    // Nothing is left to answer these
+    const abandoned = [...this.activeTasks.values(), ...this.taskQueue]
+    this.activeTasks.clear()
+    this.taskQueue = []
+    for (const task of abandoned) {
+      task.resolve({ input: task.request.input, error: 'Optimizer was terminated' })
+    }
+  }
+
+  private queueRequest(
+    request: IOptimizeRequest,
+    wasmInit: WasmInitOptions,
+  ): Promise<IOptimizeResult> {
+    return new Promise((resolve) => {
+      this.taskQueue.push({ request, wasmInit, resolve })
+      this.dispatch()
+    })
+  }
+
+  /** Starts a worker on demand, up to the pool size. */
+  private spawn(): Worker | undefined {
+    if (this.workers.length >= this.poolSize) {
+      return undefined
+    }
+    const worker = workerHack(this.workerUrl)
+    worker.onmessage = this.onWorkerMessage.bind(this, worker)
+    worker.onerror = (event) => this.retireWorker(worker, event.message || 'Worker error')
+    this.workers.push(worker)
+    return worker
+  }
+
+  private dispatch() {
+    while (this.taskQueue.length) {
+      const worker = this.idleWorkers.shift() ?? this.spawn()
+      if (!worker) {
+        // All busy; the next to finish takes it
+        return
+      }
+      const task = this.taskQueue.shift()
+      if (!task) {
+        this.idleWorkers.unshift(worker)
+        return
+      }
+      this.activeTasks.set(worker, task)
+      this.send(worker, task)
+    }
+  }
+
+  private async send(worker: Worker, task: Task) {
+    const { request, wasmInit } = task
+    try {
+      // Only oxipng reads the encoded file, so avoid the copy otherwise
+      const buffer =
+        request.optimizer === OptimizerType.Oxipng
+          ? await request.input.file?.arrayBuffer()
+          : undefined
+      const command: WorkerCommand = {
+        init: wasmInit,
+        file: { buffer, data: request.input.data },
+        optimizer: request.optimizer,
+        options: request.options,
+      }
+      // An owned copy, so transfer rather than clone
+      worker.postMessage(command, buffer ? [buffer] : [])
+    } catch (e) {
+      this.failTask(worker, e)
     }
   }
 
@@ -71,7 +125,7 @@ export class WorkerPool {
     switch (event.data.type) {
       case WorkerResultType.Complete:
         workerTask.resolve({
-          file: workerTask.file,
+          input: workerTask.request.input,
           data: event.data.output as Uint8Array,
         })
         this.releaseWorker(worker)
@@ -81,66 +135,38 @@ export class WorkerPool {
     }
   }
 
+  /** Fails a worker's task, and puts the worker back to work. */
   private failTask(worker: Worker, reason: unknown) {
     const workerTask = this.activeTasks.get(worker)
-    workerTask?.resolve({ file: workerTask.file, error: optimizeError(reason) })
+    workerTask?.resolve({
+      input: workerTask.request.input,
+      error: optimizeError(reason),
+    })
     this.releaseWorker(worker)
+  }
+
+  /**
+   * Drops a worker whose script failed to load. It never runs its message
+   * handler, so a task given to it would hang. A later task spawns a fresh one.
+   */
+  private retireWorker(worker: Worker, reason: unknown) {
+    this.workers = this.workers.filter((w) => w !== worker)
+    this.idleWorkers = this.idleWorkers.filter((w) => w !== worker)
+    const workerTask = this.activeTasks.get(worker)
+    this.activeTasks.delete(worker)
+    worker.terminate()
+    workerTask?.resolve({
+      input: workerTask.request.input,
+      error: optimizeError(reason),
+    })
+    this.dispatch()
   }
 
   private releaseWorker(worker: Worker) {
     this.activeTasks.delete(worker)
-    this.idleWorkers.push(worker)
+    if (this.workers.includes(worker)) {
+      this.idleWorkers.push(worker)
+    }
     this.dispatch()
-  }
-
-  private queueRequest(
-    image: IOptimizeRequest,
-    wasmInit: WasmInitOptions,
-  ): Promise<IOptimizeResult> {
-    const { file, optimizer, options } = image
-    return new Promise((resolve) => {
-      this.taskQueue.push({ file, wasmInit, optimizer, options, resolve })
-      this.dispatch()
-    })
-  }
-
-  public optimize(
-    images: IOptimizeRequest[],
-    wasmInit: WasmInitOptions,
-  ): Promise<IOptimizeResult[]> {
-    return Promise.all(images.map((image) => this.queueRequest(image, wasmInit)))
-  }
-
-  private async dispatch() {
-    while (this.idleWorkers.length && this.taskQueue.length) {
-      const worker = this.idleWorkers.shift()
-      const task = this.taskQueue.shift()
-
-      if (worker && task) {
-        this.activeTasks.set(worker, task)
-        const { file, wasmInit, optimizer, options } = task
-        file.file
-          .arrayBuffer()
-          .then((buffer) => {
-            const command: WorkerCommand = {
-              init: { ...wasmInit, optimizer },
-              file: {
-                name: file.file.name,
-                buffer,
-                data: file.data,
-              },
-              options: { ...options },
-            }
-            worker.postMessage(command)
-          })
-          .catch((e) => this.failTask(worker, e))
-      }
-    }
-  }
-
-  public terminate() {
-    for (const worker of this.workers) {
-      worker.terminate()
-    }
   }
 }
