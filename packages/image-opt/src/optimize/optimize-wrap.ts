@@ -36,6 +36,21 @@ const DEFAULT_OPTIONS: IOptimizerOptions = {
   [OptimizerType.Mozjpeg]: defaultMozjpegOptions,
 }
 
+/**
+ * The caller's options over the encoder's defaults. A key set to `undefined`
+ * keeps the default rather than erasing it, which a spread would not do -- a
+ * request may be built from settings persisted before the option existed.
+ */
+const withDefaults = <T extends object>(defaults: T, options: unknown): T => {
+  const merged = { ...defaults } as Record<string, unknown>
+  for (const [key, value] of Object.entries(options ?? {})) {
+    if (value !== undefined) {
+      merged[key] = value
+    }
+  }
+  return merged as T
+}
+
 // Chooses the optimizer for both the worker and the in-thread fallback, and
 // fills in the encoder's defaults under the caller's options.
 export const encodeImage = (spec: IOptimizeSpec, input: IEncodeInput): Uint8Array => {
@@ -44,20 +59,23 @@ export const encodeImage = (spec: IOptimizeSpec, input: IEncodeInput): Uint8Arra
       if (!input.buffer) {
         throw new Error('Optimizing a PNG requires the encoded file')
       }
-      return optimizeOxipng(new Uint8Array(input.buffer), {
-        ...defaultOxipngOptions,
-        ...spec.options,
-      })
+      return optimizeOxipng(
+        new Uint8Array(input.buffer),
+        withDefaults(defaultOxipngOptions, spec.options),
+      )
     case OptimizerType.Jpegli:
       if (!input.data) {
         throw new Error('Optimizing a JPEG requires decoded image data')
       }
-      return optimizeJpegli(input.data, { ...defaultJpegliOptions, ...spec.options })
+      return optimizeJpegli(input.data, withDefaults(defaultJpegliOptions, spec.options))
     case OptimizerType.Mozjpeg:
       if (!input.data) {
         throw new Error('Optimizing a JPEG requires decoded image data')
       }
-      return optimizeMozjpeg(input.data, { ...defaultMozjpegOptions, ...spec.options })
+      return optimizeMozjpeg(
+        input.data,
+        withDefaults(defaultMozjpegOptions, spec.options),
+      )
     default:
       // Only reachable from JS
       throw new Error(`Unknown optimizer: ${JSON.stringify(spec)}`)

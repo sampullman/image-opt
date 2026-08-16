@@ -94,7 +94,7 @@ The encoders do not need Vue. Import them from `@samatech/image-opt/optimize`,
 which carries no components and no store:
 
 ```ts
-import { optimizeImages, OptimizerType } from '@samatech/image-opt/optimize'
+import { JpegliChroma, optimizeImages, OptimizerType } from '@samatech/image-opt/optimize'
 import JpegliWasm from '@samatech/image-opt/jpegli.wasm?url'
 import OptimizeWorker from '@samatech/image-opt/worker?url'
 
@@ -102,7 +102,15 @@ import OptimizeWorker from '@samatech/image-opt/worker?url'
 // encoders, `file` for oxipng. Omitted options keep the encoder's default.
 // Results come back in request order, each with `data` or `error`.
 const [result] = await optimizeImages(
-  [{ input: { data: imageData }, optimizer: OptimizerType.Jpegli, options: { quality: 90 } }],
+  [
+    {
+      input: { data: imageData },
+      optimizer: OptimizerType.Jpegli,
+      // 4:2:0 by default, which halves the chroma resolution. Keep every
+      // chroma sample for images whose color detail matters.
+      options: { quality: 90, chromaSubsampling: JpegliChroma.YCbCr444 },
+    },
+  ],
   OptimizeWorker,
   { jpegliWasm: JpegliWasm },
 )

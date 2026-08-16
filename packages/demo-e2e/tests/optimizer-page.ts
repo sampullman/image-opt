@@ -10,6 +10,8 @@ export interface IJpegOptionState {
   quality: number
   optimizer: 'jpegli' | 'mozjpeg'
   mozProgressive: boolean
+  /** `JpegliChroma`: 0 is 4:4:4, 1 is 4:2:2, 2 is 4:2:0, 3 is 4:4:0. */
+  chromaSubsampling: number
   progressiveLevel: number
   optimizeCoding: number
   adaptiveQuantization: number
@@ -24,6 +26,7 @@ export const jpegOptions = (
   quality: 75,
   optimizer: 'jpegli',
   mozProgressive: true,
+  chromaSubsampling: 2,
   progressiveLevel: 2,
   optimizeCoding: 1,
   adaptiveQuantization: 1,
@@ -39,7 +42,7 @@ export interface IOptionOverrides {
   outputType?: 'matchInput' | 'jpg' | 'png'
   selectedType?: 'jpeg' | 'png'
   poolSize?: number
-  jpeg?: IJpegOptionState
+  jpeg?: Partial<IJpegOptionState>
 }
 
 /**
@@ -50,8 +53,10 @@ export interface IOptionOverrides {
  * and anything we omit keeps its default. Writing a "current" version instead
  * would replace the state wholesale and leave omitted keys undefined.
  *
- * The merge is shallow, so nested state such as `jpeg` has to be complete --
- * build it with `jpegOptions()`.
+ * vue-store's own merge is shallow, so nested state such as `jpeg` arrives
+ * whole; the store fills the keys back in behind it, which is what lets a
+ * partial `jpeg` object -- or one saved before an option existed -- work here.
+ * `jpegOptions()` builds a complete one where the test wants to be explicit.
  */
 export const seedOptions = async (page: Page, overrides: IOptionOverrides) => {
   await page.addInitScript((state) => {

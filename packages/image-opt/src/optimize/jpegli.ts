@@ -1,18 +1,20 @@
-import { JpegliModule, encode, init } from '../wasm/jpegli/jpegli'
+import {
+  IJpegliEncodeOptions,
+  JpegliChroma,
+  JpegliColorSpace,
+  JpegliModule,
+  encode,
+  init,
+} from '../wasm/jpegli/jpegli'
 import { urlFromString } from '../util'
 
-export interface IJpegliOptions {
-  quality: number
-  progressiveLevel: number
-  optimizeCoding: number
-  adaptiveQuantization: number
-  standardQuantTables: number
-  fancyDownsampling: number
-  dctMethod: number
-}
+export { JpegliChroma } from '../wasm/jpegli/jpegli'
+
+export type IJpegliOptions = IJpegliEncodeOptions
 
 export const defaultJpegliOptions: IJpegliOptions = {
   quality: 75,
+  chromaSubsampling: JpegliChroma.YCbCr420,
   progressiveLevel: 2,
   optimizeCoding: 1,
   adaptiveQuantization: 1,
@@ -20,8 +22,6 @@ export const defaultJpegliOptions: IJpegliOptions = {
   fancyDownsampling: 1,
   dctMethod: 0,
 }
-
-const YCbCr = 2
 
 let jpegliInit: Promise<JpegliModule> | undefined
 
@@ -41,19 +41,8 @@ export const initJpegli = (jpegliWasm: string | undefined): Promise<JpegliModule
   return jpegliInit
 }
 
+// `ImageData` is RGBA, which the encoder converts to YCbCr itself. Its bytes
+// are handed over as they are: the copy into WASM memory is the only one made.
 export const optimizeJpegli = (image: ImageData, options: IJpegliOptions): Uint8Array => {
-  const array = new Uint8Array(image.data)
-  return encode(
-    array,
-    image.width,
-    image.height,
-    YCbCr,
-    options.quality,
-    options.progressiveLevel,
-    options.optimizeCoding,
-    options.adaptiveQuantization,
-    options.standardQuantTables,
-    options.fancyDownsampling,
-    options.dctMethod,
-  )
+  return encode(image.data, image.width, image.height, JpegliColorSpace.Rgba, options)
 }

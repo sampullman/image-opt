@@ -1,5 +1,5 @@
-import { LocalStoragePlugin, useModule } from '@samatech/vue-store'
-import { IJpegliOptions } from '../optimize/jpegli'
+import { IPlugin, LocalStoragePlugin, useModule } from '@samatech/vue-store'
+import { defaultJpegliOptions, IJpegliOptions, JpegliChroma } from '../optimize/jpegli'
 import { OptimizerType } from '../optimize/optimize-options'
 import { IOptimizeSpec } from '../optimize/optimize-request'
 import { IOxipngOptions } from '../optimize/oxipng'
@@ -39,6 +39,7 @@ export const getImageOptions = (optimizer: OptimizerType): IOptimizeSpec => {
         optimizer,
         options: {
           quality: jpeg.quality,
+          chromaSubsampling: jpeg.chromaSubsampling,
           progressiveLevel: jpeg.progressiveLevel,
           optimizeCoding: jpeg.optimizeCoding,
           adaptiveQuantization: jpeg.adaptiveQuantization,
@@ -103,7 +104,44 @@ const mutations = (state: IOptionsState) => ({
   setJpegliDctMethod(method: number) {
     state.jpeg.dctMethod = method
   },
+  setJpegliChromaSubsampling(chroma: JpegliChroma) {
+    state.jpeg.chromaSubsampling = chroma
+  },
 })
+
+const defaultState = (): IOptionsState => ({
+  immediateDownload: true,
+  keepImageData: true,
+  outputType: OutputType.MatchInput,
+  selectedType: 'jpeg',
+  poolSize: navigator.hardwareConcurrency || 4,
+  png: {
+    level: 4,
+    interlace: false,
+  },
+  jpeg: {
+    ...defaultJpegliOptions,
+    optimizer: OptimizerType.Jpegli,
+    mozProgressive: true,
+  },
+})
+
+/**
+ * Fills in nested state the stored copy predates. `LocalStoragePlugin` migrates
+ * by top-level key, so a whole `jpeg` object saved before an option existed is
+ * carried over without it, and the widget would read that option as undefined.
+ * Runs after that plugin, on what it restored.
+ */
+const fillNestedDefaults: IPlugin<IOptionsState> = {
+  onStateInit: (state) => {
+    const defaults = defaultState()
+    return {
+      ...state,
+      png: { ...defaults.png, ...state.png },
+      jpeg: { ...defaults.jpeg, ...state.jpeg },
+    }
+  },
+}
 
 export const optionsStore = useModule<
   IOptionsState,
@@ -112,28 +150,7 @@ export const optionsStore = useModule<
 >({
   name: 'options-store',
   version: 11,
-  stateInit: () => ({
-    immediateDownload: true,
-    keepImageData: true,
-    outputType: OutputType.MatchInput,
-    selectedType: 'jpeg',
-    poolSize: navigator.hardwareConcurrency || 4,
-    png: {
-      level: 4,
-      interlace: false,
-    },
-    jpeg: {
-      quality: 75,
-      optimizer: OptimizerType.Jpegli,
-      mozProgressive: true,
-      progressiveLevel: 2,
-      optimizeCoding: 1,
-      adaptiveQuantization: 1,
-      standardQuantTables: 0,
-      fancyDownsampling: 1,
-      dctMethod: 0,
-    },
-  }),
+  stateInit: defaultState,
   mutations,
-  plugins: [LocalStoragePlugin],
+  plugins: [LocalStoragePlugin, fillNestedDefaults],
 })

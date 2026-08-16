@@ -32,6 +32,16 @@
       :checked="optionsStore.jpeg.value.fancyDownsampling === 1"
       @toggle="optionsStore.toggleJpegliFancyDownsampling()"
     />
+    <div class="row chroma-wrap">
+      <div class="text">Chroma Subsampling</div>
+      <STMultiselect
+        :value="chromaSubsampling"
+        :options="chromaOptions"
+        :clearable="false"
+        class="chroma"
+        @select="selectChroma($event?.value as string)"
+      />
+    </div>
     <div class="row">
       <div class="text">
         DCT Method: <span>{{ optionsStore.jpeg.value.dctMethod }}</span>
@@ -54,11 +64,30 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { STProgressBar } from '@samatech/vue-components'
+import { STMultiselect, STProgressBar } from '@samatech/vue-components'
+import { JpegliChroma } from '../optimize/jpegli'
 import { optionsStore } from '../store'
 import CheckboxRow from './CheckboxRow.vue'
 
 const progressiveLevel = computed(() => optionsStore.jpeg.value.progressiveLevel)
+
+// The multiselect works in strings, so the enum value travels as its digits.
+const chromaOptions = [
+  { label: '4:2:0 (smallest)', value: String(JpegliChroma.YCbCr420) },
+  { label: '4:2:2', value: String(JpegliChroma.YCbCr422) },
+  { label: '4:4:0', value: String(JpegliChroma.YCbCr440) },
+  { label: '4:4:4 (sharpest color)', value: String(JpegliChroma.YCbCr444) },
+]
+
+const chromaSubsampling = computed(() =>
+  String(optionsStore.jpeg.value.chromaSubsampling),
+)
+
+const selectChroma = (value: string | undefined) => {
+  if (value !== undefined) {
+    optionsStore.setJpegliChromaSubsampling(Number(value) as JpegliChroma)
+  }
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -87,6 +116,12 @@ $grey1: #4c566a;
 }
 .pool-size {
   width: 60px;
+}
+.chroma-wrap {
+  margin-top: 16px;
+}
+.chroma {
+  width: 170px;
 }
 .advanced-options-content {
   margin-top: 48px;
